@@ -1,14 +1,22 @@
 #include "ofApp.h"
 
 //--------------------------------------------------------------
-void ofApp::setup() {}
+void ofApp::setup() { 
+	font.load("arial.ttf", 24); 
+}
 
 //--------------------------------------------------------------
 void ofApp::update() {}
 
 //--------------------------------------------------------------
-void ofApp::draw() { 
-	ofDrawRectangle(100, 100, 50, 25);
+void ofApp::draw() {
+    ofNoFill();  // will not fill shapes after this line is called, line is
+                 // still a line
+    // note there also exists an ofFill() function
+
+    ofDrawRectangle(ofGetWidth() / 2, ofGetHeight() / 2, 50, 25);
+
+    ofDrawLine(ofGetWidth() / 2, 30, 200, 200);
 }
 
 //--------------------------------------------------------------
