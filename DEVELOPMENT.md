@@ -13,3 +13,4 @@
 9:00pm - Attempted fix for generating the enemies vector, not working :(, will move on and come back to this at a later time
 9:30pm - Not entirely sure why some things seem to be messing with the compiler but I'd guess it's an issue with the way openFrameworks compiles its part of the project
 10:00pm - Program compiles with addition of PoissonGenerator.h
+11:00pm - Been trying to setup Catch2 to function properly, wrote function of path_plotter() that returns a vector of std::pairs representing points. This function still needs to be tested. A test case was written located in the tests.cpp folder for path_plotter()
