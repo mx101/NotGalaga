@@ -40,6 +40,12 @@
     <ClCompile Include="ofApp.cpp">
       <Filter>src</Filter>
     </ClCompile>
+    <ClCompile Include="tests.runsettings">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="tests.cpp">
+      <Filter>tests</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="src">
@@ -53,6 +59,9 @@
     </Filter>
     <Filter Include="addons\ofxGui\src">
       <UniqueIdentifier>{645E9533-4DCD-6179-1CDF-CB65}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="tests">
+      <UniqueIdentifier>{77914136-3d2f-41f1-83ab-31584bee90b4}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

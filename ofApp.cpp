@@ -52,12 +52,12 @@ void ofApp::keyPressed(int key) {
   }
 
   // these commands are not supported in the Original Galaga
-  if (key == OF_KEY_UP) {
+  /*if (key == OF_KEY_UP) {
     player.player_center.second -= 5;
   }
   if (key == OF_KEY_DOWN) {
     player.player_center.second += 5;
-  }
+  }*/
 
 }
 
