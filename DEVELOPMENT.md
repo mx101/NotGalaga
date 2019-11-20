@@ -9,3 +9,4 @@
 6:44pm - Background color of window is now black. Started Enemy class, adding necessary member variables
 7:00pm - Added constructors to Enemy class, 0 represents a bee, 1 represents a moth, 2 represents a boss Galaga. Also added the pngs for these textures in the bin/data folder
 7:20pm - Formatting adjusted to be more consistent
+8:30pm - Took a short break. Running into compiler errors when pushing back onto the enemies vector

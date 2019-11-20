@@ -3,8 +3,6 @@
 #include "player.h"
 #include "enemy.h"
 
-#include <vector>
-
 //some enums to represent game state
 enum GameState { IN_PROGRESS = 0, PAUSED, FINISHED };
 
@@ -33,5 +31,5 @@ class ofApp : public ofBaseApp {
   const int kFirstMothIdx = 20;
   const int kFirstBossIdx = 40;
   Player player;
-  std::vector<Enemy> enemies;
+  std::vector<Enemy> *enemies = new std::vector<Enemy>();
 };

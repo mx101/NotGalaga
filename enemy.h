@@ -1,11 +1,13 @@
 #pragma once
-#include "matplotlibcpp.h"
 #include "ofMain.h"
+
+#include <vector>
 
 class Enemy {	
  public:
-  Enemy();
   Enemy(int enemy_type);
+
+  std::vector<std::pair<int, int>> path_plotter();  
 
   std::pair<int, int> enemy_center_;
   int enemy_type_;

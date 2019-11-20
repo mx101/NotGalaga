@@ -1,30 +1,30 @@
 #include "ofApp.h"
 
-void ofApp::setup() { 
+void ofApp::setup() {
   ofSetWindowTitle("NotGalaga");
   ofSetBackgroundColor(0, 0, 0);
   srand(static_cast<unsigned>(time(0)));
   font.load("arial.ttf", kFontSize); 
 
   ofLoadImage(player.fighter_texture, "fighter.png");
-  ofLoadImage(player.captured_fighter_texture, "capturedFighter.png");
 
   player.player_center.first = ofGetWidth() / 2;
   player.player_center.second = ofGetHeight() - (ofGetHeight() / 8);
 
-  // load in the 44 aliens
-  for (int i = 0; i < kEnemyCount; i++) {
-    if (i < kFirstMothIdx) {
-      enemies.push_back(Enemy(0));
-	} else if (i < kFirstBossIdx) {
-      enemies.push_back(Enemy(1));
-	} else {
-      enemies.push_back(Enemy(2));    
-	}
-}
+  // load in the first 44 aliens
+  //enemies = new std::vector<Enemy>();
 
-//TODO: load player fire sound
-//player.player_fire.load("");
+  //for (int i = 0; i < kEnemyCount; i++) {
+  //  if (i < kFirstMothIdx) {
+  //    enemies->push_back(Enemy(0));
+  //  } else if (i < kFirstBossIdx) {
+  //    enemies->push_back(Enemy(1));
+  //  } else {
+  //    enemies->push_back(Enemy(2));
+  //  }
+  //}
+  //TODO: load player fire sound
+  //player.player_fire.load("");
 }
 
 //--------------------------------------------------------------
