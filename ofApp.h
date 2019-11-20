@@ -1,5 +1,9 @@
 #pragma once
 #include "ofMain.h"
+#include "player.h"
+
+//some enums to represent game state
+enum GameState { IN_PROGRESS = 0, PAUSED, FINISHED };
 
 class ofApp : public ofBaseApp {
    public:
@@ -19,6 +23,8 @@ class ofApp : public ofBaseApp {
     void dragEvent(ofDragInfo dragInfo);
     void gotMessage(ofMessage msg);
 
+
 	ofTrueTypeFont font;
-    ofSoundPlayer playerFire;
+    const int kFontSize = 24;
+    Player player;
 };

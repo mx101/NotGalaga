@@ -2,7 +2,18 @@
 
 //--------------------------------------------------------------
 void ofApp::setup() { 
-	font.load("arial.ttf", 24); 
+	ofSetWindowTitle("NotGalaga");
+    srand(static_cast<unsigned>(time(0)));
+
+	font.load("arial.ttf", kFontSize); 
+	ofLoadImage(player.fighter_texture, "fighter.png");
+    ofLoadImage(player.captured_fighter_texture, "capturedFighter.png");
+
+	player.player_center.first = ofGetWidth() / 2;
+    player.player_center.second = ofGetHeight() - (ofGetHeight() / 8);
+
+	//TODO: load player fire sound
+	//player.player_fire.load("");
 }
 
 //--------------------------------------------------------------
@@ -10,7 +21,11 @@ void ofApp::update() {}
 
 //--------------------------------------------------------------
 void ofApp::draw() {
-    ofNoFill();  // will not fill shapes after this line is called, line is
+    font.drawString("The FitnessGram Pacer test is a multi-stage aerobic", 155, 92);
+
+	player.fighter_texture.draw(player.player_center.first, player.player_center.second);
+
+    //ofNoFill();  // will not fill shapes after this line is called, line is
                  // still a line
     // note there also exists an ofFill() function
 
