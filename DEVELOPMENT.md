@@ -10,3 +10,6 @@
 7:00pm - Added constructors to Enemy class, 0 represents a bee, 1 represents a moth, 2 represents a boss Galaga. Also added the pngs for these textures in the bin/data folder
 7:20pm - Formatting adjusted to be more consistent
 8:30pm - Took a short break. Running into compiler errors when pushing back onto the enemies vector
+9:00pm - Attempted fix for generating the enemies vector, not working :(, will move on and come back to this at a later time
+9:30pm - Not entirely sure why some things seem to be messing with the compiler but I'd guess it's an issue with the way openFrameworks compiles its part of the project
+10:00pm - Program compiles with addition of PoissonGenerator.h

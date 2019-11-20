@@ -30,6 +30,9 @@ class ofApp : public ofBaseApp {
   const int kFirstBeeIdx = 0;
   const int kFirstMothIdx = 20;
   const int kFirstBossIdx = 40;
+  
   Player player;
-  std::vector<Enemy> *enemies = new std::vector<Enemy>();
+  Enemy demo_bee;
+  Enemy demo_boss;
+  //std::vector<Enemy> *enemies;
 };

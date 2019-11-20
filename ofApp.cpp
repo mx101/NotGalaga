@@ -6,23 +6,23 @@ void ofApp::setup() {
   srand(static_cast<unsigned>(time(0)));
   font.load("arial.ttf", kFontSize); 
 
+  // load player
   ofLoadImage(player.fighter_texture, "fighter.png");
 
   player.player_center.first = ofGetWidth() / 2;
   player.player_center.second = ofGetHeight() - (ofGetHeight() / 8);
 
-  // load in the first 44 aliens
-  //enemies = new std::vector<Enemy>();
+  // load demo bee
+  ofLoadImage(demo_bee.texture_, "bee.png");
 
-  //for (int i = 0; i < kEnemyCount; i++) {
-  //  if (i < kFirstMothIdx) {
-  //    enemies->push_back(Enemy(0));
-  //  } else if (i < kFirstBossIdx) {
-  //    enemies->push_back(Enemy(1));
-  //  } else {
-  //    enemies->push_back(Enemy(2));
-  //  }
-  //}
+  demo_bee.enemy_center_.first = ofGetWidth() / 2;
+  demo_bee.enemy_center_.second = ofGetHeight() / 8;
+
+  ofLoadImage(demo_boss.texture_, "bossGalaga.png");
+
+  demo_boss.enemy_center_.first = ofGetWidth() / 4;
+  demo_boss.enemy_center_.second = ofGetHeight() / 3;
+  
   //TODO: load player fire sound
   //player.player_fire.load("");
 }
@@ -36,13 +36,9 @@ void ofApp::draw() {
 
   player.fighter_texture.draw(player.player_center.first, player.player_center.second);
 
-  //ofNoFill();  // will not fill shapes after this line is called, line is
-				 // still a line
-  // note there also exists an ofFill() function
+  demo_bee.texture_.draw(demo_bee.enemy_center_.first, demo_bee.enemy_center_.second);
 
-  ofDrawRectangle(ofGetWidth() / 2, ofGetHeight() / 2, 50, 25);
-
-  ofDrawLine(ofGetWidth() / 2, 30, 200, 200);
+  demo_boss.texture_.draw(demo_boss.enemy_center_.first, demo_boss.enemy_center_.second);
 }
 
 //--------------------------------------------------------------
@@ -56,12 +52,12 @@ void ofApp::keyPressed(int key) {
   }
 
   // these commands are not supported in the Original Galaga
-  /*if (key == OF_KEY_UP) {
+  if (key == OF_KEY_UP) {
     player.player_center.second -= 5;
   }
   if (key == OF_KEY_DOWN) {
     player.player_center.second += 5;
-  }*/
+  }
 
 }
 
