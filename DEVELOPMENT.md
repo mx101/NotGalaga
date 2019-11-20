@@ -5,3 +5,4 @@
 3:15pm - Attended lecture, added some notes for openFrameworks
 5:45pm - Ate dinner, back now. Added in player fighter/captured fighter textures, now adding this into the setup of the game
 6:00pm - Player texture now loads in at the start of the game in the bottom center of the window
+6:20pm - First major proof of life: player ship can now move around the screen.

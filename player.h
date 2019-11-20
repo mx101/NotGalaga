@@ -5,7 +5,6 @@ class Player {
 
   public:
     const int kFighterWidth = 48;
-	//int player_center;
     std::pair<int, int> player_center;
 	
 	ofTexture fighter_texture;

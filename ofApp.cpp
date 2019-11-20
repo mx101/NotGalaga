@@ -35,7 +35,21 @@ void ofApp::draw() {
 }
 
 //--------------------------------------------------------------
-void ofApp::keyPressed(int key) {}
+void ofApp::keyPressed(int key) {
+    if (key == OF_KEY_LEFT) {
+        player.player_center.first -= 5;
+	}
+    if (key == OF_KEY_RIGHT) {
+        player.player_center.first += 5;
+    }
+    if (key == OF_KEY_UP) {
+        player.player_center.second -= 5;
+    }
+    if (key == OF_KEY_DOWN) {
+        player.player_center.second += 5;
+    }
+
+}
 
 //--------------------------------------------------------------
 void ofApp::keyReleased(int key) {}
