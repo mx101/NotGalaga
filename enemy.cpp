@@ -9,7 +9,9 @@ using namespace PoissonGenerator;
 
 //Enemy::Enemy(int enemy_type) {
 //  this->dead_ = false;
-//
+//	
+	// load in images elsewhere and store as a pointer, load when need to
+
 //  if (enemy_type == 0) {
 //    ofLoadImage(this->texture_, "bee.png");
 //  }
