@@ -28,6 +28,7 @@ class ofApp : public ofBaseApp {
   void checkPlayerCollisions();
 
   ofTrueTypeFont font;
+  //still to be used
   const int kFontSize = 24;
   const int kEnemyCount = 44;
   const int kFirstBeeIdx = 0;
@@ -37,9 +38,13 @@ class ofApp : public ofBaseApp {
   Player player;
   vector<Bullet*> bullets;
 
+  vector<Enemy*> enemies;
   Enemy demo_bee;
   Enemy demo_boss;
+  const int kEnemyWidth = 40;
+  const int kEnemyHeight = 40;
 
   Bullet bullet;
-  //std::vector<Enemy> *enemies;
+  const int kBulletWidth = 10;
+  const int kBulletHeight = 14;
 };

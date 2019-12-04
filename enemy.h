@@ -23,5 +23,5 @@ class Enemy {
   bool dead_;
   int enemy_width_;
 
-  ofTexture texture_;
+  ofTexture enemy_texture_;
 };

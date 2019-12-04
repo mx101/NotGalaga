@@ -42,3 +42,5 @@ Implement player shooting and enemy movement at the very least.
 - 3:20am - Found galaga bullet sprite online, loading this onto a default "bullet" Bullet var in ofApp.h 
 - 3:30am - Player can now shoot bullets! Right now, the player can shoot as fast as the keyboard takes in input because of player_shots_ being a negative value once the first player bullet moves off screen.
 - 3:40am - Fix applied to bullet count. Player can now only have two bullets on screen at a time.
+- 4:00am - Working on enemy/bullet collision now.
+- 4:20am - Enemy/Bullet collision is functioning. If the bullet ofRectangle and enemy ofRectangle intersect, both are deleted.
