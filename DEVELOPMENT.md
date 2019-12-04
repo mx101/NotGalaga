@@ -72,3 +72,5 @@ Implement player shooting and enemy movement at the very least.
 - 6:05am - Added player shooting sound effect
 
 - 6:20am - Added enemy bullet image. Also, we are now differentiating between enemy bullets and player bullets
+
+- 11:00am - Added drawGameDead function that prints out a simple life lost message in the window when the player ship dies.

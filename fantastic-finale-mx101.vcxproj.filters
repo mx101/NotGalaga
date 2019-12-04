@@ -34,9 +34,6 @@
     <ClCompile Include="main.cpp">
       <Filter>src</Filter>
     </ClCompile>
-    <ClCompile Include="player.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
     <ClCompile Include="ofApp.cpp">
       <Filter>src</Filter>
     </ClCompile>
@@ -47,6 +44,9 @@
       <Filter>tests</Filter>
     </ClCompile>
     <ClCompile Include="bullet.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="player.cpp">
       <Filter>src</Filter>
     </ClCompile>
   </ItemGroup>
@@ -101,9 +101,6 @@
     <ClInclude Include="..\..\..\..\Downloads\of_v0.10.1_vs2017_release\of_v0.10.1_vs2017_release\addons\ofxGui\src\ofxToggle.h">
       <Filter>addons\ofxGui\src</Filter>
     </ClInclude>
-    <ClInclude Include="player.h">
-      <Filter>src</Filter>
-    </ClInclude>
     <ClInclude Include="enemy.h">
       <Filter>src</Filter>
     </ClInclude>
@@ -111,6 +108,9 @@
       <Filter>src</Filter>
     </ClInclude>
     <ClInclude Include="bullet.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="player.h">
       <Filter>src</Filter>
     </ClInclude>
   </ItemGroup>

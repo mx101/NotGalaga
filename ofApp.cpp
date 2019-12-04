@@ -78,6 +78,16 @@ void ofApp::update() {
     CheckPlayerCollisions();
 }
 
+void ofApp::drawGameDead() {
+    string pause_message = "Life lost! Press R to re-spawn";
+    ofSetColor(232, 74, 39);
+    //ofSetBackgroundColor(255, 255, 255);
+    
+    //ofSetBackgroundColor(0, 0, 0);
+    ofDrawBitmapString(pause_message, ofGetWindowWidth() / 2,
+                       ofGetWindowHeight() / 2);
+}
+
 void ofApp::ShootBullet() {
     if (player.player_shots_ < kLegalBulletsMax) {
         Bullet* current_bullet = new Bullet();
@@ -126,7 +136,7 @@ void ofApp::CheckPlayerCollisions() {
         int enemy_second = enemies[j]->enemy_center_.second;
         glm::vec2 enemy_center(enemy_first, enemy_second);
         ofRectangle current_enemy(enemy_center, kEnemyWidth, kEnemyHeight);
-
+		
 		int player_first = player.player_center_.first;
         int player_second = player.player_center_.second;
         glm::vec2 player_center(player_first, player_second);
@@ -136,6 +146,9 @@ void ofApp::CheckPlayerCollisions() {
             delete enemies[j];
             enemies.erase(enemies.begin() + j);
 
+			//add some more logic here for player death
+			// reset player position to center?
+
 			player.player_lives_--;
             player.alive_ = false;
         }
@@ -144,18 +157,27 @@ void ofApp::CheckPlayerCollisions() {
 
 //--------------------------------------------------------------
 void ofApp::draw() {
-    player.fighter_texture_.draw(player.player_center_.first, player.player_center_.second);
+	if (!player.alive_) {
+        // add additional state here for whether the player is out of lives
+        //if (player.player_lives_ > 0) {
+            drawGameDead();
+        //} else {
+        //}
+	} else {
+        player.fighter_texture_.draw(player.player_center_.first,
+                                     player.player_center_.second);
 
-    for (int i = 0; i < player_bullets.size(); i++) {
-        int first = player_bullets[i]->bullet_center_.first;
-        int second = player_bullets[i]->bullet_center_.second;
-        player_bullets[i]->bullet_texture_.draw(first, second);
-    }
+        for (int i = 0; i < player_bullets.size(); i++) {
+            int first = player_bullets[i]->bullet_center_.first;
+            int second = player_bullets[i]->bullet_center_.second;
+            player_bullets[i]->bullet_texture_.draw(first, second);
+        }
 
-    for (int i = 0; i < enemies.size(); i++) {
-        int first = enemies[i]->enemy_center_.first;
-        int second = enemies[i]->enemy_center_.second;
-        enemies[i]->enemy_texture_.draw(first, second);
+        for (int i = 0; i < enemies.size(); i++) {
+            int first = enemies[i]->enemy_center_.first;
+            int second = enemies[i]->enemy_center_.second;
+            enemies[i]->enemy_texture_.draw(first, second);
+        }
     }
 }
 
@@ -189,6 +211,8 @@ void ofApp::keyPressed(int key) {
 
 	if (upper_key == 'R') {
         player.alive_ = true;
+        ofSetColor(255, 255, 255);
+        ofSetBackgroundColor(0, 0, 0);
     }
 
     if (upper_key == 'E') {
