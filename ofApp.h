@@ -52,8 +52,15 @@ class ofApp : public ofBaseApp {
   const int kFighterHeight = 48;
   const int kFighterMoveSpeed = 8;
 
-  vector<Bullet*> bullets;
+  Bullet player_bullet;
+  const int kBulletWidth = 10;
+  const int kBulletHeight = 14;
+  const int kBulletSpeed = 16;
+  vector<Bullet*> player_bullets;
   const int kLegalBulletsMax = 2;
+
+  Bullet enemy_bullet;
+  vector<Bullet*> enemy_bullets;
 
   vector<Enemy*> enemies;
   Enemy demo_bee;
@@ -63,8 +70,5 @@ class ofApp : public ofBaseApp {
   const int kEnemyMoveSpeed = 4;
   const int kEnemySpawnHeight = -20;
 
-  Bullet bullet;
-  const int kBulletWidth = 10;
-  const int kBulletHeight = 14;
-  const int kBulletSpeed = 16;
+  
 };

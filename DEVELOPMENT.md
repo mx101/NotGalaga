@@ -70,3 +70,5 @@ Implement player shooting and enemy movement at the very least.
 - 6:00am - Added constants to lessen number of magic numbers. 
 
 - 6:05am - Added player shooting sound effect
+
+- 6:20am - Added enemy bullet image. Also, we are now differentiating between enemy bullets and player bullets

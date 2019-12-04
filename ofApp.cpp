@@ -21,7 +21,9 @@ void ofApp::setup() {
     player.player_center_.first = ofGetWidth() / 2;
     player.player_center_.second = ofGetHeight() - (ofGetHeight() / 8);
 
-    ofLoadImage(bullet.bullet_texture_, "bullet.png");
+    ofLoadImage(player_bullet.bullet_texture_, "bullet.png");
+
+	ofLoadImage(enemy_bullet.bullet_texture_, "enemyBullet.png");
 
     // load demo bee
     ofLoadImage(demo_bee.enemy_texture_, "bee.png");
@@ -55,12 +57,12 @@ void ofApp::update() {
         shoot_pressed = false;
     }
 
-    for (int i = 0; i < bullets.size(); i++) {
-        bullets[i]->bullet_center_.second -= kBulletSpeed;
-        int second = bullets[i]->bullet_center_.second;
+    for (int i = 0; i < player_bullets.size(); i++) {
+        player_bullets[i]->bullet_center_.second -= kBulletSpeed;
+        int second = player_bullets[i]->bullet_center_.second;
         if (second < 0) {
-            delete bullets[i];
-            bullets.erase(bullets.begin() + i);
+            delete player_bullets[i];
+            player_bullets.erase(player_bullets.begin() + i);
             player.player_shots_--;
         }
     }
@@ -79,12 +81,12 @@ void ofApp::update() {
 void ofApp::ShootBullet() {
     if (player.player_shots_ < kLegalBulletsMax) {
         Bullet* current_bullet = new Bullet();
-        *current_bullet = bullet;
+        *current_bullet = player_bullet;
         current_bullet->bullet_center_ = player.player_center_;
         current_bullet->bullet_center_.first +=
             kFighterWidth / 2 - (kBulletWidth / 2);
         current_bullet->bullet_center_.second -= kFighterWidth / 8;
-        bullets.push_back(current_bullet);
+        player_bullets.push_back(current_bullet);
         player.player_shots_++;
         player.player_fire.play();
     }
@@ -99,9 +101,9 @@ void ofApp::CheckEnemyCollisions() {
         glm::vec2 enemy_center(enemy_first, enemy_second);
         ofRectangle current_enemy(enemy_center, kEnemyWidth, kEnemyHeight);
 
-        for (int i = 0; i < bullets.size(); i++) {
-            int bullet_first = bullets[i]->bullet_center_.first;
-            int bullet_second = bullets[i]->bullet_center_.second;
+        for (int i = 0; i < player_bullets.size(); i++) {
+            int bullet_first = player_bullets[i]->bullet_center_.first;
+            int bullet_second = player_bullets[i]->bullet_center_.second;
             glm::vec2 bullet_center(bullet_first, bullet_second);
             ofRectangle current_bullet(bullet_center, kBulletWidth, kBulletHeight);
 
@@ -109,8 +111,8 @@ void ofApp::CheckEnemyCollisions() {
                 delete enemies[j];
                 enemies.erase(enemies.begin() + j);
 
-                delete bullets[i];
-                bullets.erase(bullets.begin() + i);
+                delete player_bullets[i];
+                player_bullets.erase(player_bullets.begin() + i);
                 player.player_shots_--;
 			}
         }
@@ -144,10 +146,10 @@ void ofApp::CheckPlayerCollisions() {
 void ofApp::draw() {
     player.fighter_texture_.draw(player.player_center_.first, player.player_center_.second);
 
-    for (int i = 0; i < bullets.size(); i++) {
-        int first = bullets[i]->bullet_center_.first;
-        int second = bullets[i]->bullet_center_.second;
-        bullets[i]->bullet_texture_.draw(first, second);
+    for (int i = 0; i < player_bullets.size(); i++) {
+        int first = player_bullets[i]->bullet_center_.first;
+        int second = player_bullets[i]->bullet_center_.second;
+        player_bullets[i]->bullet_texture_.draw(first, second);
     }
 
     for (int i = 0; i < enemies.size(); i++) {
