@@ -24,13 +24,24 @@ class ofApp : public ofBaseApp {
   void windowResized(int w, int h);
   void dragEvent(ofDragInfo dragInfo);
   void gotMessage(ofMessage msg);
+
+  void ShootBullet();
+
   void CheckEnemyCollisions();
   void CheckPlayerCollisions();
+
   void CreateEnemy(int x, int y, int type);
 
   ofTrueTypeFont font;
-  //still to be used
   const int kFontSize = 24;
+
+
+  bool left_pressed;
+  bool right_pressed;
+  bool shoot_pressed;
+
+
+  // still to be used
   const int kEnemyCount = 44;
   const int kFirstBeeIdx = 0;
   const int kFirstMothIdx = 20;

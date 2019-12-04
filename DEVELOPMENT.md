@@ -60,3 +60,9 @@ Implement player shooting and enemy movement at the very least.
 - 5:00am - Working on Player/Enemy Collision now, centered player bullet
 
 - 5:15am - Player/Enemy Collision functions, player still not implemented to "die" when colliding with Enemy object. Added some more functionality with player lives and player alive bool.
+
+- 5:30am - Enemies now reappear after going off the screen at the bottom
+
+- 5:40am - Attempting to implement multiple key press recognition
+
+- 5:50am - So far unable to get multiple keys, posted on Piazza. However, I have added a ShootBullet() function for readability purposes.

@@ -18,7 +18,6 @@ Some stretch goals I would want to implement if this project is finished ahead o
     - [ ] Enemy projectiles
     - [ ] Player/Enemy death
     - [ ] Score/Life Display
-    - [ ] Background stars (optional)
   - [X] Start main __*Galaga*__ game engine
     - [X] Player movement
     - [X] Player shooting
@@ -31,7 +30,7 @@ Some stretch goals I would want to implement if this project is finished ahead o
 - #### Week 3
   - [ ] Continue game engine
     - [ ] Player kidnapping/rescue
-    - [ ] Player lives
+    - [X] Player lives
     - [ ] Start wave difficulty handling (should be slightly exponential)
   - [ ] Scoreboard display at end of game
   - [ ] Add any other application text output needed i.e. *"Fighter Captured"*, *"Game Over"*, *"Game Start"*, etc.
