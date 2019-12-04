@@ -2,6 +2,7 @@
 #include "ofMain.h"
 #include "player.h"
 #include "enemy.h"
+#include "bullet.h"
 
 //some enums to represent game state
 enum GameState { IN_PROGRESS = 0, PAUSED, FINISHED };
@@ -32,6 +33,8 @@ class ofApp : public ofBaseApp {
   const int kFirstBossIdx = 40;
   
   Player player;
+  vector<Bullet> bullets;
+
   Enemy demo_bee;
   Enemy demo_boss;
   //std::vector<Enemy> *enemies;

@@ -28,11 +28,16 @@ void ofApp::setup() {
 }
 
 //--------------------------------------------------------------
-void ofApp::update() {}
+void ofApp::update() {
+
+  // update the bullets fired
+  // check for bullet, enemy collisions
+  // check for player, enemy collisions
+
+}
 
 //--------------------------------------------------------------
 void ofApp::draw() {
-  font.drawString("The FitnessGram Pacer test is a multi-stage aerobic", 155, 92);
 
   player.fighter_texture.draw(player.player_center.first, player.player_center.second);
 
@@ -44,11 +49,11 @@ void ofApp::draw() {
 //--------------------------------------------------------------
 void ofApp::keyPressed(int key) {
   if (key == OF_KEY_LEFT) {
-    player.player_center.first -= 6;
+    player.player_center.first -= 8;
   }
 
   if (key == OF_KEY_RIGHT) {
-    player.player_center.first += 6;
+    player.player_center.first += 8;
   }
 
   // these commands are not supported in the Original Galaga

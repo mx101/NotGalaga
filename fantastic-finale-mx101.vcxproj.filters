@@ -46,6 +46,9 @@
     <ClCompile Include="tests.cpp">
       <Filter>tests</Filter>
     </ClCompile>
+    <ClCompile Include="bullet.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="src">
@@ -105,6 +108,9 @@
       <Filter>src</Filter>
     </ClInclude>
     <ClInclude Include="ofApp.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="bullet.h">
       <Filter>src</Filter>
     </ClInclude>
   </ItemGroup>

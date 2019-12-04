@@ -32,3 +32,6 @@
 Implement player shooting and enemy movement at the very least.
 ### 11/22/19
 - 12:00pm - Likely planning on switching over to ofxUnitTests if Catch2 does not cooperate soon.
+
+### 12/3/19
+- 9:00pm - Added a new bullet class. This is planned to be used for handling player projectiles, could also may be used for enemy projectiles.

@@ -21,6 +21,7 @@ class Enemy {
   std::pair<int, int> enemy_center_;
   int enemy_type_;
   bool dead_;
+  int enemy_width_;
 
   ofTexture texture_;
 };
