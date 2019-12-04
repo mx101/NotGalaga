@@ -24,8 +24,9 @@ class ofApp : public ofBaseApp {
   void windowResized(int w, int h);
   void dragEvent(ofDragInfo dragInfo);
   void gotMessage(ofMessage msg);
-  void checkEnemyCollisions();
-  void checkPlayerCollisions();
+  void CheckEnemyCollisions();
+  void CheckPlayerCollisions();
+  void CreateEnemy(int x, int y, int type);
 
   ofTrueTypeFont font;
   //still to be used

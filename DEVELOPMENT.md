@@ -50,3 +50,7 @@ Implement player shooting and enemy movement at the very least.
 - 4:00am - Working on enemy/bullet collision now.
 
 - 4:20am - Enemy/Bullet collision is functioning. If the bullet ofRectangle and enemy ofRectangle intersect, both are deleted.
+
+- 4:30am - Some play testing at the current stage.
+
+- 4:35am - Created generic CreateEnemy helper function. Takes in an x, y, and type to create an enemy in the game.

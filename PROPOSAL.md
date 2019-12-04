@@ -19,7 +19,7 @@ Some stretch goals I would want to implement if this project is finished ahead o
     - [ ] Player/Enemy death
     - [ ] Score/Life Display
     - [ ] Background stars (optional)
-  - [ ] Start main __*Galaga*__ game engine
+  - [X] Start main __*Galaga*__ game engine
     - [X] Player movement
     - [X] Player shooting
 - #### Week 2

@@ -42,13 +42,13 @@ void ofApp::update() {
         }
     }
 
-	checkEnemyCollisions();
-    // update the bullets fired
-    // check for bullet, enemy collisions
+	CheckEnemyCollisions();
+    
+	// TODO
     // check for player, enemy collisions
 }
 
-void ofApp::checkEnemyCollisions() {
+void ofApp::CheckEnemyCollisions() {
     // This looks like an O(n^2) operation but bullets will always contain at most 2 elements
 
 	for (int j = 0; j < enemies.size(); j++) {
@@ -76,7 +76,7 @@ void ofApp::checkEnemyCollisions() {
     
 }
 
-void ofApp::checkPlayerCollisions() {}
+void ofApp::CheckPlayerCollisions() {}
 
 //--------------------------------------------------------------
 void ofApp::draw() {
@@ -98,6 +98,14 @@ void ofApp::draw() {
         int second = enemies[i]->enemy_center_.second;
         enemies[i]->enemy_texture_.draw(first, second);
     }
+}
+
+void ofApp::CreateEnemy(int x, int y, int type) {
+    Enemy* current_enemy = new Enemy();
+    *current_enemy = demo_bee;
+    current_enemy->enemy_center_.first = x;
+    current_enemy->enemy_center_.second = y;
+    enemies.push_back(current_enemy);
 }
 
 //--------------------------------------------------------------
@@ -126,10 +134,11 @@ void ofApp::keyPressed(int key) {
     int upper_key = toupper(key);
 
     if (upper_key == 'E') {
-        Enemy* current_enemy = new Enemy();
+        CreateEnemy(player.player_center_.first, demo_bee.enemy_center_.second, 1);
+        /*Enemy* current_enemy = new Enemy();
         *current_enemy = demo_bee;
         current_enemy->enemy_center_.first = player.player_center_.first;
-        enemies.push_back(current_enemy);
+        enemies.push_back(current_enemy);*/
     }
 
     // these commands are not supported in the Original Galaga
