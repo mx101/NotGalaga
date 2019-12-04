@@ -15,15 +15,15 @@ Some stretch goals I would want to implement if this project is finished ahead o
     - [X] Player Ship
     - [X] Enemy Space Bugs
     - [X] Player projectiles
-    - [ ] Enemy projectiles
-    - [ ] Player/Enemy death
+    - [?] Enemy projectiles
+    - [?] Player/Enemy death
     - [ ] Score/Life Display
   - [X] Start main __*Galaga*__ game engine
     - [X] Player movement
     - [X] Player shooting
 - #### Week 2
   - [ ] Continue game engine
-    - [ ] Enemy movement
+    - [?] Enemy movement
     - [ ] Enemy shooting (only for some enemy types)
     - [X] Collision handling
     - [ ] Start more advanced enemy movement/paths (not an absolute priority)
