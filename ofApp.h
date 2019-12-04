@@ -38,6 +38,7 @@ class ofApp : public ofBaseApp {
   
   Player player;
   const int kFighterWidth = 48;
+  const int kFighterHeight = 48;
 
   vector<Bullet*> bullets;
 

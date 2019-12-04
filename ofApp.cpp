@@ -10,6 +10,8 @@ void ofApp::setup() {
     ofLoadImage(player.fighter_texture_, "fighter.png");
 
     player.player_shots_ = 0;
+    player.player_lives_ = 3;
+    player.alive_ = true;
     player.player_center_.first = ofGetWidth() / 2;
     player.player_center_.second = ofGetHeight() - (ofGetHeight() / 8);
 
@@ -42,10 +44,12 @@ void ofApp::update() {
         }
     }
 
+	for (int i = 0; i < enemies.size(); i++) {
+        enemies[i]->enemy_center_.second += 4;
+    }
+
 	CheckEnemyCollisions();
-    
-	// TODO
-    // check for player, enemy collisions
+    CheckPlayerCollisions();
 }
 
 void ofApp::CheckEnemyCollisions() {
@@ -76,7 +80,27 @@ void ofApp::CheckEnemyCollisions() {
     
 }
 
-void ofApp::CheckPlayerCollisions() {}
+void ofApp::CheckPlayerCollisions() {
+    for (int j = 0; j < enemies.size(); j++) {
+        int enemy_first = enemies[j]->enemy_center_.first;
+        int enemy_second = enemies[j]->enemy_center_.second;
+        glm::vec2 enemy_center(enemy_first, enemy_second);
+        ofRectangle current_enemy(enemy_center, kEnemyWidth, kEnemyHeight);
+
+		int player_first = player.player_center_.first;
+        int player_second = player.player_center_.second;
+        glm::vec2 player_center(player_first, player_second);
+        ofRectangle player_rect(player_center, kFighterWidth, kFighterHeight);
+
+		if (current_enemy.intersects(player_rect)) {
+            delete enemies[j];
+            enemies.erase(enemies.begin() + j);
+
+			player.player_lives_--;
+            player.alive_ = false;
+        }
+    }
+}
 
 //--------------------------------------------------------------
 void ofApp::draw() {
@@ -105,28 +129,37 @@ void ofApp::CreateEnemy(int x, int y, int type) {
 
 //--------------------------------------------------------------
 void ofApp::keyPressed(int key) {
-    if (key == OF_KEY_LEFT && player.player_center_.first > 0) {
-        player.player_center_.first -= 8;
-    }
-
-    if (key == OF_KEY_RIGHT && (player.player_center_.first + kFighterWidth) < ofGetWidth()) {
-        player.player_center_.first += 8;
-    }
-
-    if (key == OF_KEY_UP) {
-        if (player.player_shots_ < 2) {
-            // bullets.push_back();
-            Bullet* current_bullet = new Bullet();
-            *current_bullet = bullet;
-            current_bullet->bullet_center_ = player.player_center_;
-            current_bullet->bullet_center_.first += kFighterWidth / 2;
-            current_bullet->bullet_center_.second -= kFighterWidth / 8;
-            bullets.push_back(current_bullet);
-            player.player_shots_++;
+    if (player.alive_) {
+        if (key == OF_KEY_LEFT && player.player_center_.first > 0) {
+            player.player_center_.first -= 8;
         }
-    }
+
+        if (key == OF_KEY_RIGHT &&
+            (player.player_center_.first + kFighterWidth) < ofGetWidth()) {
+            player.player_center_.first += 8;
+        }
+
+        if (key == OF_KEY_UP) {
+            if (player.player_shots_ < 2) {
+                // bullets.push_back();
+                Bullet* current_bullet = new Bullet();
+                *current_bullet = bullet;
+                current_bullet->bullet_center_ = player.player_center_;
+                current_bullet->bullet_center_.first +=
+                    kFighterWidth / 2 - (kBulletWidth / 2);
+                current_bullet->bullet_center_.second -= kFighterWidth / 8;
+                bullets.push_back(current_bullet);
+                player.player_shots_++;
+            }
+        }
+	}
+    
 
     int upper_key = toupper(key);
+
+	if (upper_key == 'R') {
+        player.alive_ = true;
+    }
 
     if (upper_key == 'E') {
         CreateEnemy(player.player_center_.first, demo_bee.enemy_center_.second, 1);
