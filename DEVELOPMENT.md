@@ -66,3 +66,5 @@ Implement player shooting and enemy movement at the very least.
 - 5:40am - Attempting to implement multiple key press recognition
 
 - 5:50am - So far unable to get multiple keys, posted on Piazza. However, I have added a ShootBullet() function for readability purposes.
+
+- 6:00am - Added constants to lessen number of magic numbers. 
