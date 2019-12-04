@@ -207,15 +207,19 @@ void ofApp::keyPressed(int key) {
 
     int upper_key = toupper(key);
 
-	if (upper_key == 'R') {
-        player.alive_ = true;
-        ofSetColor(255, 255, 255);
-        ofSetBackgroundColor(0, 0, 0);
+	if (upper_key == 'R' && !player.alive_) {
+        RevivePlayer();
     }
 
     if (upper_key == 'E') {
         CreateEnemy(player.player_center_.first, demo_bee.enemy_center_.second, 1);
     }
+}
+
+void ofApp::RevivePlayer() {
+    player.alive_ = true;
+    ofSetColor(255, 255, 255);
+    ofSetBackgroundColor(0, 0, 0);
 }
 
 //--------------------------------------------------------------

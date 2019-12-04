@@ -26,6 +26,7 @@ class ofApp : public ofBaseApp {
   void gotMessage(ofMessage msg);
 
   void drawGameDead();
+  void RevivePlayer();
 
   void ShootBullet();
 
