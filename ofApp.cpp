@@ -36,8 +36,8 @@ void ofApp::update() {
         bullets[i]->bullet_center_.second -= 16;
         int second = bullets[i]->bullet_center_.second;
         if (second < 0) {
-            //delete bullets[i];
-
+            delete bullets[i];
+            bullets.erase(bullets.begin() + i);
             player.player_shots_--;
 		}
     }
