@@ -3,7 +3,7 @@
 void ofApp::setup() {
     ofSetWindowTitle("NotGalaga");
 	
-	// set background color to black
+	// set background color to black, because it's space
     ofSetBackgroundColor(0, 0, 0);
     srand(static_cast<unsigned>(time(0)));
     font.load("arial.ttf", kFontSize);
@@ -18,8 +18,8 @@ void ofApp::setup() {
     player.player_shots_ = 0;
     player.player_lives_ = 3;
     player.alive_ = true;
-    player.player_center_.first = ofGetWidth() / 2;
-    player.player_center_.second = ofGetHeight() - (ofGetHeight() / 8);
+    player.player_center_.first = kGameWindowWidth / 2;
+    player.player_center_.second = kGameWindowHeight - (kGameWindowHeight / 8);
 
     ofLoadImage(player_bullet.bullet_texture_, "bullet.png");
 
@@ -28,13 +28,13 @@ void ofApp::setup() {
     // load demo bee
     ofLoadImage(demo_bee.enemy_texture_, "bee.png");
 
-    demo_bee.enemy_center_.first = ofGetWidth() / 2;
-    demo_bee.enemy_center_.second = ofGetHeight() / 8;
+    demo_bee.enemy_center_.first = kGameWindowWidth / 2;
+    demo_bee.enemy_center_.second = kGameWindowHeight / 8;
 
     ofLoadImage(demo_boss.enemy_texture_, "bossGalaga.png");
 
-    demo_boss.enemy_center_.first = ofGetWidth() / 4;
-    demo_boss.enemy_center_.second = ofGetHeight() / 3;
+    demo_boss.enemy_center_.first = kGameWindowWidth / 4;
+    demo_boss.enemy_center_.second = kGameWindowHeight / 3;
 
     // TODO: load player fire sound
     player.player_fire.load("playerFire.mp3");
@@ -69,7 +69,7 @@ void ofApp::update() {
 
 	for (int i = 0; i < enemies.size(); i++) {
         enemies[i]->enemy_center_.second += kEnemyMoveSpeed;
-        if (enemies[i]->enemy_center_.second > ofGetHeight()) {
+        if (enemies[i]->enemy_center_.second > kGameWindowHeight) {
             enemies[i]->enemy_center_.second = kEnemySpawnHeight;
 		}
     }
@@ -81,11 +81,9 @@ void ofApp::update() {
 void ofApp::drawGameDead() {
     string pause_message = "Life lost! Press R to re-spawn";
     ofSetColor(232, 74, 39);
-    //ofSetBackgroundColor(255, 255, 255);
-    
-    //ofSetBackgroundColor(0, 0, 0);
-    ofDrawBitmapString(pause_message, ofGetWindowWidth() / 2,
-                       ofGetWindowHeight() / 2);
+
+    ofDrawBitmapString(pause_message, kGameWindowWidth / 2,
+                       kGameWindowHeight / 2);
 }
 
 void ofApp::ShootBullet() {
@@ -197,7 +195,7 @@ void ofApp::keyPressed(int key) {
         }
 
         if (key == OF_KEY_RIGHT &&
-            (player.player_center_.first + kFighterWidth) < ofGetWidth()) {
+            (player.player_center_.first + kFighterWidth) < kGameWindowWidth) {
             right_pressed = true;
         }
 

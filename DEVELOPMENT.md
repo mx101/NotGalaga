@@ -74,3 +74,5 @@ Implement player shooting and enemy movement at the very least.
 - 6:20am - Added enemy bullet image. Also, we are now differentiating between enemy bullets and player bullets
 
 - 11:00am - Added drawGameDead function that prints out a simple life lost message in the window when the player ship dies.
+
+- 11:20am - Extended window size and restricted actual game play area to make room for Score, life display

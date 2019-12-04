@@ -34,6 +34,9 @@ class ofApp : public ofBaseApp {
 
   void CreateEnemy(int x, int y, int type);
 
+  const int kGameWindowWidth = 800;
+  const int kGameWindowHeight = 1000;
+
   ofTrueTypeFont font;
   const int kFontSize = 24;
 
