@@ -35,7 +35,7 @@ void ofApp::setup() {
     demo_boss.enemy_center_.second = ofGetHeight() / 3;
 
     // TODO: load player fire sound
-    // player.player_fire.load("");
+    player.player_fire.load("playerFire.mp3");
 }
 
 //--------------------------------------------------------------
@@ -86,6 +86,7 @@ void ofApp::ShootBullet() {
         current_bullet->bullet_center_.second -= kFighterWidth / 8;
         bullets.push_back(current_bullet);
         player.player_shots_++;
+        player.player_fire.play();
     }
 }
 
