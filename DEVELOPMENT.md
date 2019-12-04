@@ -35,3 +35,4 @@ Implement player shooting and enemy movement at the very least.
 
 ### 12/3/19
 - 9:00pm - Added a new bullet class. This is planned to be used for handling player projectiles, could also may be used for enemy projectiles.
+- 9:30pm - Planning more necessary functions, added checkPlayerCollisions and checkEnemyCollisions

@@ -36,6 +36,14 @@ void ofApp::update() {
 
 }
 
+void checkEnemyCollisions() {
+
+}
+
+void checkPlayerCollisions() {
+
+}
+
 //--------------------------------------------------------------
 void ofApp::draw() {
 
