@@ -80,12 +80,7 @@ void ofApp::CheckPlayerCollisions() {}
 
 //--------------------------------------------------------------
 void ofApp::draw() {
-    player.fighter_texture_.draw(player.player_center_.first,
-                                 player.player_center_.second);
-
-    //demo_bee.enemy_texture_.draw(demo_bee.enemy_center_.first, demo_bee.enemy_center_.second);
-
-    //demo_boss.enemy_texture_.draw(demo_boss.enemy_center_.first, demo_boss.enemy_center_.second);
+    player.fighter_texture_.draw(player.player_center_.first, player.player_center_.second);
 
     for (int i = 0; i < bullets.size(); i++) {
         int first = bullets[i]->bullet_center_.first;
@@ -110,11 +105,11 @@ void ofApp::CreateEnemy(int x, int y, int type) {
 
 //--------------------------------------------------------------
 void ofApp::keyPressed(int key) {
-    if (key == OF_KEY_LEFT) {
+    if (key == OF_KEY_LEFT && player.player_center_.first > 0) {
         player.player_center_.first -= 8;
     }
 
-    if (key == OF_KEY_RIGHT) {
+    if (key == OF_KEY_RIGHT && (player.player_center_.first + kFighterWidth) < ofGetWidth()) {
         player.player_center_.first += 8;
     }
 
@@ -124,8 +119,8 @@ void ofApp::keyPressed(int key) {
             Bullet* current_bullet = new Bullet();
             *current_bullet = bullet;
             current_bullet->bullet_center_ = player.player_center_;
-            current_bullet->bullet_center_.first += player.kFighterWidth / 2;
-            current_bullet->bullet_center_.second -= player.kFighterWidth / 8;
+            current_bullet->bullet_center_.first += kFighterWidth / 2;
+            current_bullet->bullet_center_.second -= kFighterWidth / 8;
             bullets.push_back(current_bullet);
             player.player_shots_++;
         }
@@ -135,10 +130,6 @@ void ofApp::keyPressed(int key) {
 
     if (upper_key == 'E') {
         CreateEnemy(player.player_center_.first, demo_bee.enemy_center_.second, 1);
-        /*Enemy* current_enemy = new Enemy();
-        *current_enemy = demo_bee;
-        current_enemy->enemy_center_.first = player.player_center_.first;
-        enemies.push_back(current_enemy);*/
     }
 
     // these commands are not supported in the Original Galaga

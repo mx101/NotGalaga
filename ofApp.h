@@ -37,6 +37,8 @@ class ofApp : public ofBaseApp {
   const int kFirstBossIdx = 40;
   
   Player player;
+  const int kFighterWidth = 48;
+
   vector<Bullet*> bullets;
 
   vector<Enemy*> enemies;
