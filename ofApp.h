@@ -35,9 +35,11 @@ class ofApp : public ofBaseApp {
   const int kFirstBossIdx = 40;
   
   Player player;
-  vector<Bullet> bullets;
+  vector<Bullet*> bullets;
 
   Enemy demo_bee;
   Enemy demo_boss;
+
+  Bullet bullet;
   //std::vector<Enemy> *enemies;
 };

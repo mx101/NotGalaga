@@ -36,3 +36,8 @@ Implement player shooting and enemy movement at the very least.
 ### 12/3/19
 - 9:00pm - Added a new bullet class. This is planned to be used for handling player projectiles, could also may be used for enemy projectiles.
 - 9:30pm - Planning more necessary functions, added checkPlayerCollisions and checkEnemyCollisions
+
+#### 12/4/19
+- 3:00am - Started bullet handling, will provide an update once this reaches a point at which it is reasonable to provide an update on.
+- 3:20am - Found galaga bullet sprite online, loading this onto a default "bullet" Bullet var in ofApp.h 
+- 3:30am - Player can now shoot bullets! Right now, the player can shoot as fast as the keyboard takes in input because of player_shots_ being a negative value once the first player bullet moves off screen.
