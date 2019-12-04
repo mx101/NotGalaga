@@ -41,12 +41,12 @@ void ofApp::setup() {
 //--------------------------------------------------------------
 void ofApp::update() {
     if (left_pressed) {
-        player.player_center_.first -= 8;
+        player.player_center_.first -= kFighterMoveSpeed;
         left_pressed = false;
 	}
 
 	if (right_pressed) {
-        player.player_center_.first += 8;
+        player.player_center_.first += kFighterMoveSpeed;
         right_pressed = false;
     }
 
@@ -56,7 +56,7 @@ void ofApp::update() {
     }
 
     for (int i = 0; i < bullets.size(); i++) {
-        bullets[i]->bullet_center_.second -= 16;
+        bullets[i]->bullet_center_.second -= kBulletSpeed;
         int second = bullets[i]->bullet_center_.second;
         if (second < 0) {
             delete bullets[i];
@@ -66,9 +66,9 @@ void ofApp::update() {
     }
 
 	for (int i = 0; i < enemies.size(); i++) {
-        enemies[i]->enemy_center_.second += 4;
+        enemies[i]->enemy_center_.second += kEnemyMoveSpeed;
         if (enemies[i]->enemy_center_.second > ofGetHeight()) {
-            enemies[i]->enemy_center_.second = -20;
+            enemies[i]->enemy_center_.second = kEnemySpawnHeight;
 		}
     }
 
@@ -77,7 +77,7 @@ void ofApp::update() {
 }
 
 void ofApp::ShootBullet() {
-    if (player.player_shots_ < 2) {
+    if (player.player_shots_ < kLegalBulletsMax) {
         Bullet* current_bullet = new Bullet();
         *current_bullet = bullet;
         current_bullet->bullet_center_ = player.player_center_;
@@ -169,27 +169,15 @@ void ofApp::keyPressed(int key) {
     if (player.alive_) {
         if (key == OF_KEY_LEFT && player.player_center_.first > 0) {
             left_pressed = true;
-            //player.player_center_.first -= 8;
         }
 
         if (key == OF_KEY_RIGHT &&
             (player.player_center_.first + kFighterWidth) < ofGetWidth()) {
             right_pressed = true;
-			//player.player_center_.first += 8;
         }
 
         if (key == OF_KEY_UP) {
             shoot_pressed = true;
-            /*if (player.player_shots_ < 2) {
-                Bullet* current_bullet = new Bullet();
-                *current_bullet = bullet;
-                current_bullet->bullet_center_ = player.player_center_;
-                current_bullet->bullet_center_.first +=
-                    kFighterWidth / 2 - (kBulletWidth / 2);
-                current_bullet->bullet_center_.second -= kFighterWidth / 8;
-                bullets.push_back(current_bullet);
-                player.player_shots_++;
-            }*/
         }
 	}
     
@@ -203,14 +191,6 @@ void ofApp::keyPressed(int key) {
     if (upper_key == 'E') {
         CreateEnemy(player.player_center_.first, demo_bee.enemy_center_.second, 1);
     }
-
-    // these commands are not supported in the Original Galaga
-    /*if (key == OF_KEY_UP) {
-      player.player_center.second -= 5;
-    }
-    if (key == OF_KEY_DOWN) {
-      player.player_center.second += 5;
-    }*/
 }
 
 //--------------------------------------------------------------

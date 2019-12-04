@@ -50,16 +50,21 @@ class ofApp : public ofBaseApp {
   Player player;
   const int kFighterWidth = 48;
   const int kFighterHeight = 48;
+  const int kFighterMoveSpeed = 8;
 
   vector<Bullet*> bullets;
+  const int kLegalBulletsMax = 2;
 
   vector<Enemy*> enemies;
   Enemy demo_bee;
   Enemy demo_boss;
   const int kEnemyWidth = 40;
   const int kEnemyHeight = 40;
+  const int kEnemyMoveSpeed = 4;
+  const int kEnemySpawnHeight = -20;
 
   Bullet bullet;
   const int kBulletWidth = 10;
   const int kBulletHeight = 14;
+  const int kBulletSpeed = 16;
 };
