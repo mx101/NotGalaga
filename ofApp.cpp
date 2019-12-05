@@ -357,6 +357,7 @@ void ofApp::draw() {
 }
 
 Enemy * ofApp::CreateEnemy(int x, int y, int type) {
+	
     Enemy* current_enemy = new Enemy();
     *current_enemy = bee_;
     current_enemy->enemy_center_.first = x;
@@ -364,7 +365,11 @@ Enemy * ofApp::CreateEnemy(int x, int y, int type) {
     enemies_.push_back(current_enemy);
     current_enemy->enemy_width_ = kEnemyWidth;
 
-	ShootBullet(current_enemy->enemy_center_, kEnemyBulletSpeed, false);
+	// use wave number mod something else to determine if an enemy should shoot
+    if (std::rand() % 5 == 0) {
+        ShootBullet(current_enemy->enemy_center_, kEnemyBulletSpeed, false);
+	}
+	
 
 	return current_enemy;
 }

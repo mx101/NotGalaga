@@ -115,3 +115,7 @@ Implement player shooting and enemy movement at the very least.
 - 1:35am - Enemy bullets are no longer invisible
 
 - 11:30am - Started Wave generation system. Currently activates on single key press and spawns in a line of bees
+
+- 11:45am - Playing around with std::rand() to determine if an enemy should shoot or no
+
+- 11:55am - Slight tangent to include XInput header

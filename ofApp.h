@@ -3,6 +3,8 @@
 #include "player.h"
 #include "enemy.h"
 #include "bullet.h"
+#include <windows.h>
+#include <xinput.h>
 
 //some enums to represent game state
 enum GameState { IN_PROGRESS = 0, PAUSED, FINISHED };
