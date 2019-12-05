@@ -6,7 +6,9 @@ void ofApp::setup() {
 	// set background color to black, because it's space
     ofSetBackgroundColor(0, 0, 0);
     srand(static_cast<unsigned>(time(0)));
-    font.load("arial.ttf", kFontSize);
+
+    message_font_.load("arial.ttf", kMessageSize);
+    score_font_.load("arial.ttf", kScoreSize);
 
 	left_pressed = false;
     right_pressed = false;
@@ -78,7 +80,11 @@ void ofApp::update() {
     CheckPlayerCollisions();
 }
 
-void ofApp::drawGameDead() {
+void ofApp::DrawScoreboard() {
+
+}
+
+void ofApp::DrawGameDead() {
     string pause_message = "Life lost! Press R to re-spawn";
     ofSetColor(232, 74, 39);
 
@@ -157,10 +163,12 @@ void ofApp::CheckPlayerCollisions() {
 
 //--------------------------------------------------------------
 void ofApp::draw() {
+    DrawScoreboard();
+
 	if (!player.alive_) {
         // add additional state here for whether the player is out of lives
         //if (player.player_lives_ > 0) {
-            drawGameDead();
+            DrawGameDead();
         //} else {
         //}
 	} else {

@@ -25,7 +25,9 @@ class ofApp : public ofBaseApp {
   void dragEvent(ofDragInfo dragInfo);
   void gotMessage(ofMessage msg);
 
-  void drawGameDead();
+  void DrawScoreboard();
+
+  void DrawGameDead();
   void RevivePlayer();
 
   void ShootBullet();
@@ -41,8 +43,10 @@ class ofApp : public ofBaseApp {
   const int kGameWindowWidth = 800;
   const int kGameWindowHeight = 1000;
 
-  ofTrueTypeFont font;
-  const int kFontSize = 24;
+  ofTrueTypeFont message_font_;
+  ofTrueTypeFont score_font_;
+  const int kMessageSize = 24;
+  const int kScoreSize = 36;
 
 
   bool left_pressed;

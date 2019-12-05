@@ -80,3 +80,5 @@ Implement player shooting and enemy movement at the very least.
 - 11:25am - Added RevivePlayer() function to improve readability for ofApp::keyPressed()
 
 - 7:00pm - Added some notes and predicted variables/functions
+
+- 7:30pm - Renamed kFontSize to kMessageSize and also added another ofTrueTypeFont kScoreSize for displaying the score text on the side
