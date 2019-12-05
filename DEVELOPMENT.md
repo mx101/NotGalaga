@@ -119,3 +119,7 @@ Implement player shooting and enemy movement at the very least.
 - 11:45am - Playing around with std::rand() to determine if an enemy should shoot or no
 
 - 11:55am - Slight tangent to include XInput header
+
+- 12:00pm - Logic fix in Generate Wave so enemies now actually spawn in rows
+
+- 12:05pm - Different enemy types now spawn

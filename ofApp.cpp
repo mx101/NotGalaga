@@ -217,12 +217,12 @@ void ofApp::GenerateWave() {
         Enemy* curr_enemy;
 
         if (i < kFirstRowMothIdx) {
-            if (i < kFirstRowBeeIdx) {
+            if (i < kSecondRowBeeIdx) {
                 curr_enemy = CreateEnemy(x, y, 0);
                 x += curr_enemy->enemy_width_ + separation;
 
             } else {
-                if (i == kFirstRowBeeIdx) {
+                if (i == kSecondRowBeeIdx) {
                     x = kStartX;
                     y += kEnemySpacing;
 				}
@@ -234,7 +234,7 @@ void ofApp::GenerateWave() {
 			
 		// create moths for enemies [20, 35]
         } else if (i < kFirstBossIdx) {
-            if (i < kFirstRowMothIdx) {
+            if (i < kSecondRowMothIdx) {
                 curr_enemy = CreateEnemy(x, y, 1);
             } else {
                 curr_enemy = CreateEnemy(x, y, 1);
@@ -359,9 +359,18 @@ void ofApp::draw() {
 Enemy * ofApp::CreateEnemy(int x, int y, int type) {
 	
     Enemy* current_enemy = new Enemy();
-    *current_enemy = bee_;
-    current_enemy->enemy_center_.first = x;
+    if (type == 0) {
+        *current_enemy = bee_; 
+	} else if (type == 1) {
+        *current_enemy = moth_;
+    } else if (type == 2) {
+        *current_enemy = boss_;
+	}
+        
+	current_enemy->enemy_center_.first = x;
     current_enemy->enemy_center_.second = y;
+    current_enemy->formation_pos_.first = x;
+    current_enemy->formation_pos_.second = y;
     enemies_.push_back(current_enemy);
     current_enemy->enemy_width_ = kEnemyWidth;
 
@@ -428,29 +437,29 @@ if (key == OF_KEY_UP) {
 }*/
 }
 
-//--------------------------------------------------------------
-void ofApp::mouseMoved(int x, int y) {}
-
-//--------------------------------------------------------------
-void ofApp::mouseDragged(int x, int y, int button) {}
-
-//--------------------------------------------------------------
-void ofApp::mousePressed(int x, int y, int button) {}
-
-//--------------------------------------------------------------
-void ofApp::mouseReleased(int x, int y, int button) {}
-
-//--------------------------------------------------------------
-void ofApp::mouseEntered(int x, int y) {}
-
-//--------------------------------------------------------------
-void ofApp::mouseExited(int x, int y) {}
-
-//--------------------------------------------------------------
-void ofApp::windowResized(int w, int h) {}
-
-//--------------------------------------------------------------
-void ofApp::gotMessage(ofMessage msg) {}
-
-//--------------------------------------------------------------
-void ofApp::dragEvent(ofDragInfo dragInfo) {}
+////--------------------------------------------------------------
+//void ofApp::mouseMoved(int x, int y) {}
+//
+////--------------------------------------------------------------
+//void ofApp::mouseDragged(int x, int y, int button) {}
+//
+////--------------------------------------------------------------
+//void ofApp::mousePressed(int x, int y, int button) {}
+//
+////--------------------------------------------------------------
+//void ofApp::mouseReleased(int x, int y, int button) {}
+//
+////--------------------------------------------------------------
+//void ofApp::mouseEntered(int x, int y) {}
+//
+////--------------------------------------------------------------
+//void ofApp::mouseExited(int x, int y) {}
+//
+////--------------------------------------------------------------
+//void ofApp::windowResized(int w, int h) {}
+//
+////--------------------------------------------------------------
+//void ofApp::gotMessage(ofMessage msg) {}
+//
+////--------------------------------------------------------------
+//void ofApp::dragEvent(ofDragInfo dragInfo) {}

@@ -21,10 +21,12 @@ class Enemy {
   // this is represented as a queue since some enemies have repeating paths
   std::queue<std::pair<int, int>> path_;
   std::pair<int, int> enemy_center_;
+  std::pair<int, int> formation_pos_;
   int enemy_type_;
   int enemy_score_;
   bool dead_;
   int enemy_width_;
+
 
   ofTexture enemy_texture_;
 };
