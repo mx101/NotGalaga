@@ -105,3 +105,7 @@ Implement player shooting and enemy movement at the very least.
 - 12:35am - Basic function structure created for above method. Now just need the math for what coordinate to start spawning.
 
 - 12:45am - Added basic wave number display to sideboard
+
+- 12:55am - Adjusted some variable names to be consistent in style
+
+- 1:15am - Streamlined ShootBullet() function to create a bullet for either a player or enemy bullet

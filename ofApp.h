@@ -31,7 +31,7 @@ class ofApp : public ofBaseApp {
   void DrawGameDead();
   void RevivePlayer();
 
-  void ShootBullet();
+  void ShootBullet(std::pair<int, int> center, int velocity, bool player_shot);
 
   void GenerateWave();
   void ReturnToFormation();
@@ -82,17 +82,18 @@ class ofApp : public ofBaseApp {
 
 
 
-  Bullet player_bullet;
+  Bullet player_bullet_;
   const int kBulletWidth = 10;
   const int kBulletHeight = 14;
-  const int kBulletSpeed = 16;
-  vector<Bullet*> player_bullets;
+  const int kPlayerBulletSpeed = -16;
+  vector<Bullet*> player_bullets_;
   const int kLegalBulletsMax = 2;
 
-  Bullet enemy_bullet;
-  vector<Bullet*> enemy_bullets;
+  Bullet enemy_bullet_;
+  vector<Bullet*> enemy_bullets_;
+  const int kEnemyBulletSpeed = 16;
 
-  vector<Enemy*> enemies;
+  vector<Enemy*> enemies_;
   Enemy bee_;
   Enemy boss_;
   Enemy moth_;
