@@ -123,3 +123,7 @@ Implement player shooting and enemy movement at the very least.
 - 12:00pm - Logic fix in Generate Wave so enemies now actually spawn in rows
 
 - 12:05pm - Different enemy types now spawn
+
+- 12:40pm - Added ability to move and shoot
+
+- 12:45pm - Adjusted player movement speed

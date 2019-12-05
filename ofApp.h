@@ -62,7 +62,6 @@ class ofApp : public ofBaseApp {
 
   bool left_pressed;
   bool right_pressed;
-  bool shoot_pressed;
 
 
   const int kStartX = 20; // change kStartX and kStartY
@@ -80,7 +79,7 @@ class ofApp : public ofBaseApp {
   int score_;
   const int kFighterWidth = 48;
   const int kFighterHeight = 48;
-  const int kFighterMoveSpeed = 8;
+  const int kFighterMoveSpeed = 5;
 
 
 

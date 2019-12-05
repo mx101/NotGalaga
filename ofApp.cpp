@@ -16,7 +16,6 @@ void ofApp::setup() {
 
     left_pressed = false;
     right_pressed = false;
-    shoot_pressed = false;
 
     // load player
     ofLoadImage(player.fighter_texture_, "fighter.png");
@@ -60,17 +59,10 @@ void ofApp::update() {
         if (player.alive_) {
             if (left_pressed) {
                 player.player_center_.first -= kFighterMoveSpeed;
-                left_pressed = false;
             }
 
             if (right_pressed) {
                 player.player_center_.first += kFighterMoveSpeed;
-                right_pressed = false;
-            }
-
-            if (shoot_pressed) {
-                ShootBullet(player.player_center_, kPlayerBulletSpeed, true);
-                shoot_pressed = false;
             }
         }
 
@@ -396,7 +388,7 @@ void ofApp::keyPressed(int key) {
         }
 
         if (key == OF_KEY_UP && player.player_shots_ < kLegalBulletsMax) {
-            shoot_pressed = true;
+            ShootBullet(player.player_center_, kPlayerBulletSpeed, true);
         }
     }
 
@@ -424,17 +416,13 @@ void ofApp::ReturnToFormation() {}
 
 //--------------------------------------------------------------
 void ofApp::keyReleased(int key) {
-    /*if (key == OF_KEY_LEFT) {
-    left_pressed = false;
-}
+    if (key == OF_KEY_LEFT) {
+		left_pressed = false;
+	}
 
-if (key == OF_KEY_RIGHT) {
-    right_pressed = false;
-}
-
-if (key == OF_KEY_UP) {
-    shoot_pressed = false;
-}*/
+	if (key == OF_KEY_RIGHT) {
+		right_pressed = false;
+	}
 }
 
 ////--------------------------------------------------------------
