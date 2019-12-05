@@ -31,6 +31,9 @@ Some stretch goals I would want to implement if this project is finished ahead o
   - [ ] Continue game engine
     - [X] Player lives
     - [ ] Start wave difficulty handling (should be slightly exponential)
+	  - Some ideas for this could be:
+	    - more shooting
+		- more random movement paths
   - [ ] Scoreboard display at end of game
   - [ ] Add any other application text output needed i.e. *"Fighter Captured"*, *"Game Over"*, *"Game Start"*, etc.
 - #### Week 4
