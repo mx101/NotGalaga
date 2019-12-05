@@ -95,11 +95,22 @@ void ofApp::DrawSideboard() {
 
 	string lives_message = "Lives: " + to_string(player.player_lives_);
 
-	int side_life_width = kGameWindowWidth + (kSideboardWidth / 2) - side_font_.stringWidth(lives_message) / 2;
+	int side_life_width = kGameWindowWidth + (kSideboardWidth / 2) - 
+							   side_font_.stringWidth(lives_message) / 2;
+
 	int side_life_height = (kGameWindowHeight / 2) + kSideboardSpacing;
 
-    side_font_.drawString(lives_message, side_life_width,
-                              side_life_height);
+    side_font_.drawString(lives_message, side_life_width, side_life_height);
+
+
+	string score_message = "Score: " + to_string(score_);
+
+	int side_score_width = kGameWindowWidth + (kSideboardWidth / 2) -
+                               side_font_.stringWidth(score_message) / 2;
+
+	int side_score_height = (kGameWindowHeight / 2) - kSideboardSpacing;
+
+	side_font_.drawString(score_message, side_score_width, side_score_height);
 
 	// implement score section/wave number
 }
