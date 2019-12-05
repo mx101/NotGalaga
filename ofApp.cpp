@@ -16,6 +16,7 @@ void ofApp::setup() {
 
 	LoadData();
 
+	//condense below lines into some restartGame method
     player.player_shots_ = 0;
     player.player_lives_ = 3;
     player.alive_ = true;
@@ -30,7 +31,6 @@ void ofApp::setup() {
 
 	boss_.enemy_center_.first = kGameWindowWidth / 4;
     boss_.enemy_center_.second = kGameWindowHeight / 3;
-
 
     score_ = 0;
 }
@@ -53,8 +53,6 @@ void ofApp::LoadData() {
     ofLoadImage(bee_.enemy_texture_, "bee.png");
     ofLoadImage(boss_.enemy_texture_, "bossGalaga.png");
     ofLoadImage(moth_.enemy_texture_, "moth.png");
-
-    
 }
 
 //--------------------------------------------------------------
@@ -104,6 +102,7 @@ void ofApp::update() {
         if (player.alive_) {
             CheckPlayerCollisions();
         }
+
     } else {
         DrawScoreboard();
     }
