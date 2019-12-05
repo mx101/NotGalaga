@@ -32,18 +32,24 @@ void ofApp::setup() {
 
 	ofLoadImage(enemy_bullet.bullet_texture_, "enemyBullet.png");
 
-    // load demo bee
-    ofLoadImage(demo_bee.enemy_texture_, "bee.png");
+    // load bee data
+    ofLoadImage(bee_.enemy_texture_, "bee.png");
 
-    demo_bee.enemy_center_.first = kGameWindowWidth / 2;
-    demo_bee.enemy_center_.second = kGameWindowHeight / 8;
+    bee_.enemy_center_.first = kGameWindowWidth / 2;
+    bee_.enemy_center_.second = kGameWindowHeight / 8;
 
-    ofLoadImage(demo_boss.enemy_texture_, "bossGalaga.png");
+	// load boss data
+    ofLoadImage(boss_.enemy_texture_, "bossGalaga.png");
 
-    demo_boss.enemy_center_.first = kGameWindowWidth / 4;
-    demo_boss.enemy_center_.second = kGameWindowHeight / 3;
+    boss_.enemy_center_.first = kGameWindowWidth / 4;
+    boss_.enemy_center_.second = kGameWindowHeight / 3;
 
-    // TODO: load player fire sound
+	// load moth data
+    ofLoadImage(moth_.enemy_texture_, "moth.png");
+
+    moth_.enemy_center_.first = kGameWindowWidth / 4;
+    moth_.enemy_center_.second = kGameWindowHeight / 3;
+
     player.player_fire.load("playerFire.mp3");
 }
 
@@ -96,6 +102,9 @@ void ofApp::update() {
 
 void ofApp::DrawScoreboard() {
 	// items to display, high score of current session, score of current game
+	// option to restart game
+	// remember to delete the remaining enemies from memory
+
 }
 
 void ofApp::DrawSideboard() {
@@ -139,6 +148,7 @@ void ofApp::DrawGameDead() {
         game_running_ = false;
 	}
     
+	// This is the RGB for Illini Orange
     ofSetColor(232, 74, 39);
 	
 	int center_width = (kGameWindowWidth / 2) -
@@ -247,7 +257,7 @@ void ofApp::draw() {
 
 void ofApp::CreateEnemy(int x, int y, int type) {
     Enemy* current_enemy = new Enemy();
-    *current_enemy = demo_bee;
+    *current_enemy = bee_;
     current_enemy->enemy_center_.first = x;
     current_enemy->enemy_center_.second = y;
     enemies.push_back(current_enemy);
@@ -278,7 +288,7 @@ void ofApp::keyPressed(int key) {
     }
 
     if (upper_key == 'E') {
-        CreateEnemy(player.player_center_.first, demo_bee.enemy_center_.second, 0);
+        CreateEnemy(player.player_center_.first, bee_.enemy_center_.second, 0);
     }
 }
 

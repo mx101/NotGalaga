@@ -96,3 +96,7 @@ Implement player shooting and enemy movement at the very least.
 - 11:40pm - Added different update logic for if player has lives or no
 
 - 11:50pm - Noted some more needed items for DrawScoreboard()
+
+### 12/5/19
+- 12:00am - Changed so that the bee, moth, and boss galaga images are all loaded in setup(), some additional notes/comments in other areas
+

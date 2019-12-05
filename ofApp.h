@@ -85,8 +85,9 @@ class ofApp : public ofBaseApp {
   vector<Bullet*> enemy_bullets;
 
   vector<Enemy*> enemies;
-  Enemy demo_bee;
-  Enemy demo_boss;
+  Enemy bee_;
+  Enemy boss_;
+  Enemy moth_;
   const int kEnemyWidth = 40;
   const int kEnemyHeight = 40;
   const int kEnemyMoveSpeed = 4;
