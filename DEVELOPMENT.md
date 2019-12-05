@@ -109,3 +109,7 @@ Implement player shooting and enemy movement at the very least.
 - 12:55am - Adjusted some variable names to be consistent in style
 
 - 1:15am - Streamlined ShootBullet() function to create a bullet for either a player or enemy bullet
+
+- 1:30am - Enemies can now shoot, their bullets are currently invisible... whoops
+
+- 1:35am - Enemy bullets are no longer invisible

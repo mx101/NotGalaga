@@ -91,7 +91,7 @@ class ofApp : public ofBaseApp {
 
   Bullet enemy_bullet_;
   vector<Bullet*> enemy_bullets_;
-  const int kEnemyBulletSpeed = 16;
+  const int kEnemyBulletSpeed = 10;
 
   vector<Enemy*> enemies_;
   Enemy bee_;

@@ -24,7 +24,7 @@ Some stretch goals I would want to implement if this project is finished ahead o
 - #### Week 2
   - [ ] Continue game engine
     - [X] Enemy movement
-    - [ ] Enemy shooting (only for some enemy types)
+    - [X] Enemy shooting (only for some enemy types)
     - [X] Collision handling
     - [ ] Start more advanced enemy movement/paths (not an absolute priority)
 - #### Week 3

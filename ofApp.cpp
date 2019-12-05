@@ -93,6 +93,16 @@ void ofApp::update() {
             }
         }
 
+		for (int i = 0; i < enemy_bullets_.size(); i++) {
+            enemy_bullets_[i]->bullet_center_.second += kEnemyBulletSpeed;
+            int second = enemy_bullets_[i]->bullet_center_.second;
+
+            if (second > kGameWindowHeight) {
+                delete enemy_bullets_[i];
+                enemy_bullets_.erase(enemy_bullets_.begin() + i);
+            }
+        }
+
         CheckEnemyCollisions();
 
         if (player.alive_) {
@@ -186,6 +196,8 @@ void ofApp::ShootBullet(std::pair<int, int> center, int velocity, bool player_sh
     } else {
         *current_bullet = enemy_bullet_;
         current_bullet->bullet_center_ = center;
+
+		enemy_bullets_.push_back(current_bullet);
 	}   
 
 	current_bullet->bullet_velocity_ = velocity;
@@ -251,17 +263,17 @@ void ofApp::CheckEnemyCollisions() {
 }
 
 void ofApp::CheckPlayerCollisions() {
+    int player_first = player.player_center_.first;
+    int player_second = player.player_center_.second;
+    glm::vec2 player_center(player_first, player_second);
+    ofRectangle player_rect(player_center, kFighterWidth, kFighterHeight);
+
     // check physical player/enemy collision
     for (int j = 0; j < enemies_.size(); j++) {
         int enemy_first = enemies_[j]->enemy_center_.first;
         int enemy_second = enemies_[j]->enemy_center_.second;
         glm::vec2 enemy_center(enemy_first, enemy_second);
         ofRectangle current_enemy(enemy_center, kEnemyWidth, kEnemyHeight);
-
-        int player_first = player.player_center_.first;
-        int player_second = player.player_center_.second;
-        glm::vec2 player_center(player_first, player_second);
-        ofRectangle player_rect(player_center, kFighterWidth, kFighterHeight);
 
         if (current_enemy.intersects(player_rect)) {
             delete enemies_[j];
@@ -276,7 +288,18 @@ void ofApp::CheckPlayerCollisions() {
     // check for enemy bullet collision with player
     if (player.alive_) {
         for (int i = 0; i < enemy_bullets_.size(); i++) {
-        
+            int enemy_first = enemy_bullets_[i]->bullet_center_.first;
+            int enemy_second = enemy_bullets_[i]->bullet_center_.second;
+            glm::vec2 enemy_center(enemy_first, enemy_second);
+            ofRectangle current_enemy(enemy_center, kBulletWidth, kBulletHeight);
+
+			if (current_enemy.intersects(player_rect)) {
+                delete enemy_bullets_[i];
+                enemy_bullets_.erase(enemy_bullets_.begin() + i);
+
+                player.player_lives_--;
+                player.alive_ = false;
+            }
 		}
     }
 }
@@ -306,6 +329,12 @@ void ofApp::draw() {
             int second = enemies_[i]->enemy_center_.second;
             enemies_[i]->enemy_texture_.draw(first, second);
         }
+
+		for (int i = 0; i < enemy_bullets_.size(); i++) {
+            int first = enemy_bullets_[i]->bullet_center_.first;
+            int second = enemy_bullets_[i]->bullet_center_.second;
+            enemy_bullets_[i]->bullet_texture_.draw(first, second);
+        }
     }
 }
 
@@ -315,6 +344,8 @@ void ofApp::CreateEnemy(int x, int y, int type) {
     current_enemy->enemy_center_.first = x;
     current_enemy->enemy_center_.second = y;
     enemies_.push_back(current_enemy);
+
+	ShootBullet(current_enemy->enemy_center_, kEnemyBulletSpeed, false);
 }
 
 //--------------------------------------------------------------
