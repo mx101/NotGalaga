@@ -29,7 +29,7 @@ Some stretch goals I would want to implement if this project is finished ahead o
     - [X] Player lives
 - #### Week 3
   - [ ] Continue game engine
-	- [ ] Implement wave creation
+	- [X] Implement wave creation
 	- [?] Start more advanced enemy movement/paths
     - [?] Start wave difficulty handling (should be slightly exponential)
 	  - Some ideas for this could be:

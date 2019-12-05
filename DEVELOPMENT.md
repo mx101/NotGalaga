@@ -133,3 +133,5 @@ Implement player shooting and enemy movement at the very least.
 - 1:30pm - Finishing GenerateWave() function
 
 - 1:45pm - Fixed bug that caused enemies to have massive hitboxes
+
+- 2:15pm - Fixed literal edge case of player fighter extending past the game window

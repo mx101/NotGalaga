@@ -57,14 +57,28 @@ void ofApp::LoadData() {
 //--------------------------------------------------------------
 void ofApp::update() {
     if (game_running_) {
+        if (enemies_.empty()) {
+            GenerateWave();
+        }
+
         if (player.alive_) {
-            if (left_pressed) {
+            if (left_pressed && player.player_center_.first > 0) {
                 player.player_center_.first -= kFighterMoveSpeed;
             }
 
-            if (right_pressed) {
+            if (right_pressed && (player.player_center_.first + kFighterWidth -
+                                  1) < kGameWindowWidth) {
                 player.player_center_.first += kFighterMoveSpeed;
             }
+
+            // check right edge not out of bounds
+            int ship_right = player.player_center_.first + kFighterWidth;
+			int out_of_bounds = ship_right - kGameWindowWidth;
+
+            if (out_of_bounds > 0) {
+                //std::cout << "out by: " << out_of_bounds << std::endl;
+                player.player_center_.first -= out_of_bounds;
+			}
         }
 
         for (int i = 0; i < player_bullets_.size(); i++) {
@@ -385,7 +399,7 @@ Enemy* ofApp::CreateEnemy(int x, int y, int type) {
     current_enemy->enemy_width_ = kEnemyWidth;
 
     // use wave number mod something else to determine if an enemy should shoot
-    if (false) {  // std::rand() % 5 == 0) {
+    if (type != 2 && std::rand() % 5 == 0) {
         ShootBullet(current_enemy->enemy_center_, kEnemyBulletSpeed, false);
     }
 
@@ -395,12 +409,11 @@ Enemy* ofApp::CreateEnemy(int x, int y, int type) {
 //--------------------------------------------------------------
 void ofApp::keyPressed(int key) {
     if (player.alive_) {
-        if (key == OF_KEY_LEFT && player.player_center_.first > 0) {
+        if (key == OF_KEY_LEFT) {
             left_pressed = true;
         }
 
-        if (key == OF_KEY_RIGHT &&
-            (player.player_center_.first + kFighterWidth) < kGameWindowWidth) {
+        if (key == OF_KEY_RIGHT) {
             right_pressed = true;
         }
 
@@ -434,7 +447,7 @@ void ofApp::RevivePlayer() {
 void ofApp::ReturnToFormation() {
     for (Enemy* curr_enemy : enemies_) {
         curr_enemy->enemy_center_ = curr_enemy->formation_pos_;
-	}
+    }
 }
 
 //--------------------------------------------------------------

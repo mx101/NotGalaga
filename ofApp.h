@@ -81,11 +81,11 @@ class ofApp : public ofBaseApp {
   Enemy moth_;
   const int kEnemyWidth = 40;
   const int kEnemyHeight = 40;
-  const int kEnemySpacing = 300;
-  const int kEnemyMoveSpeed = 4;
+  const int kEnemySpacing = 60;
+  const int kEnemyMoveSpeed = 2;
   const int kEnemySpawnHeight = -20;
   const int kBeeStartX = 20;  // change kStartX and kStartY
-  const int kBeeStartY = 40;
+  const int kBeeStartY = 250;
   const int kBeeCount = 20;  // 20 bees total
   const int kSecondRowBeeIdx = 10;
   const int kMothCount = 16;  // 16 moths total
