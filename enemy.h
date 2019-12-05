@@ -17,7 +17,9 @@ class Enemy {
   const int kFirstMothIdx = 20;
   const int kFirstBossIdx = 40;*/
 
-
+  // the pair will be representing a change in x, y
+  // this is represented as a queue since some enemies have repeating paths
+  std::queue<std::pair<int, int>> path_;
   std::pair<int, int> enemy_center_;
   int enemy_type_;
   bool dead_;

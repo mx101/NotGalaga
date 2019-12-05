@@ -30,6 +30,9 @@ class ofApp : public ofBaseApp {
 
   void ShootBullet();
 
+  void ReturnToFormation();
+
+
   void CheckEnemyCollisions();
   void CheckPlayerCollisions();
 

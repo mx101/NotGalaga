@@ -78,3 +78,5 @@ Implement player shooting and enemy movement at the very least.
 - 11:20am - Extended window size and restricted actual game play area to make room for Score, life display
 
 - 11:25am - Added RevivePlayer() function to improve readability for ofApp::keyPressed()
+
+- 7:00pm - Added some notes and predicted variables/functions

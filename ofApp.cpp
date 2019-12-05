@@ -87,17 +87,19 @@ void ofApp::drawGameDead() {
 }
 
 void ofApp::ShootBullet() {
-    if (player.player_shots_ < kLegalBulletsMax) {
-        Bullet* current_bullet = new Bullet();
-        *current_bullet = player_bullet;
-        current_bullet->bullet_center_ = player.player_center_;
-        current_bullet->bullet_center_.first +=
-            kFighterWidth / 2 - (kBulletWidth / 2);
-        current_bullet->bullet_center_.second -= kFighterWidth / 8;
-        player_bullets.push_back(current_bullet);
-        player.player_shots_++;
-        player.player_fire.play();
-    }
+	//possible streamlining improvement: have this function take in a start point and velocity
+	//that way we can reuse for shooting enemy bullets
+    
+    Bullet* current_bullet = new Bullet();
+    *current_bullet = player_bullet;
+    current_bullet->bullet_center_ = player.player_center_;
+    current_bullet->bullet_center_.first +=
+        kFighterWidth / 2 - (kBulletWidth / 2);
+    current_bullet->bullet_center_.second -= kFighterWidth / 8;
+    player_bullets.push_back(current_bullet);
+    player.player_shots_++;
+    player.player_fire.play();
+    
 }
 
 void ofApp::CheckEnemyCollisions() {
@@ -199,7 +201,7 @@ void ofApp::keyPressed(int key) {
             right_pressed = true;
         }
 
-        if (key == OF_KEY_UP) {
+        if (key == OF_KEY_UP && player.player_shots_ < kLegalBulletsMax) {
             shoot_pressed = true;
         }
 	}
@@ -222,8 +224,24 @@ void ofApp::RevivePlayer() {
     ofSetBackgroundColor(0, 0, 0);
 }
 
+void ofApp::ReturnToFormation() {
+
+}
+
 //--------------------------------------------------------------
-void ofApp::keyReleased(int key) {}
+void ofApp::keyReleased(int key) { 
+	/*if (key == OF_KEY_LEFT) {
+        left_pressed = false;
+    }
+
+    if (key == OF_KEY_RIGHT) {
+        right_pressed = false;
+    }
+
+    if (key == OF_KEY_UP) {
+        shoot_pressed = false;
+    }*/
+}
 
 //--------------------------------------------------------------
 void ofApp::mouseMoved(int x, int y) {}
