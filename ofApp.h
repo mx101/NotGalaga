@@ -33,8 +33,8 @@ class ofApp : public ofBaseApp {
 
   void ShootBullet();
 
+  void GenerateWave();
   void ReturnToFormation();
-
 
   void CheckEnemyCollisions();
   void CheckPlayerCollisions();
@@ -43,6 +43,7 @@ class ofApp : public ofBaseApp {
 
   bool game_running_;
   int high_score_;
+  int waves_;
   
   const int kGameWindowWidth = 800;
   const int kGameWindowHeight = 1000;
@@ -62,17 +63,24 @@ class ofApp : public ofBaseApp {
   bool shoot_pressed;
 
 
-  // still to be used
-  const int kEnemyCount = 44;
-  const int kFirstBeeIdx = 0;
-  const int kFirstMothIdx = 20;
-  const int kFirstBossIdx = 40;
+  const int kStartX = 20; // change kStartX and kStartY
+  const int kStartY = 40; 
+  const int kEnemyCount = 40;
+  const int kFirstRowBeeIdx = 0; // 20 bees
+  const int kSecondRowBeeIdx = 10;
+  const int kFirstRowMothIdx = 20; // 16 moths
+  const int kSecondRowMothIdx = 28;
+  const int kFirstBossIdx = 36; // 4 boss galaga
   
+
+
   Player player;
   int score_;
   const int kFighterWidth = 48;
   const int kFighterHeight = 48;
   const int kFighterMoveSpeed = 8;
+
+
 
   Bullet player_bullet;
   const int kBulletWidth = 10;

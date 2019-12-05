@@ -100,3 +100,8 @@ Implement player shooting and enemy movement at the very least.
 ### 12/5/19
 - 12:00am - Changed so that the bee, moth, and boss galaga images are all loaded in setup(), some additional notes/comments in other areas
 
+- 12:25am - Started Wave Generator function in ofApp
+
+- 12:35am - Basic function structure created for above method. Now just need the math for what coordinate to start spawning.
+
+- 12:45am - Added basic wave number display to sideboard

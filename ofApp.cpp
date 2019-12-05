@@ -9,6 +9,7 @@ void ofApp::setup() {
 
 	game_running_ = true;
     high_score_ = 30000;
+    waves_ = 0;
 
     message_font_.load("galaga.ttf", kMessageSize);
     side_font_.load("galaga.ttf", kSideSize);
@@ -122,6 +123,7 @@ void ofApp::DrawSideboard() {
 
     side_font_.drawString(lives_message, side_life_width, side_life_height);
 
+	
 
 	string score_message = "Score: " + to_string(score_);
 
@@ -132,7 +134,16 @@ void ofApp::DrawSideboard() {
 
 	side_font_.drawString(score_message, side_score_width, side_score_height);
 
-	// implement wave number display
+
+
+	string wave_message = "Wave: " + to_string(waves_);
+
+    int side_wave_width = kGameWindowWidth + (kSideboardWidth / 2) -
+                              side_font_.stringWidth(wave_message) / 2;
+
+    int side_wave_height = (kGameWindowHeight / 2) + (2 * kSideboardSpacing);
+
+    side_font_.drawString(wave_message, side_wave_width, side_wave_height);
 }
 
 void ofApp::DrawGameDead() {
@@ -174,6 +185,37 @@ void ofApp::ShootBullet() {
     player.player_shots_++;
     player.player_fire.play();
 }
+
+
+void ofApp::GenerateWave() {
+    // load in the first 44 aliens
+    // note the additional if checks for moths and bees because they form two rows
+    int x = kStartX;
+    int y = kStartY;
+
+    for (int i = 0; i < kEnemyCount; i++) {
+        if (i < kFirstRowMothIdx) {
+            if (i < kFirstRowBeeIdx) {
+                CreateEnemy(x, y, 0);
+		    } else {
+                CreateEnemy(x, y, 0);
+            }
+
+        } else if (i < kFirstBossIdx) {
+            if (i < kFirstRowMothIdx) {
+                CreateEnemy(x, y, 1);
+            } else {
+                CreateEnemy(x, y, 1);
+            }
+
+        } else {
+            CreateEnemy(x, y, 2);
+        }
+    }
+
+	waves_++;
+}
+
 
 void ofApp::CheckEnemyCollisions() {
     // This looks like an O(n^2) operation but bullets will always contain at most 2 elements
