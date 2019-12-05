@@ -15,9 +15,9 @@ Some stretch goals I would want to implement if this project is finished ahead o
     - [X] Player Ship
     - [X] Enemy Space Bugs
     - [X] Player projectiles
-    - [?] Enemy projectiles
+    - [X] Enemy projectiles
     - [?] Player/Enemy death
-    - [ ] Score/Life Display
+    - [X] Score/Life Display
   - [X] Start main __*Galaga*__ game engine
     - [X] Player movement
     - [X] Player shooting

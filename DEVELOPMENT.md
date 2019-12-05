@@ -82,3 +82,7 @@ Implement player shooting and enemy movement at the very least.
 - 7:00pm - Added some notes and predicted variables/functions
 
 - 7:30pm - Renamed kFontSize to kMessageSize and also added another ofTrueTypeFont kScoreSize for displaying the score text on the side
+
+- 7:45pm - We have a line of separation between the scoreboard and gameplay area now!
+
+- 8:30pm - Changed font to a Galaga-esque one instead of Arial. DrawScoreboard() renamed to DrawSideboard() and partially implemented to show lives.

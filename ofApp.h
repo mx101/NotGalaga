@@ -25,7 +25,7 @@ class ofApp : public ofBaseApp {
   void dragEvent(ofDragInfo dragInfo);
   void gotMessage(ofMessage msg);
 
-  void DrawScoreboard();
+  void DrawSideboard();
 
   void DrawGameDead();
   void RevivePlayer();
@@ -42,11 +42,13 @@ class ofApp : public ofBaseApp {
 
   const int kGameWindowWidth = 800;
   const int kGameWindowHeight = 1000;
+  const int kSideboardWidth = 300;
 
   ofTrueTypeFont message_font_;
-  ofTrueTypeFont score_font_;
-  const int kMessageSize = 24;
-  const int kScoreSize = 36;
+  ofTrueTypeFont side_font_;
+  const int kMessageSize = 16;
+  const int kSideSize = 24;
+  const int kSideboardSpacing = 30;
 
 
   bool left_pressed;
@@ -61,6 +63,7 @@ class ofApp : public ofBaseApp {
   const int kFirstBossIdx = 40;
   
   Player player;
+  int score_;
   const int kFighterWidth = 48;
   const int kFighterHeight = 48;
   const int kFighterMoveSpeed = 8;

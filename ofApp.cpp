@@ -7,8 +7,8 @@ void ofApp::setup() {
     ofSetBackgroundColor(0, 0, 0);
     srand(static_cast<unsigned>(time(0)));
 
-    message_font_.load("arial.ttf", kMessageSize);
-    score_font_.load("arial.ttf", kScoreSize);
+    message_font_.load("galaga.ttf", kMessageSize);
+    side_font_.load("galaga.ttf", kSideSize);
 
 	left_pressed = false;
     right_pressed = false;
@@ -22,6 +22,8 @@ void ofApp::setup() {
     player.alive_ = true;
     player.player_center_.first = kGameWindowWidth / 2;
     player.player_center_.second = kGameWindowHeight - (kGameWindowHeight / 8);
+    
+	score_ = 0;
 
     ofLoadImage(player_bullet.bullet_texture_, "bullet.png");
 
@@ -80,16 +82,31 @@ void ofApp::update() {
     CheckPlayerCollisions();
 }
 
-void ofApp::DrawScoreboard() {
+void ofApp::DrawSideboard() {
+	// draw the line of separation between gameplay and sideboard
+	glm::vec2 top_border(kGameWindowWidth, 0);
+    glm::vec2 bottom_border(kGameWindowWidth, kGameWindowHeight);
+	ofDrawLine(top_border, bottom_border); 
 
+	string lives_message = "Lives: " + to_string(player.player_lives_);
+
+	int side_life_width = kGameWindowWidth + 100;
+	int side_life_height = (kGameWindowHeight / 2) + kSideboardSpacing;
+
+    side_font_.drawString(lives_message, side_life_width,
+                              side_life_height);
 }
 
 void ofApp::DrawGameDead() {
-    string pause_message = "Life lost! Press R to re-spawn";
+    string pause_message = "Life lost! Press R to respawn";
     ofSetColor(232, 74, 39);
+	
+	int center_width =
+        (kGameWindowWidth / 2) - (message_font_.stringWidth(pause_message) / 2);
 
-    ofDrawBitmapString(pause_message, kGameWindowWidth / 2,
-                       kGameWindowHeight / 2);
+	int center_height = kGameWindowHeight / 2;
+
+    message_font_.drawString(pause_message, center_width, center_height);
 }
 
 void ofApp::ShootBullet() {
@@ -163,7 +180,7 @@ void ofApp::CheckPlayerCollisions() {
 
 //--------------------------------------------------------------
 void ofApp::draw() {
-    DrawScoreboard();
+    DrawSideboard();
 
 	if (!player.alive_) {
         // add additional state here for whether the player is out of lives
