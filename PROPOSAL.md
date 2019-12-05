@@ -29,6 +29,7 @@ Some stretch goals I would want to implement if this project is finished ahead o
     - [X] Player lives
 - #### Week 3
   - [ ] Continue game engine
+	- [ ] Implement wave creation
 	- [?] Start more advanced enemy movement/paths
     - [?] Start wave difficulty handling (should be slightly exponential)
 	  - Some ideas for this could be:
@@ -38,7 +39,7 @@ Some stretch goals I would want to implement if this project is finished ahead o
   - [ ] Add any other application text output needed i.e. *"Fighter Captured"*, *"Game Over"*, *"Game Start"*, etc.
 - #### Week 4
   - [ ] Player kidnapping/rescue
-  - [ ] Finish anything that was pushed back from previous weeks
+  - [ ] Finish anything pushed back from previous weeks
   - [ ] Complete additional testing, if need be
 - #### Stretch Goals
   - [ ] Create more arcade games, refer to above list

@@ -129,3 +129,7 @@ Implement player shooting and enemy movement at the very least.
 - 12:45pm - Adjusted player movement speed
 
 - 12:50pm - Condensed some setup() lines into a LoadData() function that calls most of the load functions for oF objects
+
+- 1:30pm - Finishing GenerateWave() function
+
+- 1:45pm - Fixed bug that caused enemies to have massive hitboxes

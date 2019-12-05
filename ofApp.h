@@ -18,15 +18,6 @@ class ofApp : public ofBaseApp {
 
   void keyPressed(int key);
   void keyReleased(int key);
-  /*void mouseMoved(int x, int y);
-  void mouseDragged(int x, int y, int button);
-  void mousePressed(int x, int y, int button);
-  void mouseReleased(int x, int y, int button);
-  void mouseEntered(int x, int y);
-  void mouseExited(int x, int y);
-  void windowResized(int w, int h);
-  void dragEvent(ofDragInfo dragInfo);
-  void gotMessage(ofMessage msg);*/
 
   void DrawSideboard();
   void DrawScoreboard();
@@ -62,18 +53,7 @@ class ofApp : public ofBaseApp {
 
 
   bool left_pressed;
-  bool right_pressed;
-
-
-  const int kStartX = 20; // change kStartX and kStartY
-  const int kStartY = 40; 
-  const int kEnemyCount = 40;
-  const int kFirstRowBeeIdx = 0; // 20 bees
-  const int kSecondRowBeeIdx = 10;
-  const int kFirstRowMothIdx = 20; // 16 moths
-  const int kSecondRowMothIdx = 28;
-  const int kFirstBossIdx = 36; // 4 boss galaga
-  
+  bool right_pressed; 
 
 
   Player player;
@@ -101,9 +81,18 @@ class ofApp : public ofBaseApp {
   Enemy moth_;
   const int kEnemyWidth = 40;
   const int kEnemyHeight = 40;
-  const int kEnemySpacing = 60;
+  const int kEnemySpacing = 300;
   const int kEnemyMoveSpeed = 4;
   const int kEnemySpawnHeight = -20;
+  const int kBeeStartX = 20;  // change kStartX and kStartY
+  const int kBeeStartY = 40;
+  const int kBeeCount = 20;  // 20 bees total
+  const int kSecondRowBeeIdx = 10;
+  const int kMothCount = 16;  // 16 moths total
+  const int kSecondRowMothIdx = 8;
+  const int kBossCount = 4;  // 4 boss galaga total
+  const int kMothStartX = 70;
+  const int kBossStartX = 170;
 
   
 };
