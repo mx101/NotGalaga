@@ -127,3 +127,5 @@ Implement player shooting and enemy movement at the very least.
 - 12:40pm - Added ability to move and shoot
 
 - 12:45pm - Adjusted player movement speed
+
+- 12:50pm - Condensed some setup() lines into a LoadData() function that calls most of the load functions for oF objects

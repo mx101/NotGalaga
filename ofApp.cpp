@@ -11,14 +11,10 @@ void ofApp::setup() {
     high_score_ = 30000;
     waves_ = 0;
 
-    message_font_.load("galaga.ttf", kMessageSize);
-    side_font_.load("galaga.ttf", kSideSize);
-
     left_pressed = false;
     right_pressed = false;
 
-    // load player
-    ofLoadImage(player.fighter_texture_, "fighter.png");
+	LoadData();
 
     player.player_shots_ = 0;
     player.player_lives_ = 3;
@@ -26,31 +22,39 @@ void ofApp::setup() {
     player.player_center_.first = kGameWindowWidth / 2;
     player.player_center_.second = kGameWindowHeight - (kGameWindowHeight / 8);
 
-    score_ = 0;
-
-    ofLoadImage(player_bullet_.bullet_texture_, "bullet.png");
-
-    ofLoadImage(enemy_bullet_.bullet_texture_, "enemyBullet.png");
-
-    // load bee data
-    ofLoadImage(bee_.enemy_texture_, "bee.png");
-
-    bee_.enemy_center_.first = kGameWindowWidth / 2;
+	bee_.enemy_center_.first = kGameWindowWidth / 2;
     bee_.enemy_center_.second = kGameWindowHeight / 8;
 
-    // load boss data
-    ofLoadImage(boss_.enemy_texture_, "bossGalaga.png");
-
-    boss_.enemy_center_.first = kGameWindowWidth / 4;
-    boss_.enemy_center_.second = kGameWindowHeight / 3;
-
-    // load moth data
-    ofLoadImage(moth_.enemy_texture_, "moth.png");
-
-    moth_.enemy_center_.first = kGameWindowWidth / 4;
+	moth_.enemy_center_.first = kGameWindowWidth / 4;
     moth_.enemy_center_.second = kGameWindowHeight / 3;
 
+	boss_.enemy_center_.first = kGameWindowWidth / 4;
+    boss_.enemy_center_.second = kGameWindowHeight / 3;
+
+
+    score_ = 0;
+}
+
+void ofApp::LoadData() {
+
+	// load font data
+	message_font_.load("galaga.ttf", kMessageSize);
+    side_font_.load("galaga.ttf", kSideSize);
+
+    // load player
+    ofLoadImage(player.fighter_texture_, "fighter.png");
     player.player_fire.load("playerFire.mp3");
+    
+	// load bullets
+	ofLoadImage(player_bullet_.bullet_texture_, "bullet.png");
+    ofLoadImage(enemy_bullet_.bullet_texture_, "enemyBullet.png");
+
+    // load enemy data
+    ofLoadImage(bee_.enemy_texture_, "bee.png");
+    ofLoadImage(boss_.enemy_texture_, "bossGalaga.png");
+    ofLoadImage(moth_.enemy_texture_, "moth.png");
+
+    
 }
 
 //--------------------------------------------------------------
