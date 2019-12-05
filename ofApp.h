@@ -26,6 +26,7 @@ class ofApp : public ofBaseApp {
   void gotMessage(ofMessage msg);
 
   void DrawSideboard();
+  void DrawScoreboard();
 
   void DrawGameDead();
   void RevivePlayer();
@@ -40,10 +41,13 @@ class ofApp : public ofBaseApp {
 
   void CreateEnemy(int x, int y, int type);
 
+  bool game_running_;
+  
   const int kGameWindowWidth = 800;
   const int kGameWindowHeight = 1000;
   const int kSideboardWidth = 300;
   const int kOffset = 50;
+
 
   ofTrueTypeFont message_font_;
   ofTrueTypeFont side_font_;

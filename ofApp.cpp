@@ -7,6 +7,8 @@ void ofApp::setup() {
     ofSetBackgroundColor(0, 0, 0);
     srand(static_cast<unsigned>(time(0)));
 
+	game_running_ = true;
+
     message_font_.load("galaga.ttf", kMessageSize);
     side_font_.load("galaga.ttf", kSideSize);
 
@@ -46,45 +48,53 @@ void ofApp::setup() {
 
 //--------------------------------------------------------------
 void ofApp::update() {
-    if (player.alive_) {
-        if (left_pressed) {
-            player.player_center_.first -= kFighterMoveSpeed;
-            left_pressed = false;
+    if (game_running_) {
+        if (player.alive_) {
+            if (left_pressed) {
+                player.player_center_.first -= kFighterMoveSpeed;
+                left_pressed = false;
+            }
+
+            if (right_pressed) {
+                player.player_center_.first += kFighterMoveSpeed;
+                right_pressed = false;
+            }
+
+            if (shoot_pressed) {
+                ShootBullet();
+                shoot_pressed = false;
+            }
         }
 
-        if (right_pressed) {
-            player.player_center_.first += kFighterMoveSpeed;
-            right_pressed = false;
+        for (int i = 0; i < player_bullets.size(); i++) {
+            player_bullets[i]->bullet_center_.second -= kBulletSpeed;
+            int second = player_bullets[i]->bullet_center_.second;
+            if (second < 0) {
+                delete player_bullets[i];
+                player_bullets.erase(player_bullets.begin() + i);
+                player.player_shots_--;
+            }
         }
 
-        if (shoot_pressed) {
-            ShootBullet();
-            shoot_pressed = false;
+        for (int i = 0; i < enemies.size(); i++) {
+            enemies[i]->enemy_center_.second += kEnemyMoveSpeed;
+            if (enemies[i]->enemy_center_.second > kGameWindowHeight) {
+                enemies[i]->enemy_center_.second = kEnemySpawnHeight;
+            }
         }
+
+        CheckEnemyCollisions();
+
+        if (player.alive_) {
+            CheckPlayerCollisions();
+        }
+    } else {
+        DrawScoreboard();
 	}
-    
-    for (int i = 0; i < player_bullets.size(); i++) {
-        player_bullets[i]->bullet_center_.second -= kBulletSpeed;
-        int second = player_bullets[i]->bullet_center_.second;
-        if (second < 0) {
-            delete player_bullets[i];
-            player_bullets.erase(player_bullets.begin() + i);
-            player.player_shots_--;
-        }
-    }
+}
 
-	for (int i = 0; i < enemies.size(); i++) {
-        enemies[i]->enemy_center_.second += kEnemyMoveSpeed;
-        if (enemies[i]->enemy_center_.second > kGameWindowHeight) {
-            enemies[i]->enemy_center_.second = kEnemySpawnHeight;
-		}
-    }
+void ofApp::DrawScoreboard() {
 
-	CheckEnemyCollisions();
-
-    if (player.alive_) {
-		CheckPlayerCollisions();
-	}
 }
 
 void ofApp::DrawSideboard() {
@@ -112,19 +122,31 @@ void ofApp::DrawSideboard() {
 
 	side_font_.drawString(score_message, side_score_width, side_score_height);
 
-	// implement score section/wave number
+	// implement wave number display
 }
 
 void ofApp::DrawGameDead() {
-    string pause_message = "Life lost! Press R to respawn";
+    ofImage explosion("explosion.gif");
+    explosion.draw(player.player_center_.first, player.player_center_.second);
+
+    string death_message;
+
+	if (player.player_lives_ > 0) {
+        death_message = "Life lost! Press R to respawn";
+    } else {
+        death_message = "Life lost! Game Over";
+        game_running_ = false;
+	}
+    
     ofSetColor(232, 74, 39);
 	
-	int center_width =
-        (kGameWindowWidth / 2) - (message_font_.stringWidth(pause_message) / 2);
+	int center_width = (kGameWindowWidth / 2) -
+                       (message_font_.stringWidth(death_message) / 2);
 
 	int center_height = kGameWindowHeight / 2;
 
-    message_font_.drawString(pause_message, center_width, center_height);
+    message_font_.drawString(death_message, center_width,
+                                 center_height);
 }
 
 void ofApp::ShootBullet() {
@@ -140,7 +162,6 @@ void ofApp::ShootBullet() {
     player_bullets.push_back(current_bullet);
     player.player_shots_++;
     player.player_fire.play();
-    
 }
 
 void ofApp::CheckEnemyCollisions() {
@@ -186,9 +207,8 @@ void ofApp::CheckPlayerCollisions() {
 		if (current_enemy.intersects(player_rect)) {
             delete enemies[j];
             enemies.erase(enemies.begin() + j);
-
+            
 			//add some more logic here for player death
-			// reset player position to center?
 
 			player.player_lives_--;
             player.alive_ = false;

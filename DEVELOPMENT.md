@@ -90,3 +90,7 @@ Implement player shooting and enemy movement at the very least.
 - 11:00pm - Made some fixes to game logic, player cannot die/move/shoot when dead, also centered life count in sideboard
 
 - 11:10pm - Added score display in sideboard
+
+- 11:30pm - Added additional logic for player death, also loaded player death gif
+
+- 11:40pm - Added different update logic for if player has lives or no
