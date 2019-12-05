@@ -86,3 +86,6 @@ Implement player shooting and enemy movement at the very least.
 - 7:45pm - We have a line of separation between the scoreboard and gameplay area now!
 
 - 8:30pm - Changed font to a Galaga-esque one instead of Arial. DrawScoreboard() renamed to DrawSideboard() and partially implemented to show lives.
+
+- 11:00pm - Made some fixes to game logic, player cannot die/move/shoot when dead, also centered life count in sideboard
+

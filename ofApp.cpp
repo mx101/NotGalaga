@@ -46,21 +46,23 @@ void ofApp::setup() {
 
 //--------------------------------------------------------------
 void ofApp::update() {
-    if (left_pressed) {
-        player.player_center_.first -= kFighterMoveSpeed;
-        left_pressed = false;
+    if (player.alive_) {
+        if (left_pressed) {
+            player.player_center_.first -= kFighterMoveSpeed;
+            left_pressed = false;
+        }
+
+        if (right_pressed) {
+            player.player_center_.first += kFighterMoveSpeed;
+            right_pressed = false;
+        }
+
+        if (shoot_pressed) {
+            ShootBullet();
+            shoot_pressed = false;
+        }
 	}
-
-	if (right_pressed) {
-        player.player_center_.first += kFighterMoveSpeed;
-        right_pressed = false;
-    }
-
-	if (shoot_pressed) {
-        ShootBullet();
-        shoot_pressed = false;
-    }
-
+    
     for (int i = 0; i < player_bullets.size(); i++) {
         player_bullets[i]->bullet_center_.second -= kBulletSpeed;
         int second = player_bullets[i]->bullet_center_.second;
@@ -79,7 +81,10 @@ void ofApp::update() {
     }
 
 	CheckEnemyCollisions();
-    CheckPlayerCollisions();
+
+    if (player.alive_) {
+		CheckPlayerCollisions();
+	}
 }
 
 void ofApp::DrawSideboard() {
@@ -90,11 +95,13 @@ void ofApp::DrawSideboard() {
 
 	string lives_message = "Lives: " + to_string(player.player_lives_);
 
-	int side_life_width = kGameWindowWidth + 100;
+	int side_life_width = kGameWindowWidth + (kSideboardWidth / 2) - side_font_.stringWidth(lives_message) / 2;
 	int side_life_height = (kGameWindowHeight / 2) + kSideboardSpacing;
 
     side_font_.drawString(lives_message, side_life_width,
                               side_life_height);
+
+	// implement score section/wave number
 }
 
 void ofApp::DrawGameDead() {
@@ -245,6 +252,8 @@ void ofApp::keyPressed(int key) {
 
 void ofApp::RevivePlayer() {
     player.alive_ = true;
+    player.player_center_.first = kGameWindowWidth / 2;
+	
     ofSetColor(255, 255, 255);
     ofSetBackgroundColor(0, 0, 0);
 }

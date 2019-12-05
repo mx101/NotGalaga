@@ -43,11 +43,12 @@ class ofApp : public ofBaseApp {
   const int kGameWindowWidth = 800;
   const int kGameWindowHeight = 1000;
   const int kSideboardWidth = 300;
+  const int kOffset = 50;
 
   ofTrueTypeFont message_font_;
   ofTrueTypeFont side_font_;
   const int kMessageSize = 16;
-  const int kSideSize = 24;
+  const int kSideSize = 20;
   const int kSideboardSpacing = 30;
 
 
