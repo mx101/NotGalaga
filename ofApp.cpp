@@ -210,25 +210,42 @@ void ofApp::GenerateWave() {
     // rows
     int x = kStartX;
     int y = kStartY;
+    int separation = 10;
 
     for (int i = 0; i < kEnemyCount; i++) {
+		// create bees for enemies [0,19]
+        Enemy* curr_enemy;
+
         if (i < kFirstRowMothIdx) {
             if (i < kFirstRowBeeIdx) {
-                CreateEnemy(x, y, 0);
+                curr_enemy = CreateEnemy(x, y, 0);
+                x += curr_enemy->enemy_width_ + separation;
+
             } else {
-                CreateEnemy(x, y, 0);
+                if (i == kFirstRowBeeIdx) {
+                    x = kStartX;
+                    y += kEnemySpacing;
+				}
+                
+                curr_enemy = CreateEnemy(x, y, 0);
+                x += curr_enemy->enemy_width_ + separation;
             }
 
+			
+		// create moths for enemies [20, 35]
         } else if (i < kFirstBossIdx) {
             if (i < kFirstRowMothIdx) {
-                CreateEnemy(x, y, 1);
+                curr_enemy = CreateEnemy(x, y, 1);
             } else {
-                CreateEnemy(x, y, 1);
+                curr_enemy = CreateEnemy(x, y, 1);
             }
 
+		// create boss galaga for enemies [36, 39]
         } else {
-            CreateEnemy(x, y, 2);
+            curr_enemy = CreateEnemy(x, y, 2);
         }
+
+
     }
 
     waves_++;
@@ -339,14 +356,17 @@ void ofApp::draw() {
     }
 }
 
-void ofApp::CreateEnemy(int x, int y, int type) {
+Enemy * ofApp::CreateEnemy(int x, int y, int type) {
     Enemy* current_enemy = new Enemy();
     *current_enemy = bee_;
     current_enemy->enemy_center_.first = x;
     current_enemy->enemy_center_.second = y;
     enemies_.push_back(current_enemy);
+    current_enemy->enemy_width_ = kEnemyWidth;
 
 	ShootBullet(current_enemy->enemy_center_, kEnemyBulletSpeed, false);
+
+	return current_enemy;
 }
 
 //--------------------------------------------------------------
@@ -373,7 +393,8 @@ void ofApp::keyPressed(int key) {
     }
 
     if (upper_key == 'E') {
-        CreateEnemy(player.player_center_.first, bee_.enemy_center_.second, 0);
+        GenerateWave();
+		//CreateEnemy(player.player_center_.first, bee_.enemy_center_.second, 0);
     }
 }
 

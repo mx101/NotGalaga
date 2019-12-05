@@ -39,7 +39,7 @@ class ofApp : public ofBaseApp {
   void CheckEnemyCollisions();
   void CheckPlayerCollisions();
 
-  void CreateEnemy(int x, int y, int type);
+  Enemy * CreateEnemy(int x, int y, int type);
 
   bool game_running_;
   int high_score_;
@@ -99,6 +99,7 @@ class ofApp : public ofBaseApp {
   Enemy moth_;
   const int kEnemyWidth = 40;
   const int kEnemyHeight = 40;
+  const int kEnemySpacing = 60;
   const int kEnemyMoveSpeed = 4;
   const int kEnemySpawnHeight = -20;
 

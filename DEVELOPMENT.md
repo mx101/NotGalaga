@@ -113,3 +113,5 @@ Implement player shooting and enemy movement at the very least.
 - 1:30am - Enemies can now shoot, their bullets are currently invisible... whoops
 
 - 1:35am - Enemy bullets are no longer invisible
+
+- 11:30am - Started Wave generation system. Currently activates on single key press and spawns in a line of bees
