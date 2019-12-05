@@ -5,6 +5,7 @@
 #include "bullet.h"
 #include <windows.h>
 #include <xinput.h>
+#include <tuple>
 
 //some enums to represent game state
 enum GameState { IN_PROGRESS = 0, PAUSED, FINISHED };
@@ -28,7 +29,11 @@ class ofApp : public ofBaseApp {
   void ShootBullet(std::pair<int, int> center, int velocity, bool player_shot);
 
   void GenerateWave();
-  void ReturnToFormation();
+  void ReturnToFormation(); // currently instantly teleports enemies to starting position
+  queue<tuple<int, int>> GeneratePath();
+  tuple<int, int> GenerateMove(); // returns a single move in the form of (delta x, delta y) 
+
+  tuple<int, int> zero_move_ = {0, 0};
 
   void CheckEnemyCollisions();
   void CheckPlayerCollisions();

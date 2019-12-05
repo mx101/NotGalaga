@@ -128,6 +128,18 @@ void ofApp::update() {
     }
 }
 
+
+queue<tuple<int, int>> ofApp::GeneratePath() {
+    queue<tuple<int, int>> to_return;
+    to_return.push(GenerateMove());
+	return to_return;
+}
+
+
+tuple<int, int> ofApp::GenerateMove() { 
+	return tuple<int, int>(); 
+}
+
 void ofApp::DrawScoreboard() {
     // items to display, high score of current session, score of current game
     // option to restart game
