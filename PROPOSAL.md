@@ -23,18 +23,18 @@ Some stretch goals I would want to implement if this project is finished ahead o
     - [X] Player shooting
 - #### Week 2
   - [ ] Continue game engine
-    - [?] Enemy movement
+    - [X] Enemy movement
     - [ ] Enemy shooting (only for some enemy types)
     - [X] Collision handling
     - [ ] Start more advanced enemy movement/paths (not an absolute priority)
 - #### Week 3
   - [ ] Continue game engine
-    - [ ] Player kidnapping/rescue
     - [X] Player lives
     - [ ] Start wave difficulty handling (should be slightly exponential)
   - [ ] Scoreboard display at end of game
   - [ ] Add any other application text output needed i.e. *"Fighter Captured"*, *"Game Over"*, *"Game Start"*, etc.
 - #### Week 4
+  - [ ] Player kidnapping/rescue
   - [ ] Finish anything that was pushed back from previous weeks
   - [ ] Complete additional testing, if need be
 - #### Stretch Goals
