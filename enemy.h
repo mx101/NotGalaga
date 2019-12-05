@@ -6,8 +6,8 @@
 
 class Enemy {	
  public:
-  /*Enemy();
-  Enemy(int enemy_type);*/
+  //Enemy();
+  //Enemy(int enemy_type);
 
   std::vector<std::pair<int, int>> path_plotter();  
   //static void generate_enemies(std::vector<Enemy> *enemies);
@@ -22,6 +22,7 @@ class Enemy {
   std::queue<std::pair<int, int>> path_;
   std::pair<int, int> enemy_center_;
   int enemy_type_;
+  int enemy_score_;
   bool dead_;
   int enemy_width_;
 

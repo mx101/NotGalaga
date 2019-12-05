@@ -94,3 +94,5 @@ Implement player shooting and enemy movement at the very least.
 - 11:30pm - Added additional logic for player death, also loaded player death gif
 
 - 11:40pm - Added different update logic for if player has lives or no
+
+- 11:50pm - Noted some more needed items for DrawScoreboard()

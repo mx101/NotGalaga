@@ -42,6 +42,7 @@ class ofApp : public ofBaseApp {
   void CreateEnemy(int x, int y, int type);
 
   bool game_running_;
+  int high_score_;
   
   const int kGameWindowWidth = 800;
   const int kGameWindowHeight = 1000;

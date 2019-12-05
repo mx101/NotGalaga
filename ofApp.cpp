@@ -8,6 +8,7 @@ void ofApp::setup() {
     srand(static_cast<unsigned>(time(0)));
 
 	game_running_ = true;
+    high_score_ = 30000;
 
     message_font_.load("galaga.ttf", kMessageSize);
     side_font_.load("galaga.ttf", kSideSize);
@@ -94,7 +95,7 @@ void ofApp::update() {
 }
 
 void ofApp::DrawScoreboard() {
-
+	// items to display, high score of current session, score of current game
 }
 
 void ofApp::DrawSideboard() {
@@ -277,7 +278,7 @@ void ofApp::keyPressed(int key) {
     }
 
     if (upper_key == 'E') {
-        CreateEnemy(player.player_center_.first, demo_bee.enemy_center_.second, 1);
+        CreateEnemy(player.player_center_.first, demo_bee.enemy_center_.second, 0);
     }
 }
 
