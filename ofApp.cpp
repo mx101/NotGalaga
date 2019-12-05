@@ -196,6 +196,7 @@ void ofApp::ShootBullet(std::pair<int, int> center, int velocity, bool player_sh
     } else {
         *current_bullet = enemy_bullet_;
         current_bullet->bullet_center_ = center;
+        current_bullet->bullet_center_.first += kEnemyWidth / 2 - (kBulletWidth / 2);
 
 		enemy_bullets_.push_back(current_bullet);
 	}   
