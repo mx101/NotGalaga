@@ -71,13 +71,20 @@ void ofApp::update() {
                 player.player_center_.first += kFighterMoveSpeed;
             }
 
-            // check right edge not out of bounds
+            // check edges not out of bounds
             int ship_right = player.player_center_.first + kFighterWidth;
-			int out_of_bounds = ship_right - kGameWindowWidth;
+			int out_of_bounds_right = ship_right - kGameWindowWidth;
 
-            if (out_of_bounds > 0) {
+            if (out_of_bounds_right > 0) {
                 //std::cout << "out by: " << out_of_bounds << std::endl;
-                player.player_center_.first -= out_of_bounds;
+                player.player_center_.first -= out_of_bounds_right;
+			}
+
+			int ship_left = player.player_center_.first;
+
+			if (ship_left < 0) {
+                //std::cout << "out by: " << ship_left << std::endl;         
+                player.player_center_.first -= ship_left;        
 			}
         }
 

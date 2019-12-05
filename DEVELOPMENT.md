@@ -134,4 +134,6 @@ Implement player shooting and enemy movement at the very least.
 
 - 1:45pm - Fixed bug that caused enemies to have massive hitboxes
 
-- 2:15pm - Fixed literal edge case of player fighter extending past the game window
+- 2:15pm - Fixed literal edge case of player fighter extending past the game window on the right side
+
+- 2:20pm - Fixed player fighter extending past game window on left side
