@@ -570,7 +570,10 @@ Enemy* ofApp::CreateEnemy(int x, int y, int type) {
     current_enemy->enemy_center_.second = y;
     current_enemy->formation_pos_.first = x;
     current_enemy->formation_pos_.second = y;
-    current_enemy->path_.directions = GenerateDefaultPath();
+	pair<int, int> slightly_shifted = current_enemy->enemy_center_;
+	slightly_shifted.first += 30;
+	slightly_shifted.second += kGameWindowHeight;
+	current_enemy->path_.directions = PathPlotter(current_enemy->enemy_center_, slightly_shifted); // GenerateDefaultPath();
 	current_enemy->path_.in_formation_ = false;
 
     enemies_.push_back(current_enemy);
