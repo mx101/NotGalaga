@@ -51,7 +51,6 @@ class ofApp : public ofBaseApp {
   ofxXboxController xbox;
   bool deadZone;
   Gamepad* gamepad;
-  ofSpherePrimitive sphere;
 
 
   const int kGameWindowWidth = 800;

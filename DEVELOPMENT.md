@@ -145,5 +145,7 @@ Implement player shooting and enemy movement at the very least.
 ### 12/6/19
 - 1:30am - Finally functioning controller support! Currently, the controller controls a test sphere
 
-- 1:45am - controller can now move and shoot player fighter
+- 1:45am - Controller can now move and shoot player fighter
+
+- 1:55am - Removed controller testing sphere and controller display information
 

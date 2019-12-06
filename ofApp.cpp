@@ -13,8 +13,6 @@ void ofApp::setup() {
     gamepad = xbox.getGamepadPtr(0);
     deadZone = true;
 
-    sphere.setRadius(100);
-
     game_running_ = true;
     high_score_ = 30000;
     waves_ = 0;
@@ -432,11 +430,10 @@ void ofApp::CheckPlayerCollisions() {
 
 //--------------------------------------------------------------
 void ofApp::draw() {
-    ofSetColor(200, 40, 30);
-    sphere.drawWireframe();
+    //ofSetColor(200, 40, 30);
 
-    ofSetColor(255);
-    xbox.draw();
+    //ofSetColor(255);
+    //xbox.draw();
 
     DrawSideboard();
 
