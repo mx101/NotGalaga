@@ -53,7 +53,7 @@ class ofApp : public ofBaseApp {
   bool game_running_;
   int high_score_;
   int waves_;
-
+  int timer_;
 
   //Xbox controller support
   ofxXboxController xbox;
@@ -95,6 +95,9 @@ class ofApp : public ofBaseApp {
   const int kPlayerBulletSpeed = -16;
   vector<Bullet*> player_bullets_;
   const int kLegalBulletsMax = 2;
+  const int kReloadTime = 15;
+  int time_last_shot;
+  
 
   Bullet enemy_bullet_;
   vector<Bullet*> enemy_bullets_;

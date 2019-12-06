@@ -173,3 +173,5 @@ Implement player shooting and enemy movement at the very least.
 
 - 4:20am - Added specific widths depending if enemy is a bee/moth/boss
 
+- 4:30am - Added pseudotimer, currently primarily used for limiting shooting speed. In the future, implement into enemy movement, possibly make some EnemyMove() function that takes in whether the enemy movement should wait or not?
+

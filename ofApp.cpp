@@ -13,7 +13,9 @@ void ofApp::setup() {
 
     game_running_ = true;
     high_score_ = 30000;
-    waves_ = 0;
+    waves_ = 1;
+    timer_ = 0;
+    time_last_shot = 0;
 
     left_pressed = false;
     right_pressed = false;
@@ -60,6 +62,7 @@ void ofApp::LoadData() {
 
 //--------------------------------------------------------------
 void ofApp::update() {
+	timer_++;
     /*if (test) {
         std::vector<std::pair<int, int>> vect = CreateRandPath();
 
@@ -104,8 +107,9 @@ void ofApp::UpdatePlayerObjects() {
         // when player shoots with a, the ship will fire sequentially
         // very quickly so it looks like a single shot
         // solution: store when the last shot was shot?
-        if ((gamepad->a) && player.player_shots_ < kLegalBulletsMax) {
-            ShootBullet(player.player_center_, kPlayerBulletSpeed, true);
+        if ((gamepad->a) && player.player_shots_ < kLegalBulletsMax && abs(time_last_shot - timer_) > kReloadTime) {
+            time_last_shot = timer_;
+			ShootBullet(player.player_center_, kPlayerBulletSpeed, true);
         }
 
         if ((gamepad->dPadLeft || left_pressed) &&
@@ -184,6 +188,14 @@ queue<pair<int, int>> ofApp::GenerateDefaultPath() {
     to_return.push(kZeroMove);
     to_return.push(kLeftMove);
     to_return.push(kZeroMove);
+    to_return.push(kZeroMove);
+    to_return.push(kZeroMove);
+    to_return.push(kZeroMove);
+    to_return.push(kZeroMove);
+    to_return.push(kZeroMove);
+    to_return.push(kZeroMove);
+    to_return.push(kZeroMove);
+    to_return.push(kZeroMove);
 	to_return.push(kRightMove);
     to_return.push(kZeroMove);
 	to_return.push(kRightMove);
@@ -246,7 +258,7 @@ void ofApp::DrawSideboard() {
 
     side_font_.drawString(score_message, side_score_width, side_score_height);
 
-    string wave_message = "Wave: " + to_string(waves_);
+    string wave_message = "Wave: " + to_string(waves_ - 1);
 
     int side_wave_width = kGameWindowWidth + (kSideboardWidth / 2) -
                           side_font_.stringWidth(wave_message) / 2;
@@ -501,7 +513,10 @@ Enemy* ofApp::CreateEnemy(int x, int y, int type) {
     enemies_.push_back(current_enemy);
 
     // use wave number mod something else to determine if an enemy should shoot
-    if (type != 2 && std::rand() % 5 == 0) {
+    bool difficulty = (std::rand() % waves_) > waves_ / 3;
+
+	// if do enemy fly in, the shooting can be moved to as the enemies fly in
+	if (type != 2 && difficulty) {
         ShootBullet(current_enemy->enemy_center_, kEnemyBulletSpeed, false);
     }
 
