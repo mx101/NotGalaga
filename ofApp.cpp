@@ -200,6 +200,21 @@ void ofApp::UpdateEnemyObjects() {
     }
 }
 
+queue<pair<int, int>> ofApp::PathPlotter(pair<int, int> begin, pair<int, int> end) {
+	int frame_count = 20;
+	pair<int, int> current = begin;
+	int x_change = (end.first - begin.first) / frame_count;
+	int y_change = (end.second - begin.second) / frame_count;
+
+	queue<pair<int, int>> to_return;
+
+	for (int i = 0; i < frame_count; i++) {
+		to_return.push({x_change, y_change});
+	}
+
+	return to_return;
+}
+
 queue<pair<int, int>> ofApp::GenerateDefaultPath() {
     queue<pair<int, int>> to_return;
 
@@ -226,9 +241,14 @@ queue<pair<int, int>> ofApp::GenerateDefaultPath() {
 	return to_return;
 }
 
-queue<pair<int, int>> ofApp::GeneratePath() {
+queue<pair<int, int>> ofApp::GenerateRandomPath() {
     queue<pair<int, int>> to_return;
-    to_return.push(GenerateRandomMove());
+	int random_steps = 20;
+
+	for (int i = 0; i < random_steps; i++) {
+		to_return.push(GenerateRandomMove());
+	}
+    
     return to_return;
 }
 

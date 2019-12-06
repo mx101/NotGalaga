@@ -39,8 +39,9 @@ class ofApp : public ofBaseApp {
   void GenerateWave();
   void ReturnToFormation(); // currently instantly teleports enemies to starting position
 
+  queue<pair<int, int>> ofApp::PathPlotter(pair<int, int> begin, pair<int, int> end);
   queue<pair<int, int>> GenerateDefaultPath();
-  queue<pair<int, int>> GeneratePath();
+  queue<pair<int, int>> GenerateRandomPath();
   pair<int, int> GenerateRandomMove();  // returns a single move in the form of
                                         // (delta x, delta y)
 
@@ -124,12 +125,12 @@ class ofApp : public ofBaseApp {
   const int kBeeMothHeight = 40;
   const int kBossWidth = 60;
   const int kEnemySpacing = 60;
-  const int kEnemyDefaultMoveSpeed = 2;
+  const int kEnemyDefaultMoveSpeed = 5;
   const int kEnemySpawnHeight = -20;
-  const int kBeeStartX = 20;  // change kStartX and kStartY
+  const int kBeeStartX = 120;  // change kStartX and kStartY
   const int kBeeStartY = 250;
-  const int kMothStartX = 70;
-  const int kBossStartX = 170;
+  const int kMothStartX = 170;
+  const int kBossStartX = 235;
   const int kBeeCount = 20;  // 20 bees total
   const int kMothCount = 16;  // 16 moths total
   const int kBossCount = 4;  // 4 boss galaga total

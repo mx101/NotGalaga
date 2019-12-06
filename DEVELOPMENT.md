@@ -190,3 +190,7 @@ Implement player shooting and enemy movement at the very least.
 - 6:25am - Keeping track of shots fired by the player and shots landed 
 
 - 6:30am - Changes to earning score, specifically about whether the enemy is in formation or not
+
+- 6:45am - Made some adjustments to enemy spawn coordinates
+
+- 7:00am - Created PathPlotter() function that creates a queue based on a default frame_count in which we want the enemy to travel from point A to point B in.
