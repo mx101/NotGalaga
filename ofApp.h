@@ -21,6 +21,7 @@ class ofApp : public ofBaseApp {
   void keyPressed(int key);
   void keyReleased(int key);
 
+  void DeathVibration();
   void UpdatePlayerObjects();
   void UpdateEnemyObjects();
 
@@ -95,8 +96,11 @@ class ofApp : public ofBaseApp {
   const int kPlayerBulletSpeed = -16;
   vector<Bullet*> player_bullets_;
   const int kLegalBulletsMax = 2;
+
   const int kReloadTime = 15;
+  const int kPauseTime = 10;
   int time_last_shot;
+  int time_last_paused;
   
 
   Bullet enemy_bullet_;

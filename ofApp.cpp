@@ -16,6 +16,7 @@ void ofApp::setup() {
     waves_ = 1;
     timer_ = 0;
     time_last_shot = 0;
+    time_last_paused = 0;
 
     left_pressed = false;
     right_pressed = false;
@@ -87,18 +88,27 @@ void ofApp::update() {
         CheckEnemyCollisions();
 
         if (player.alive_) {
-            gamepad->rightVibration = 0;
-            gamepad->leftVibration = 0;
             CheckPlayerCollisions();
         }
 
 		if (!player.alive_) {
-            gamepad->leftVibration = float(1.0);
-            gamepad->rightVibration = float(1.0);
+            DeathVibration();
 		}
 
     } else {
         DrawScoreboard();
+        DeathVibration();
+    }
+}
+
+void ofApp::DeathVibration() {
+    int pause_elapsed = abs(timer_ - time_last_paused);
+    if (pause_elapsed < kPauseTime) {
+        gamepad->leftVibration = float(1.0);
+        gamepad->rightVibration = float(1.0);
+    } else {
+        gamepad->rightVibration = 0;
+        gamepad->leftVibration = 0;
     }
 }
 
@@ -429,6 +439,7 @@ void ofApp::CheckPlayerCollisions() {
 
             player.player_lives_--;
             player.alive_ = false;
+            time_last_paused = timer_;
         }
     }
 
@@ -448,6 +459,7 @@ void ofApp::CheckPlayerCollisions() {
 
                 player.player_lives_--;
                 player.alive_ = false;
+                time_last_paused = timer_;
             }
         }
     }
