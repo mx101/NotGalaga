@@ -56,6 +56,8 @@ void ofApp::LoadData() {
 
 //--------------------------------------------------------------
 void ofApp::update() {
+    std::cout << get<0>(GenerateMove()) << std::endl;
+    std::cout << get<1>(GenerateMove()) << std::endl;
     if (game_running_) {
         if (enemies_.empty()) {
             GenerateWave();
@@ -100,7 +102,7 @@ void ofApp::update() {
         }
 
         for (int i = 0; i < enemies_.size(); i++) {
-            enemies_[i]->enemy_center_.second += kEnemyMoveSpeed;
+            enemies_[i]->enemy_center_.second += kEnemyDefaultMoveSpeed;
 
             if (enemies_[i]->enemy_center_.second > kGameWindowHeight) {
                 enemies_[i]->enemy_center_.second = kEnemySpawnHeight;
@@ -137,7 +139,16 @@ queue<tuple<int, int>> ofApp::GeneratePath() {
 
 
 tuple<int, int> ofApp::GenerateMove() { 
-	return tuple<int, int>(); 
+	int enemy_speed_range = 20;
+
+	// generates a pair of numbers in the range of [-10, 10]
+    int x_change = 
+			(enemy_speed_range / 2) - (std::rand() % enemy_speed_range);
+
+    int y_change = 
+			(enemy_speed_range / 2) - (std::rand() % enemy_speed_range);
+
+	return tuple<int, int>(x_change, y_change); 
 }
 
 void ofApp::DrawScoreboard() {

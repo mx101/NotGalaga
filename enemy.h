@@ -25,6 +25,7 @@ class Enemy {
   int enemy_type_;
   int enemy_score_;
   bool dead_;
+
   int enemy_width_;
 
 

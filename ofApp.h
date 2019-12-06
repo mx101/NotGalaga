@@ -31,7 +31,7 @@ class ofApp : public ofBaseApp {
   void GenerateWave();
   void ReturnToFormation(); // currently instantly teleports enemies to starting position
   queue<tuple<int, int>> GeneratePath();
-  tuple<int, int> GenerateMove(); // returns a single move in the form of (delta x, delta y) 
+  tuple<int, int> GenerateMove(); // returns a single move in the form of (delta x, delta y)
 
   tuple<int, int> zero_move_ = {0, 0};
 
@@ -84,10 +84,11 @@ class ofApp : public ofBaseApp {
   Enemy bee_;
   Enemy boss_;
   Enemy moth_;
+
   const int kEnemyWidth = 40;
   const int kEnemyHeight = 40;
   const int kEnemySpacing = 60;
-  const int kEnemyMoveSpeed = 2;
+  const int kEnemyDefaultMoveSpeed = 2;
   const int kEnemySpawnHeight = -20;
   const int kBeeStartX = 20;  // change kStartX and kStartY
   const int kBeeStartY = 250;

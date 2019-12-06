@@ -139,3 +139,6 @@ Implement player shooting and enemy movement at the very least.
 - 2:20pm - Fixed player fighter extending past game window on left side
 
 - 2:50pm - Planning out complex enemy move generation
+
+- 7:10pm - Completed GenerateMove() which returns a tuple representing a change in x and y
+
