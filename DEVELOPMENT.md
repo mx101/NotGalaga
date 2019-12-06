@@ -151,3 +151,5 @@ Implement player shooting and enemy movement at the very least.
 
 - 2:30am - Condensed some code in ofApp::draw() into a DrawNonPlayerObjects() function to improve readability
 
+- 2:45am - Added enemy kill score variable. Killing an enemy will actually increase the player's score now
+

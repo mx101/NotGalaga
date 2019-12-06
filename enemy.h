@@ -23,8 +23,9 @@ class Enemy {
   std::pair<int, int> enemy_center_;
   std::pair<int, int> formation_pos_;
   int enemy_type_;
-  int enemy_score_;
+  int enemy_kill_score_;
   bool dead_;
+  bool moving_;
 
   int enemy_width_;
 

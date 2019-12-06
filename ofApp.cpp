@@ -51,6 +51,12 @@ void ofApp::LoadData() {
     ofLoadImage(bee_.enemy_texture_, "bee.png");
     ofLoadImage(boss_.enemy_texture_, "bossGalaga.png");
     ofLoadImage(moth_.enemy_texture_, "moth.png");
+
+	//note that this number will be doubled if the enemy dies while moving
+	bee_.enemy_kill_score_ = 40;
+    moth_.enemy_kill_score_ = 80;
+    boss_.enemy_kill_score_ = 150;
+
 }
 
 //--------------------------------------------------------------
@@ -69,10 +75,6 @@ void ofApp::update() {
     gamepad->rightVibration = gamepad->rightTrigger;
 
     xbox.update();
-
-    /*sphere.move(gamepad->thumbLX, -gamepad->thumbLY, 0);
-    float ry = ofMap(gamepad->thumbRX, -1, 1, -360, 360);
-    sphere.setOrientation(ofVec3f(0, ry, 0));*/
 
     if (game_running_) {
         if (enemies_.empty()) {
@@ -374,7 +376,9 @@ void ofApp::CheckEnemyCollisions() {
                                        kBulletHeight);
 
             if (current_enemy.intersects(current_bullet)) {
-                delete enemies_[j];
+                score_ += enemies_[j]->enemy_kill_score_;
+
+				delete enemies_[j];
                 enemies_.erase(enemies_.begin() + j);
 
                 delete player_bullets_[i];
@@ -399,6 +403,8 @@ void ofApp::CheckPlayerCollisions() {
         ofRectangle current_enemy(enemy_center, kEnemyWidth, kEnemyHeight);
 
         if (current_enemy.intersects(player_rect)) {
+            score_ += 2 * enemies_[j]->enemy_kill_score_;
+
             delete enemies_[j];
             enemies_.erase(enemies_.begin() + j);
 
