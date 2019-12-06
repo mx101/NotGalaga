@@ -105,8 +105,9 @@ class ofApp : public ofBaseApp {
   Enemy boss_;
   Enemy moth_;
 
-  const int kEnemyWidth = 40;
-  const int kEnemyHeight = 40;
+  const int kBeeMothWidth = 40;
+  const int kBeeMothHeight = 40;
+  const int kBossWidth = 60;
   const int kEnemySpacing = 60;
   const int kEnemyDefaultMoveSpeed = 2;
   const int kEnemySpawnHeight = -20;

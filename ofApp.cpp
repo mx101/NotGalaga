@@ -302,7 +302,7 @@ void ofApp::ShootBullet(std::pair<int, int> center, int velocity,
         *current_bullet = enemy_bullet_;
         current_bullet->bullet_center_ = center;
         current_bullet->bullet_center_.first +=
-            kEnemyWidth / 2 - (kBulletWidth / 2);
+            kBeeMothHeight / 2 - (kBulletWidth / 2);
 
         enemy_bullets_.push_back(current_bullet);
     }
@@ -371,7 +371,8 @@ void ofApp::CheckEnemyCollisions() {
         int enemy_first = enemies_[j]->enemy_center_.first;
         int enemy_second = enemies_[j]->enemy_center_.second;
         glm::vec2 enemy_center(enemy_first, enemy_second);
-        ofRectangle current_enemy(enemy_center, kEnemyWidth, kEnemyHeight);
+        ofRectangle current_enemy(enemy_center, enemies_[j]->enemy_width_,
+                                  enemies_[j]->enemy_width_);
 
         for (int i = 0; i < player_bullets_.size(); i++) {
             int bullet_first = player_bullets_[i]->bullet_center_.first;
@@ -405,7 +406,8 @@ void ofApp::CheckPlayerCollisions() {
         int enemy_first = enemies_[j]->enemy_center_.first;
         int enemy_second = enemies_[j]->enemy_center_.second;
         glm::vec2 enemy_center(enemy_first, enemy_second);
-        ofRectangle current_enemy(enemy_center, kEnemyWidth, kEnemyHeight);
+        ofRectangle current_enemy(enemy_center, enemies_[j]->enemy_width_,
+                                  enemies_[j]->enemy_width_);
 
         if (current_enemy.intersects(player_rect)) {
             score_ += 2 * enemies_[j]->enemy_kill_score_;
@@ -481,10 +483,13 @@ Enemy* ofApp::CreateEnemy(int x, int y, int type) {
     Enemy* current_enemy = new Enemy();
     if (type == 0) {
         *current_enemy = bee_;
+        current_enemy->enemy_width_ = kBeeMothWidth;
     } else if (type == 1) {
         *current_enemy = moth_;
+        current_enemy->enemy_width_ = kBeeMothWidth;
     } else if (type == 2) {
         *current_enemy = boss_;
+        current_enemy->enemy_width_ = kBossWidth;
     }
 
     current_enemy->enemy_center_.first = x;
@@ -494,7 +499,6 @@ Enemy* ofApp::CreateEnemy(int x, int y, int type) {
     current_enemy->path_ = GenerateDefaultPath();
 
     enemies_.push_back(current_enemy);
-    current_enemy->enemy_width_ = kEnemyWidth;
 
     // use wave number mod something else to determine if an enemy should shoot
     if (type != 2 && std::rand() % 5 == 0) {

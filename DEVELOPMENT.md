@@ -171,3 +171,5 @@ Implement player shooting and enemy movement at the very least.
 
 - 4:15am - Added vibration on death
 
+- 4:20am - Added specific widths depending if enemy is a bee/moth/boss
+
