@@ -16,6 +16,8 @@ class ofApp : public ofBaseApp {
   void setup();
   void update();
   void draw();
+
+  void RestartGame();
   void LoadData();
 
   void keyPressed(int key);

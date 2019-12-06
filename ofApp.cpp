@@ -11,27 +11,29 @@ void ofApp::setup() {
     gamepad = xbox.getGamepadPtr(0);
     deadZone = true;
 
-    game_running_ = true;
-    high_score_ = 30000;
-    waves_ = 1;
-    timer_ = 0;
-    time_last_shot = 0;
-    time_last_paused = 0;
-
-    left_pressed = false;
-    right_pressed = false;
-    shoot_pressed = false;
-
     LoadData();
+	RestartGame();
+}
 
-    // condense below lines into some restartGame method
-    player.player_shots_ = 0;
-    player.player_lives_ = 3;
-    player.alive_ = true;
-    player.player_center_.first = kGameWindowWidth / 2;
-    player.player_center_.second = kGameWindowHeight - (kGameWindowHeight / 8);
+void ofApp::RestartGame() {
+	game_running_ = true;
+	high_score_ = 30000;
+	waves_ = 1;
+	timer_ = 0;
+	time_last_shot = 0;
+	time_last_paused = 0;
 
-    score_ = 0;
+	left_pressed = false;
+	right_pressed = false;
+	shoot_pressed = false;
+
+	player.player_shots_ = 0;
+	player.player_lives_ = 3;
+	player.alive_ = true;
+	player.player_center_.first = kGameWindowWidth / 2;
+	player.player_center_.second = kGameWindowHeight - (kGameWindowHeight / 8);
+
+	score_ = 0;
 }
 
 void ofApp::LoadData() {

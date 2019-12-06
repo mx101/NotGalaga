@@ -180,3 +180,5 @@ Implement player shooting and enemy movement at the very least.
 - 5:10am - Now storing enemy path in an inner struct to the Enemy class
 
 - 5:30am - Doing some file organization to fix GitHub Issue #2
+
+- 5:35am - Added RestartGame function to improve readability in setup() and add ability for player to play again after losing all lives
