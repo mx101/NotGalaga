@@ -30,19 +30,4 @@ using namespace PoissonGenerator;
 //  }
 //}
 
-std::vector<std::pair<int, int>> Enemy::path_plotter() {
-  std::vector<std::pair<int, int>> to_return;
-
-  DefaultPRNG PRNG;
-  int num_points = 100;
-
-  std::vector<Point> points_to_extract =
-      generatePoissonPoints(num_points, PRNG);  
-
-  for (Point current_point : points_to_extract) {
-    to_return.push_back(std::pair<int, int>(current_point.x, current_point.y));
-  }
-
-  return to_return;
-}
 

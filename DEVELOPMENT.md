@@ -155,3 +155,5 @@ Implement player shooting and enemy movement at the very least.
 
 - 2:50am - Deleted the unnecessary CreateRandPath function that utilized the Poisson Generator library
 
+- 3:02am - Making some design improvements to GenerateWave()
+

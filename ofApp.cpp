@@ -18,7 +18,6 @@ void ofApp::setup() {
     left_pressed = false;
     right_pressed = false;
     shoot_pressed = false;
-    //test = true;
 
     LoadData();
 
@@ -278,19 +277,14 @@ void ofApp::GenerateWave() {
     for (int i = 0; i < kBeeCount; i++) {
         Enemy* curr_bee;
 
-        if (i < kSecondRowBeeIdx) {
-            curr_bee = CreateEnemy(x, y, 0);
-            x += curr_bee->enemy_width_ + separation;
-
-        } else {
-            if (i == kSecondRowBeeIdx) {
-                x = kBeeStartX;
-                y -= kEnemySpacing;
-            }
-
-            curr_bee = CreateEnemy(x, y, 0);
-            x += curr_bee->enemy_width_ + separation;
+        if (i == kSecondRowBeeIdx) {
+            x = kBeeStartX;
+            y -= kEnemySpacing;
         }
+
+        curr_bee = CreateEnemy(x, y, 0);
+		curr_bee->formation_pos_ = std::pair<int, int>(x, y);
+        x += curr_bee->enemy_width_ + separation;
     }
 
     x = kMothStartX;
@@ -299,19 +293,14 @@ void ofApp::GenerateWave() {
     for (int i = 0; i < kMothCount; i++) {
         Enemy* curr_moth;
 
-        if (i < kSecondRowMothIdx) {
-            curr_moth = CreateEnemy(x, y, 1);
-            x += curr_moth->enemy_width_ + separation;
-
-        } else {
-            if (i == kSecondRowMothIdx) {
-                x = kMothStartX;
-                y -= kEnemySpacing;
-            }
-
-            curr_moth = CreateEnemy(x, y, 1);
-            x += curr_moth->enemy_width_ + separation;
+        if (i == kSecondRowMothIdx) {
+            x = kMothStartX;
+            y -= kEnemySpacing;
         }
+
+        curr_moth = CreateEnemy(x, y, 1);
+        curr_moth->formation_pos_ = std::pair<int, int>(x, y);
+        x += curr_moth->enemy_width_ + separation;
     }
 
     x = kBossStartX;
@@ -321,6 +310,7 @@ void ofApp::GenerateWave() {
         Enemy* curr_boss;
 
         curr_boss = CreateEnemy(x, y, 2);
+        curr_boss->formation_pos_ = std::pair<int, int>(x, y);
         x += curr_boss->enemy_width_ + separation;
     }
 
