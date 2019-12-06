@@ -1,7 +1,5 @@
 #include "ofApp.h"
 
-using namespace PoissonGenerator;
-
 void ofApp::setup() {
     ofSetWindowTitle("NotGalaga");
 
@@ -56,7 +54,6 @@ void ofApp::LoadData() {
 	bee_.enemy_kill_score_ = 40;
     moth_.enemy_kill_score_ = 80;
     boss_.enemy_kill_score_ = 150;
-
 }
 
 //--------------------------------------------------------------
@@ -157,34 +154,6 @@ void ofApp::update() {
     } else {
         DrawScoreboard();
     }
-}
-
-std::vector<std::pair<int, int>> ofApp::CreateRandPath() {
-    std::vector<std::pair<int, int>> to_return;
-
-    DefaultPRNG PRNG;
-    int num_points = 100;
-
-    std::vector<Point> points_to_extract =
-        generatePoissonPoints(num_points, PRNG);
-
-    int enemy_speed_range = 20;
-
-    for (Point current_point : points_to_extract) {
-        // generates a pair of numbers in the range of [-10, 10]
-		// note that these numbers are guaranteed in this range because they originate as
-		// percentages from -1 to 1
-        int xC = current_point.x * 10;
-        int yC = current_point.y * 10;
-
-        int x_change = (xC / 2) - (std::rand() % xC);
-
-        int y_change = (yC / 2) - (std::rand() % yC);
-
-        to_return.push_back(std::pair<int, int>(x_change, y_change));
-    }
-
-    return to_return;
 }
 
 queue<tuple<int, int>> ofApp::GeneratePath() {

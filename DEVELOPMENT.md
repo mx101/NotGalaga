@@ -153,3 +153,5 @@ Implement player shooting and enemy movement at the very least.
 
 - 2:45am - Added enemy kill score variable. Killing an enemy will actually increase the player's score now
 
+- 2:50am - Deleted the unnecessary CreateRandPath function that utilized the Poisson Generator library
+
