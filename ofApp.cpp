@@ -22,6 +22,7 @@ void ofApp::RestartGame() {
 	timer_ = 0;
 	time_last_shot = 0;
 	time_last_paused = 0;
+	time_enemy_moved = 0;
 
 	left_pressed = false;
 	right_pressed = false;
@@ -105,7 +106,7 @@ void ofApp::update() {
 
 void ofApp::DeathVibration() {
     int pause_elapsed = abs(timer_ - time_last_paused);
-    if (pause_elapsed < kPauseTime) {
+    if (pause_elapsed < kGeneralTime) {
         gamepad->leftVibration = float(1.0);
         gamepad->rightVibration = float(1.0);
     } else {
@@ -165,19 +166,25 @@ void ofApp::UpdatePlayerObjects() {
 }
 
 void ofApp::UpdateEnemyObjects() {
-    for (int i = 0; i < enemies_.size(); i++) {
-        pair<int, int> current_move = enemies_[i]->path_.directions.front();
+	bool should_move = (time_enemy_moved - timer_) % kGeneralTime == 0;
+	if (should_move) {
+		for (int i = 0; i < enemies_.size(); i++) {
+			pair<int, int> current_move = enemies_[i]->path_.directions.front();
 
-		enemies_[i]->enemy_center_.first += current_move.first;
-        enemies_[i]->enemy_center_.second += current_move.second;
+			enemies_[i]->enemy_center_.first += current_move.first;
+			enemies_[i]->enemy_center_.second += current_move.second;
 
-		enemies_[i]->path_.directions.pop();
-        enemies_[i]->path_.directions.push(current_move);
+			enemies_[i]->path_.directions.pop();
+			enemies_[i]->path_.directions.push(current_move);
 
-        if (enemies_[i]->enemy_center_.second > kGameWindowHeight) {
-            enemies_[i]->enemy_center_.second = kEnemySpawnHeight;
-        }
-    }
+			if (enemies_[i]->enemy_center_.second > kGameWindowHeight) {
+				enemies_[i]->enemy_center_.second = kEnemySpawnHeight;
+			}
+		}
+
+		time_enemy_moved = timer_;
+	}
+    
 
     for (int i = 0; i < enemy_bullets_.size(); i++) {
         enemy_bullets_[i]->bullet_center_.second += kEnemyBulletSpeed;

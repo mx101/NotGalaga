@@ -184,3 +184,5 @@ Implement player shooting and enemy movement at the very least.
 - 5:35am - Added RestartGame function to improve readability in setup() and add ability for player to play again after losing all lives
 
 - 5:45am - Adjusted some spacing on the sideboard
+
+- 6:15am - Added clock for enemy default move so it is a recognizable shift in enemy position instead of an incredibly fast teleport between multiple locations

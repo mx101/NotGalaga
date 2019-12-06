@@ -101,7 +101,7 @@ class ofApp : public ofBaseApp {
   const int kLegalBulletsMax = 2;
 
   const int kReloadTime = 15;
-  const int kPauseTime = 10;
+  const int kGeneralTime = 10;
   int time_last_shot;
   int time_last_paused;
   
@@ -114,6 +114,8 @@ class ofApp : public ofBaseApp {
   Enemy bee_;
   Enemy boss_;
   Enemy moth_;
+
+  int time_enemy_moved;
 
   const int kBeeMothWidth = 40;
   const int kBeeMothHeight = 40;
