@@ -169,3 +169,5 @@ Implement player shooting and enemy movement at the very least.
 
 - 4:00am - Started enemy movement based on a queue of direction changes
 
+- 4:15am - Added vibration on death
+

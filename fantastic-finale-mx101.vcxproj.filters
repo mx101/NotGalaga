@@ -49,7 +49,9 @@
     <ClCompile Include="player.cpp">
       <Filter>src</Filter>
     </ClCompile>
-    <ClCompile Include="ofxXboxController.cpp" />
+    <ClCompile Include="ofxXboxController.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="src">

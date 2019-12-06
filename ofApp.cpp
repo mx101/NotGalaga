@@ -70,9 +70,6 @@ void ofApp::update() {
                 test = false;
         }*/
 
-    gamepad->leftVibration = gamepad->leftTrigger;
-    gamepad->rightVibration = gamepad->rightTrigger;
-
     xbox.update();
 
     if (game_running_) {
@@ -87,8 +84,15 @@ void ofApp::update() {
         CheckEnemyCollisions();
 
         if (player.alive_) {
+            gamepad->rightVibration = 0;
+            gamepad->leftVibration = 0;
             CheckPlayerCollisions();
         }
+
+		if (!player.alive_) {
+            gamepad->leftVibration = float(1.0);
+            gamepad->rightVibration = float(1.0);
+		}
 
     } else {
         DrawScoreboard();
@@ -437,9 +441,9 @@ void ofApp::CheckPlayerCollisions() {
 
 //--------------------------------------------------------------
 void ofApp::draw() {
-    // ofSetColor(200, 40, 30);
-    // ofSetColor(255);
-    // xbox.draw();
+     /*ofSetColor(200, 40, 30);
+     ofSetColor(255);
+     xbox.draw();*/
 
     DrawSideboard();
     DrawNonPlayerObjects();
@@ -525,8 +529,6 @@ void ofApp::keyPressed(int key) {
 
     if (upper_key == 'E') {
         GenerateWave();
-        // CreateEnemy(player.player_center_.first, bee_.enemy_center_.second,
-        // 0);
     }
 }
 
