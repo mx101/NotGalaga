@@ -164,13 +164,13 @@ void ofApp::UpdateEnemyObjects() {
     }
 }
 
-queue<tuple<int, int>> ofApp::GeneratePath() {
-    queue<tuple<int, int>> to_return;
+queue<pair<int, int>> ofApp::GeneratePath() {
+    queue<pair<int, int>> to_return;
     to_return.push(GenerateRandomMove());
     return to_return;
 }
 
-tuple<int, int> ofApp::GenerateRandomMove() {
+pair<int, int> ofApp::GenerateRandomMove() {
     int enemy_speed_range = 20;
 
     // generates a pair of numbers in the range of [-10, 10]
@@ -178,7 +178,7 @@ tuple<int, int> ofApp::GenerateRandomMove() {
 
     int y_change = (enemy_speed_range / 2) - (std::rand() % enemy_speed_range);
 
-    return tuple<int, int>(x_change, y_change);
+    return pair<int, int>(x_change, y_change);
 }
 
 void ofApp::DrawScoreboard() {

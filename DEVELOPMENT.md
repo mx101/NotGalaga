@@ -165,3 +165,7 @@ Implement player shooting and enemy movement at the very least.
 
 - 3:25am - Condensed update code into helper functions to improve readability
 
+- 3:35am - Changed GeneratePath() and GenerateRandomMove() to deal with pairs instead of tuples to stay consistent with rest of project
+
+
+

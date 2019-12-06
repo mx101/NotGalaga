@@ -35,10 +35,11 @@ class ofApp : public ofBaseApp {
 
   void GenerateWave();
   void ReturnToFormation(); // currently instantly teleports enemies to starting position
-  queue<tuple<int, int>> GeneratePath();
-  tuple<int, int> GenerateRandomMove(); // returns a single move in the form of (delta x, delta y)
+  queue<pair<int, int>> GeneratePath();
+  pair<int, int> GenerateRandomMove();  // returns a single move in the form of
+                                        // (delta x, delta y)
 
-  tuple<int, int> zero_move_ = {0, 0};
+  pair<int, int> zero_move_ = {0, 0};
 
   void CheckEnemyCollisions();
   void CheckPlayerCollisions();
