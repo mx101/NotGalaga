@@ -431,39 +431,40 @@ void ofApp::CheckPlayerCollisions() {
 //--------------------------------------------------------------
 void ofApp::draw() {
     //ofSetColor(200, 40, 30);
-
     //ofSetColor(255);
     //xbox.draw();
 
     DrawSideboard();
+    DrawNonPlayerObjects();
 
     if (!player.alive_) {
-        // add additional state here for whether the player is out of lives
-        // if (player.player_lives_ > 0) {
         DrawGameDead();
-        //} else {
-        //}
+
     } else {
         player.fighter_texture_.draw(player.player_center_.first,
                                      player.player_center_.second);
+    }
+	
+	
+}
 
-        for (int i = 0; i < player_bullets_.size(); i++) {
-            int first = player_bullets_[i]->bullet_center_.first;
-            int second = player_bullets_[i]->bullet_center_.second;
-            player_bullets_[i]->bullet_texture_.draw(first, second);
-        }
+void ofApp::DrawNonPlayerObjects() {
+    for (int i = 0; i < player_bullets_.size(); i++) {
+        int first = player_bullets_[i]->bullet_center_.first;
+        int second = player_bullets_[i]->bullet_center_.second;
+        player_bullets_[i]->bullet_texture_.draw(first, second);
+    }
 
-        for (int i = 0; i < enemies_.size(); i++) {
-            int first = enemies_[i]->enemy_center_.first;
-            int second = enemies_[i]->enemy_center_.second;
-            enemies_[i]->enemy_texture_.draw(first, second);
-        }
+    for (int i = 0; i < enemies_.size(); i++) {
+        int first = enemies_[i]->enemy_center_.first;
+        int second = enemies_[i]->enemy_center_.second;
+        enemies_[i]->enemy_texture_.draw(first, second);
+    }
 
-        for (int i = 0; i < enemy_bullets_.size(); i++) {
-            int first = enemy_bullets_[i]->bullet_center_.first;
-            int second = enemy_bullets_[i]->bullet_center_.second;
-            enemy_bullets_[i]->bullet_texture_.draw(first, second);
-        }
+    for (int i = 0; i < enemy_bullets_.size(); i++) {
+        int first = enemy_bullets_[i]->bullet_center_.first;
+        int second = enemy_bullets_[i]->bullet_center_.second;
+        enemy_bullets_[i]->bullet_texture_.draw(first, second);
     }
 }
 

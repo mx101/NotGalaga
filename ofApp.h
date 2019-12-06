@@ -23,6 +23,7 @@ class ofApp : public ofBaseApp {
 
   void DrawSideboard();
   void DrawScoreboard();
+  void DrawNonPlayerObjects();
 
   void DrawGameDead();
   void RevivePlayer();

@@ -149,3 +149,5 @@ Implement player shooting and enemy movement at the very least.
 
 - 1:55am - Removed controller testing sphere and controller display information
 
+- 2:30am - Condensed some code in ofApp::draw() into a DrawNonPlayerObjects() function to improve readability
+
