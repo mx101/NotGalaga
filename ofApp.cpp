@@ -23,6 +23,8 @@ void ofApp::RestartGame() {
 	time_last_shot = 0;
 	time_last_paused = 0;
 	time_enemy_moved = 0;
+	shots_fired_ = 0;
+	shots_hit_ = 0;
 
 	left_pressed = false;
 	right_pressed = false;
@@ -123,6 +125,7 @@ void ofApp::UpdatePlayerObjects() {
         if ((gamepad->a || gamepad->b) && player.player_shots_ < kLegalBulletsMax && abs(time_last_shot - timer_) > kReloadTime) {
             time_last_shot = timer_;
 			ShootBullet(player.player_center_, kPlayerBulletSpeed, true);
+			shots_fired_++;
         }
 
         if ((gamepad->dPadLeft || left_pressed) &&
@@ -432,6 +435,7 @@ void ofApp::CheckEnemyCollisions() {
                 delete player_bullets_[i];
                 player_bullets_.erase(player_bullets_.begin() + i);
                 player.player_shots_--;
+				shots_hit_++;
             }
         }
     }

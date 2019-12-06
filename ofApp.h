@@ -58,6 +58,9 @@ class ofApp : public ofBaseApp {
   int waves_;
   int timer_;
 
+  int shots_fired_; // these two variables to be used for the classic Galaga ending screen
+  int shots_hit_;
+
   //Xbox controller support
   ofxXboxController xbox;
   bool deadZone;
