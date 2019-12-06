@@ -157,3 +157,9 @@ Implement player shooting and enemy movement at the very least.
 
 - 3:02am - Making some design improvements to GenerateWave()
 
+- 3:05am - Moved/Deleted some unnecessary constants
+
+- 3:10am - Running into a weird vector out of bounds error when attempting to add theme music 
+
+- 3:15am - Successfully added theme music, bug occurred when ofSoundPlayer for theme music was loaded before the xbox controller was created in setup()
+

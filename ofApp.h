@@ -47,10 +47,12 @@ class ofApp : public ofBaseApp {
   int waves_;
 
 
-  //Gamepad gamepad;
+  //Xbox controller support
   ofxXboxController xbox;
   bool deadZone;
   Gamepad* gamepad;
+
+  ofSoundPlayer theme_music_;
 
 
   const int kGameWindowWidth = 800;
@@ -102,13 +104,10 @@ class ofApp : public ofBaseApp {
   const int kEnemySpawnHeight = -20;
   const int kBeeStartX = 20;  // change kStartX and kStartY
   const int kBeeStartY = 250;
-  const int kBeeCount = 20;  // 20 bees total
-  const int kSecondRowBeeIdx = 10;
-  const int kMothCount = 16;  // 16 moths total
-  const int kSecondRowMothIdx = 8;
-  const int kBossCount = 4;  // 4 boss galaga total
   const int kMothStartX = 70;
   const int kBossStartX = 170;
-
+  const int kBeeCount = 20;  // 20 bees total
+  const int kMothCount = 16;  // 16 moths total
+  const int kBossCount = 4;  // 4 boss galaga total
   
 };

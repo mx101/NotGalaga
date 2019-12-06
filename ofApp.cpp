@@ -11,6 +11,9 @@ void ofApp::setup() {
     gamepad = xbox.getGamepadPtr(0);
     deadZone = true;
 
+	theme_music_.load("theme.mp3");
+    theme_music_.play();
+
     game_running_ = true;
     high_score_ = 30000;
     waves_ = 0;
@@ -267,6 +270,8 @@ void ofApp::ShootBullet(std::pair<int, int> center, int velocity,
 }
 
 void ofApp::GenerateWave() {
+    int second_row_bee = 10;
+    int second_row_moth = 8;
     // note the additional if checks for moths and bees
     // because they form two rows
 
@@ -277,7 +282,7 @@ void ofApp::GenerateWave() {
     for (int i = 0; i < kBeeCount; i++) {
         Enemy* curr_bee;
 
-        if (i == kSecondRowBeeIdx) {
+        if (i == second_row_bee) {
             x = kBeeStartX;
             y -= kEnemySpacing;
         }
@@ -293,7 +298,7 @@ void ofApp::GenerateWave() {
     for (int i = 0; i < kMothCount; i++) {
         Enemy* curr_moth;
 
-        if (i == kSecondRowMothIdx) {
+        if (i == second_row_moth) {
             x = kMothStartX;
             y -= kEnemySpacing;
         }
