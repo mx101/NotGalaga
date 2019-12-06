@@ -11,9 +11,6 @@ void ofApp::setup() {
     gamepad = xbox.getGamepadPtr(0);
     deadZone = true;
 
-	theme_music_.load("theme.mp3");
-    theme_music_.play();
-
     game_running_ = true;
     high_score_ = 30000;
     waves_ = 0;
@@ -35,6 +32,9 @@ void ofApp::setup() {
 }
 
 void ofApp::LoadData() {
+	theme_music_.load("theme.mp3");
+    theme_music_.play();
+
     // load font data
     message_font_.load("galaga.ttf", kMessageSize);
     side_font_.load("galaga.ttf", kSideSize);

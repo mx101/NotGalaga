@@ -45,4 +45,5 @@ Some stretch goals I would want to implement if this project is finished ahead o
   - [ ] Finish anything pushed back from previous weeks
   - [ ] Complete additional testing, if need be
 - #### Stretch Goals
+  - [ ] Enemy Fly In
   - [ ] Create more arcade games, refer to above list
