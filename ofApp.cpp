@@ -164,13 +164,13 @@ void ofApp::UpdatePlayerObjects() {
 
 void ofApp::UpdateEnemyObjects() {
     for (int i = 0; i < enemies_.size(); i++) {
-        pair<int, int> current_move = enemies_[i]->path_.front();
+        pair<int, int> current_move = enemies_[i]->path_.directions.front();
 
 		enemies_[i]->enemy_center_.first += current_move.first;
         enemies_[i]->enemy_center_.second += current_move.second;
 
-		enemies_[i]->path_.pop();
-        enemies_[i]->path_.push(current_move);
+		enemies_[i]->path_.directions.pop();
+        enemies_[i]->path_.directions.push(current_move);
 
         if (enemies_[i]->enemy_center_.second > kGameWindowHeight) {
             enemies_[i]->enemy_center_.second = kEnemySpawnHeight;
@@ -198,14 +198,6 @@ queue<pair<int, int>> ofApp::GenerateDefaultPath() {
     to_return.push(kZeroMove);
     to_return.push(kLeftMove);
     to_return.push(kZeroMove);
-    to_return.push(kZeroMove);
-    to_return.push(kZeroMove);
-    to_return.push(kZeroMove);
-    to_return.push(kZeroMove);
-    to_return.push(kZeroMove);
-    to_return.push(kZeroMove);
-    to_return.push(kZeroMove);
-    to_return.push(kZeroMove);
 	to_return.push(kRightMove);
     to_return.push(kZeroMove);
 	to_return.push(kRightMove);
@@ -217,6 +209,7 @@ queue<pair<int, int>> ofApp::GenerateDefaultPath() {
     to_return.push(kLeftMove);
     to_return.push(kZeroMove);
     to_return.push(kLeftMove);
+    to_return.push(kZeroMove);
 
 	return to_return;
 }
@@ -520,7 +513,7 @@ Enemy* ofApp::CreateEnemy(int x, int y, int type) {
     current_enemy->enemy_center_.second = y;
     current_enemy->formation_pos_.first = x;
     current_enemy->formation_pos_.second = y;
-    current_enemy->path_ = GenerateDefaultPath();
+    current_enemy->path_.directions = GenerateDefaultPath();
 
     enemies_.push_back(current_enemy);
 
