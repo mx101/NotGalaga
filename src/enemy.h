@@ -19,7 +19,5 @@ class Enemy {
   int enemy_kill_score_;
   int enemy_width_;
 
-  
-
   ofTexture enemy_texture_;
 };

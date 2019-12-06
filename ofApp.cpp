@@ -427,7 +427,13 @@ void ofApp::CheckEnemyCollisions() {
                                        kBulletHeight);
 
             if (current_enemy.intersects(current_bullet)) {
-                score_ += enemies_[j]->enemy_kill_score_;
+				if (enemies_[j]->path_.in_formation_) {
+					score_ += enemies_[j]->enemy_kill_score_;
+				} else {
+					// player earns double the points for killing an alien 
+					// while not in formation
+					score_ += 2 * enemies_[j]->enemy_kill_score_;
+				}
 
                 delete enemies_[j];
                 enemies_.erase(enemies_.begin() + j);
@@ -545,6 +551,7 @@ Enemy* ofApp::CreateEnemy(int x, int y, int type) {
     current_enemy->formation_pos_.first = x;
     current_enemy->formation_pos_.second = y;
     current_enemy->path_.directions = GenerateDefaultPath();
+	current_enemy->path_.in_formation_ = false;
 
     enemies_.push_back(current_enemy);
 
