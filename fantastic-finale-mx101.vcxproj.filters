@@ -43,15 +43,10 @@
     <ClCompile Include="tests.cpp">
       <Filter>tests</Filter>
     </ClCompile>
-    <ClCompile Include="bullet.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
-    <ClCompile Include="player.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
-    <ClCompile Include="ofxXboxController.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
+    <ClCompile Include="lib\ofxXboxController.cpp" />
+    <ClCompile Include="src\bullet.cpp" />
+    <ClCompile Include="src\enemy.cpp" />
+    <ClCompile Include="src\player.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="src">
@@ -104,28 +99,15 @@
     <ClInclude Include="..\..\..\..\Downloads\of_v0.10.1_vs2017_release\of_v0.10.1_vs2017_release\addons\ofxGui\src\ofxToggle.h">
       <Filter>addons\ofxGui\src</Filter>
     </ClInclude>
-    <ClInclude Include="enemy.h">
-      <Filter>src</Filter>
-    </ClInclude>
     <ClInclude Include="ofApp.h">
       <Filter>src</Filter>
     </ClInclude>
-    <ClInclude Include="bullet.h">
-      <Filter>src</Filter>
-    </ClInclude>
-    <ClInclude Include="player.h">
-      <Filter>src</Filter>
-    </ClInclude>
-    <ClInclude Include="ofxXboxController.h">
-      <Filter>src</Filter>
-    </ClInclude>
+    <ClInclude Include="lib\ofxXboxController.h" />
+    <ClInclude Include="src\bullet.h" />
+    <ClInclude Include="src\enemy.h" />
+    <ClInclude Include="src\player.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="icon.rc" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="enemy.cpp">
-      <Filter>src</Filter>
-    </None>
   </ItemGroup>
 </Project>

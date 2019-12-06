@@ -1,5 +1,5 @@
 //#include "catch.hpp"
-#include "enemy.h"
+#include "src/enemy.h"
 
 // ofxUnitTests IS AN OPTION
 

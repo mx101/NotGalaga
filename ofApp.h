@@ -1,11 +1,11 @@
 #pragma once
 #include "ofMain.h"
-#include "player.h"
-#include "enemy.h"
-#include "bullet.h"
+#include "src/player.h"
+#include "src/enemy.h"
+#include "src/bullet.h"
 #include <Windows.h>
 #include <Xinput.h>
-#include "ofxXboxController.h"
+#include "lib/ofxXboxController.h"
 #include <tuple>
 
 //some enums to represent game state

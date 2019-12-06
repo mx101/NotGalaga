@@ -1,6 +1,5 @@
 #include "enemy.h"
 
-using namespace PoissonGenerator;
 //Enemy::Enemy() {
 //  this->enemy_type_ = 0; 
 //  this->dead_ = false;
