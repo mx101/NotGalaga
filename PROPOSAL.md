@@ -2,7 +2,9 @@
 ### Michael Xiang
 For my final project, I intend on recreating a classic arcade game in the style of [__*Galaga*__](https://en.wikipedia.org/wiki/Galaga). It is a classic "fixed shooter" game where the player must defeat waves of space bugs and avoid incoming projectiles. My influence for completing this project is based from childhood nostalgia as this was my favorite arcade game to play growing up.
 
-I currently plan on using an external math libraries like this [Poisson point generator](https://github.com/corporateshark/poisson-disk-generator) and [matplotlib](https://github.com/lava/matplotlib-cpp) to plot out possible creative enemy paths for __*Galaga*__.
+The old plan was to use an external math libraries like this [Poisson point generator](https://github.com/corporateshark/poisson-disk-generator) and [matplotlib](https://github.com/lava/matplotlib-cpp) to plot out possible creative enemy paths for __*Galaga*__.
+
+I realized that using a poisson random point generator to create a set of directional movements was overly complicated and so instead opted to implement controller support using this library. [ofxXboxController](https://github.com/charlesveasey/ofxXboxController) by GitHub user charlesveasey
 
 The current timeline for this project (detailed more specifically by week below) covers the key gameplay functionalities of __*Galaga*__. This includes player movement/shooting, enemy movement (paths)/shooting, enemy types, player [kidnapping/rescuing](https://youtu.be/bnGl9P2TVUc?t=43), a scoreboard, incrementing wave difficulty, etc.
 
