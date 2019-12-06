@@ -110,4 +110,7 @@
   <ItemGroup>
     <ResourceCompile Include="icon.rc" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="PROPOSAL.md" />
+  </ItemGroup>
 </Project>
