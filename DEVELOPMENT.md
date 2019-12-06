@@ -163,3 +163,5 @@ Implement player shooting and enemy movement at the very least.
 
 - 3:15am - Successfully added theme music, bug occurred when ofSoundPlayer for theme music was loaded before the xbox controller was created in setup()
 
+- 3:25am - Condensed update code into helper functions to improve readability
+

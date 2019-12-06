@@ -80,72 +80,9 @@ void ofApp::update() {
             GenerateWave();
         }
 
-        if (player.alive_) {
+        UpdatePlayerObjects();
 
-			// when player shoots with a, the ship will fire sequentially
-			// very quickly so it looks like a single shot
-			// solution: store when the last shot was shot?
-            if ((gamepad->a) && 
-				player.player_shots_ < kLegalBulletsMax) {
-                ShootBullet(player.player_center_, kPlayerBulletSpeed, true);
-			}
-
-            if ((gamepad->dPadLeft || left_pressed) &&
-                player.player_center_.first > 0) {
-                player.player_center_.first -= kFighterMoveSpeed;
-            }
-
-            if ((gamepad->dPadRight || right_pressed) &&
-                (player.player_center_.first + kFighterWidth -
-                                  1) < kGameWindowWidth) {
-                player.player_center_.first += kFighterMoveSpeed;
-            }
-
-            // check edges not out of bounds
-            int ship_right = player.player_center_.first + kFighterWidth;
-            int out_of_bounds_right = ship_right - kGameWindowWidth;
-
-            if (out_of_bounds_right > 0) {
-                // std::cout << "out by: " << out_of_bounds << std::endl;
-                player.player_center_.first -= out_of_bounds_right;
-            }
-
-            int ship_left = player.player_center_.first;
-
-            if (ship_left < 0) {
-                // std::cout << "out by: " << ship_left << std::endl;
-                player.player_center_.first -= ship_left;
-            }
-        }
-
-        for (int i = 0; i < player_bullets_.size(); i++) {
-            player_bullets_[i]->bullet_center_.second += kPlayerBulletSpeed;
-            int second = player_bullets_[i]->bullet_center_.second;
-
-            if (second < 0) {
-                delete player_bullets_[i];
-                player_bullets_.erase(player_bullets_.begin() + i);
-                player.player_shots_--;
-            }
-        }
-
-        for (int i = 0; i < enemies_.size(); i++) {
-            enemies_[i]->enemy_center_.second += kEnemyDefaultMoveSpeed;
-
-            if (enemies_[i]->enemy_center_.second > kGameWindowHeight) {
-                enemies_[i]->enemy_center_.second = kEnemySpawnHeight;
-            }
-        }
-
-        for (int i = 0; i < enemy_bullets_.size(); i++) {
-            enemy_bullets_[i]->bullet_center_.second += kEnemyBulletSpeed;
-            int second = enemy_bullets_[i]->bullet_center_.second;
-
-            if (second > kGameWindowHeight) {
-                delete enemy_bullets_[i];
-                enemy_bullets_.erase(enemy_bullets_.begin() + i);
-            }
-        }
+		UpdateEnemyObjects();
 
         CheckEnemyCollisions();
 
@@ -155,6 +92,75 @@ void ofApp::update() {
 
     } else {
         DrawScoreboard();
+    }
+}
+
+void ofApp::UpdatePlayerObjects() {
+    if (player.alive_) {
+        // when player shoots with a, the ship will fire sequentially
+        // very quickly so it looks like a single shot
+        // solution: store when the last shot was shot?
+        if ((gamepad->a) && player.player_shots_ < kLegalBulletsMax) {
+            ShootBullet(player.player_center_, kPlayerBulletSpeed, true);
+        }
+
+        if ((gamepad->dPadLeft || left_pressed) &&
+            player.player_center_.first > 0) {
+            player.player_center_.first -= kFighterMoveSpeed;
+        }
+
+        if ((gamepad->dPadRight || right_pressed) &&
+            (player.player_center_.first + kFighterWidth - 1) <
+                kGameWindowWidth) {
+            player.player_center_.first += kFighterMoveSpeed;
+        }
+
+        // check edges not out of bounds
+        int ship_right = player.player_center_.first + kFighterWidth;
+        int out_of_bounds_right = ship_right - kGameWindowWidth;
+
+        if (out_of_bounds_right > 0) {
+            // std::cout << "out by: " << out_of_bounds << std::endl;
+            player.player_center_.first -= out_of_bounds_right;
+        }
+
+        int ship_left = player.player_center_.first;
+
+        if (ship_left < 0) {
+            // std::cout << "out by: " << ship_left << std::endl;
+            player.player_center_.first -= ship_left;
+        }
+    }
+
+    for (int i = 0; i < player_bullets_.size(); i++) {
+        player_bullets_[i]->bullet_center_.second += kPlayerBulletSpeed;
+        int second = player_bullets_[i]->bullet_center_.second;
+
+        if (second < 0) {
+            delete player_bullets_[i];
+            player_bullets_.erase(player_bullets_.begin() + i);
+            player.player_shots_--;
+        }
+    }
+}
+
+void ofApp::UpdateEnemyObjects() {
+    for (int i = 0; i < enemies_.size(); i++) {
+        enemies_[i]->enemy_center_.second += kEnemyDefaultMoveSpeed;
+
+        if (enemies_[i]->enemy_center_.second > kGameWindowHeight) {
+            enemies_[i]->enemy_center_.second = kEnemySpawnHeight;
+        }
+    }
+
+    for (int i = 0; i < enemy_bullets_.size(); i++) {
+        enemy_bullets_[i]->bullet_center_.second += kEnemyBulletSpeed;
+        int second = enemy_bullets_[i]->bullet_center_.second;
+
+        if (second > kGameWindowHeight) {
+            delete enemy_bullets_[i];
+            enemy_bullets_.erase(enemy_bullets_.begin() + i);
+        }
     }
 }
 
