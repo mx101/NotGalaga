@@ -69,6 +69,7 @@ class ofApp : public ofBaseApp {
 
   bool left_pressed;
   bool right_pressed; 
+  bool shoot_pressed;
 
 
   Player player;

@@ -21,6 +21,7 @@ void ofApp::setup() {
 
     left_pressed = false;
     right_pressed = false;
+    shoot_pressed = false;
     //test = true;
 
     LoadData();
@@ -66,21 +67,14 @@ void ofApp::update() {
 		test = false;
 	}*/
 
-	/*Gamepad gamepad;
-    if (gamepad.IsPressed(XINPUT_GAMEPAD_A)) {
-        std::cout << "(A) button pressed" << endl;
-    }*/
-
 	gamepad->leftVibration = gamepad->leftTrigger;
     gamepad->rightVibration = gamepad->rightTrigger;
 
     xbox.update();
 
-    sphere.move(gamepad->thumbLX, -gamepad->thumbLY, 0);
+    /*sphere.move(gamepad->thumbLX, -gamepad->thumbLY, 0);
     float ry = ofMap(gamepad->thumbRX, -1, 1, -360, 360);
-    sphere.setOrientation(ofVec3f(0, ry, 0));
-
-
+    sphere.setOrientation(ofVec3f(0, ry, 0));*/
 
     if (game_running_) {
         if (enemies_.empty()) {
@@ -88,11 +82,22 @@ void ofApp::update() {
         }
 
         if (player.alive_) {
-            if (left_pressed && player.player_center_.first > 0) {
+
+			// when player shoots with a, the ship will fire sequentially
+			// very quickly so it looks like a single shot
+			// solution: store when the last shot was shot?
+            if ((gamepad->a) && 
+				player.player_shots_ < kLegalBulletsMax) {
+                ShootBullet(player.player_center_, kPlayerBulletSpeed, true);
+			}
+
+            if ((gamepad->dPadLeft || left_pressed) &&
+                player.player_center_.first > 0) {
                 player.player_center_.first -= kFighterMoveSpeed;
             }
 
-            if (right_pressed && (player.player_center_.first + kFighterWidth -
+            if ((gamepad->dPadRight || right_pressed) &&
+                (player.player_center_.first + kFighterWidth -
                                   1) < kGameWindowWidth) {
                 player.player_center_.first += kFighterMoveSpeed;
             }
@@ -501,8 +506,8 @@ void ofApp::keyPressed(int key) {
             right_pressed = true;
         }
 
-        if (key == OF_KEY_UP && player.player_shots_ < kLegalBulletsMax) {
-            ShootBullet(player.player_center_, kPlayerBulletSpeed, true);
+        if (key == OF_KEY_UP) {
+            shoot_pressed = true;
         }
     }
 
