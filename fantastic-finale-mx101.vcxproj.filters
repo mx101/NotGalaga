@@ -49,6 +49,7 @@
     <ClCompile Include="player.cpp">
       <Filter>src</Filter>
     </ClCompile>
+    <ClCompile Include="ofxXboxController.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="src">
@@ -111,6 +112,9 @@
       <Filter>src</Filter>
     </ClInclude>
     <ClInclude Include="player.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="ofxXboxController.h">
       <Filter>src</Filter>
     </ClInclude>
   </ItemGroup>

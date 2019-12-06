@@ -142,3 +142,6 @@ Implement player shooting and enemy movement at the very least.
 
 - 7:10pm - Completed GenerateMove() which returns a tuple representing a change in x and y
 
+### 12/6/19
+- 1:30am - Finally functioning controller support! Currently, the controller controls a test sphere
+

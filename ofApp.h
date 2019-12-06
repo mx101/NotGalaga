@@ -3,8 +3,9 @@
 #include "player.h"
 #include "enemy.h"
 #include "bullet.h"
-#include <windows.h>
-#include <xinput.h>
+#include <Windows.h>
+#include <Xinput.h>
+#include "ofxXboxController.h"
 #include <tuple>
 
 //some enums to represent game state
@@ -29,9 +30,10 @@ class ofApp : public ofBaseApp {
   void ShootBullet(std::pair<int, int> center, int velocity, bool player_shot);
 
   void GenerateWave();
+  std::vector<std::pair<int, int>> CreateRandPath();
   void ReturnToFormation(); // currently instantly teleports enemies to starting position
   queue<tuple<int, int>> GeneratePath();
-  tuple<int, int> GenerateMove(); // returns a single move in the form of (delta x, delta y)
+  tuple<int, int> GenerateRandomMove(); // returns a single move in the form of (delta x, delta y)
 
   tuple<int, int> zero_move_ = {0, 0};
 
@@ -43,7 +45,15 @@ class ofApp : public ofBaseApp {
   bool game_running_;
   int high_score_;
   int waves_;
-  
+
+
+  //Gamepad gamepad;
+  ofxXboxController xbox;
+  bool deadZone;
+  Gamepad* gamepad;
+  ofSpherePrimitive sphere;
+
+
   const int kGameWindowWidth = 800;
   const int kGameWindowHeight = 1000;
   const int kSideboardWidth = 300;

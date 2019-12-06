@@ -183,6 +183,7 @@
     <ClCompile Include="bullet.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="ofApp.cpp" />
+    <ClCompile Include="ofxXboxController.cpp" />
     <ClCompile Include="player.cpp" />
     <ClCompile Include="..\..\..\..\Downloads\of_v0.10.1_vs2017_release\of_v0.10.1_vs2017_release\addons\ofxGui\src\ofxBaseGui.cpp" />
     <ClCompile Include="..\..\..\..\Downloads\of_v0.10.1_vs2017_release\of_v0.10.1_vs2017_release\addons\ofxGui\src\ofxButton.cpp" />
@@ -212,6 +213,7 @@
     <ClInclude Include="bullet.h" />
     <ClInclude Include="enemy.h" />
     <ClInclude Include="ofApp.h" />
+    <ClInclude Include="ofxXboxController.h" />
     <ClInclude Include="player.h" />
   </ItemGroup>
   <ItemGroup>

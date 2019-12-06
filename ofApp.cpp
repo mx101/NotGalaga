@@ -1,5 +1,7 @@
 #include "ofApp.h"
 
+using namespace PoissonGenerator;
+
 void ofApp::setup() {
     ofSetWindowTitle("NotGalaga");
 
@@ -7,12 +9,19 @@ void ofApp::setup() {
     ofSetBackgroundColor(0, 0, 0);
     srand(static_cast<unsigned>(time(0)));
 
+	xbox.setup();
+    gamepad = xbox.getGamepadPtr(0);
+    deadZone = true;
+
+    sphere.setRadius(100);
+
     game_running_ = true;
     high_score_ = 30000;
     waves_ = 0;
 
     left_pressed = false;
     right_pressed = false;
+    //test = true;
 
     LoadData();
 
@@ -22,15 +31,6 @@ void ofApp::setup() {
     player.alive_ = true;
     player.player_center_.first = kGameWindowWidth / 2;
     player.player_center_.second = kGameWindowHeight - (kGameWindowHeight / 8);
-
-    /*bee_.enemy_center_.first = kGameWindowWidth / 2;
-    bee_.enemy_center_.second = kGameWindowHeight / 8;
-
-    moth_.enemy_center_.first = kGameWindowWidth / 4;
-    moth_.enemy_center_.second = kGameWindowHeight / 3;
-
-    boss_.enemy_center_.first = kGameWindowWidth / 4;
-    boss_.enemy_center_.second = kGameWindowHeight / 3;*/
 
     score_ = 0;
 }
@@ -56,8 +56,32 @@ void ofApp::LoadData() {
 
 //--------------------------------------------------------------
 void ofApp::update() {
-    std::cout << get<0>(GenerateMove()) << std::endl;
-    std::cout << get<1>(GenerateMove()) << std::endl;
+    /*if (test) {
+        std::vector<std::pair<int, int>> vect = CreateRandPath();
+
+        for (std::pair<int, int> cPair : vect) {
+            std::cout << cPair.first << std::endl;
+            std::cout << cPair.second << std::endl;
+        }
+		test = false;
+	}*/
+
+	/*Gamepad gamepad;
+    if (gamepad.IsPressed(XINPUT_GAMEPAD_A)) {
+        std::cout << "(A) button pressed" << endl;
+    }*/
+
+	gamepad->leftVibration = gamepad->leftTrigger;
+    gamepad->rightVibration = gamepad->rightTrigger;
+
+    xbox.update();
+
+    sphere.move(gamepad->thumbLX, -gamepad->thumbLY, 0);
+    float ry = ofMap(gamepad->thumbRX, -1, 1, -360, 360);
+    sphere.setOrientation(ofVec3f(0, ry, 0));
+
+
+
     if (game_running_) {
         if (enemies_.empty()) {
             GenerateWave();
@@ -75,19 +99,19 @@ void ofApp::update() {
 
             // check edges not out of bounds
             int ship_right = player.player_center_.first + kFighterWidth;
-			int out_of_bounds_right = ship_right - kGameWindowWidth;
+            int out_of_bounds_right = ship_right - kGameWindowWidth;
 
             if (out_of_bounds_right > 0) {
-                //std::cout << "out by: " << out_of_bounds << std::endl;
+                // std::cout << "out by: " << out_of_bounds << std::endl;
                 player.player_center_.first -= out_of_bounds_right;
-			}
+            }
 
-			int ship_left = player.player_center_.first;
+            int ship_left = player.player_center_.first;
 
-			if (ship_left < 0) {
-                //std::cout << "out by: " << ship_left << std::endl;         
-                player.player_center_.first -= ship_left;        
-			}
+            if (ship_left < 0) {
+                // std::cout << "out by: " << ship_left << std::endl;
+                player.player_center_.first -= ship_left;
+            }
         }
 
         for (int i = 0; i < player_bullets_.size(); i++) {
@@ -130,25 +154,49 @@ void ofApp::update() {
     }
 }
 
+std::vector<std::pair<int, int>> ofApp::CreateRandPath() {
+    std::vector<std::pair<int, int>> to_return;
+
+    DefaultPRNG PRNG;
+    int num_points = 100;
+
+    std::vector<Point> points_to_extract =
+        generatePoissonPoints(num_points, PRNG);
+
+    int enemy_speed_range = 20;
+
+    for (Point current_point : points_to_extract) {
+        // generates a pair of numbers in the range of [-10, 10]
+		// note that these numbers are guaranteed in this range because they originate as
+		// percentages from -1 to 1
+        int xC = current_point.x * 10;
+        int yC = current_point.y * 10;
+
+        int x_change = (xC / 2) - (std::rand() % xC);
+
+        int y_change = (yC / 2) - (std::rand() % yC);
+
+        to_return.push_back(std::pair<int, int>(x_change, y_change));
+    }
+
+    return to_return;
+}
 
 queue<tuple<int, int>> ofApp::GeneratePath() {
     queue<tuple<int, int>> to_return;
-    to_return.push(GenerateMove());
-	return to_return;
+    to_return.push(GenerateRandomMove());
+    return to_return;
 }
 
+tuple<int, int> ofApp::GenerateRandomMove() {
+    int enemy_speed_range = 20;
 
-tuple<int, int> ofApp::GenerateMove() { 
-	int enemy_speed_range = 20;
+    // generates a pair of numbers in the range of [-10, 10]
+    int x_change = (enemy_speed_range / 2) - (std::rand() % enemy_speed_range);
 
-	// generates a pair of numbers in the range of [-10, 10]
-    int x_change = 
-			(enemy_speed_range / 2) - (std::rand() % enemy_speed_range);
+    int y_change = (enemy_speed_range / 2) - (std::rand() % enemy_speed_range);
 
-    int y_change = 
-			(enemy_speed_range / 2) - (std::rand() % enemy_speed_range);
-
-	return tuple<int, int>(x_change, y_change); 
+    return tuple<int, int>(x_change, y_change);
 }
 
 void ofApp::DrawScoreboard() {
@@ -379,6 +427,12 @@ void ofApp::CheckPlayerCollisions() {
 
 //--------------------------------------------------------------
 void ofApp::draw() {
+    ofSetColor(200, 40, 30);
+    sphere.drawWireframe();
+
+    ofSetColor(255);
+    xbox.draw();
+
     DrawSideboard();
 
     if (!player.alive_) {

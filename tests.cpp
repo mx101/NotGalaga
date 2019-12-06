@@ -1,8 +1,9 @@
-#include "catch.hpp"
+//#include "catch.hpp"
 #include "enemy.h"
 
 // ofxUnitTests IS AN OPTION
 
+//TEST_CASE("test") { REQUIRE(true); }
 //TEST_CASE("test") { REQUIRE(true); }
 
 //TEST_CASE("path plotter returns a randomized vector of std::pairs") { 

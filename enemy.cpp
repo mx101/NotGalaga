@@ -30,20 +30,6 @@ using namespace PoissonGenerator;
 //  }
 //}
 
-//void Enemy::generate_enemies(std::vector<Enemy> *enemies) {
-//  // load in the first 44 aliens
-//
-//  for (int i = 0; i < kEnemyCount; i++) {
-//    if (i < kFirstMothIdx) {
-//      enemies->push_back(Enemy(0));
-//    } else if (i < kFirstBossIdx) {
-//      enemies->push_back(Enemy(1));
-//    } else {
-//      enemies->push_back(Enemy(2));
-//    }
-//  }
-//}
-
 std::vector<std::pair<int, int>> Enemy::path_plotter() {
   std::vector<std::pair<int, int>> to_return;
 
