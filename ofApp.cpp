@@ -17,7 +17,7 @@ void ofApp::setup() {
 
 void ofApp::RestartGame() {
 	game_running_ = true;
-	high_score_ = 30000;
+	high_score_ = kDefaultHighScore;
 	waves_ = 1;
 	timer_ = 0;
 	time_last_shot = 0;
@@ -268,9 +268,27 @@ void ofApp::DrawSideboard() {
     int side_wave_width = kGameWindowWidth + (kSideboardWidth / 2) -
                           side_font_.stringWidth(wave_message) / 2;
 
-    int side_wave_height = (kGameWindowHeight / 2) + (2 * kSideboardSpacing);
+    int side_wave_height = (kGameWindowHeight / 2) + (3 * kSideboardSpacing);
 
     side_font_.drawString(wave_message, side_wave_width, side_wave_height);
+
+	string high_message = "High Score:";
+
+	int side_high_width = kGameWindowWidth + (kSideboardWidth / 2) -
+		side_font_.stringWidth(high_message) / 2;
+
+	int side_high_height = (kGameWindowHeight / 2) - (5 * kSideboardSpacing);
+
+	side_font_.drawString(high_message, side_high_width, side_high_height);
+
+	string highS_message = to_string(high_score_);
+
+	int side_highS_width = kGameWindowWidth + (kSideboardWidth / 2) -
+		side_font_.stringWidth(highS_message) / 2;
+
+	int side_highS_height = (kGameWindowHeight / 2) - (4 * kSideboardSpacing);
+
+	side_font_.drawString(highS_message, side_highS_width, side_highS_height);
 }
 
 void ofApp::DrawGameDead() {

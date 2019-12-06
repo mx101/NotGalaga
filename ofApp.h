@@ -70,6 +70,7 @@ class ofApp : public ofBaseApp {
   const int kGameWindowHeight = 1000;
   const int kSideboardWidth = 300;
   const int kOffset = 50;
+  const int kDefaultHighScore = 10000;
 
 
   ofTrueTypeFont message_font_;
