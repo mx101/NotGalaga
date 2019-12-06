@@ -167,5 +167,5 @@ Implement player shooting and enemy movement at the very least.
 
 - 3:35am - Changed GeneratePath() and GenerateRandomMove() to deal with pairs instead of tuples to stay consistent with rest of project
 
-
+- 4:00am - Started enemy movement based on a queue of direction changes
 

@@ -7,7 +7,7 @@ void ofApp::setup() {
     ofSetBackgroundColor(0, 0, 0);
     srand(static_cast<unsigned>(time(0)));
 
-	xbox.setup();
+    xbox.setup();
     gamepad = xbox.getGamepadPtr(0);
     deadZone = true;
 
@@ -32,7 +32,7 @@ void ofApp::setup() {
 }
 
 void ofApp::LoadData() {
-	theme_music_.load("theme.mp3");
+    theme_music_.load("theme.mp3");
     theme_music_.play();
 
     // load font data
@@ -52,8 +52,8 @@ void ofApp::LoadData() {
     ofLoadImage(boss_.enemy_texture_, "bossGalaga.png");
     ofLoadImage(moth_.enemy_texture_, "moth.png");
 
-	//note that this number will be doubled if the enemy dies while moving
-	bee_.enemy_kill_score_ = 40;
+    // note that this number will be doubled if the enemy dies while moving
+    bee_.enemy_kill_score_ = 40;
     moth_.enemy_kill_score_ = 80;
     boss_.enemy_kill_score_ = 150;
 }
@@ -67,10 +67,10 @@ void ofApp::update() {
             std::cout << cPair.first << std::endl;
             std::cout << cPair.second << std::endl;
         }
-		test = false;
-	}*/
+                test = false;
+        }*/
 
-	gamepad->leftVibration = gamepad->leftTrigger;
+    gamepad->leftVibration = gamepad->leftTrigger;
     gamepad->rightVibration = gamepad->rightTrigger;
 
     xbox.update();
@@ -82,7 +82,7 @@ void ofApp::update() {
 
         UpdatePlayerObjects();
 
-		UpdateEnemyObjects();
+        UpdateEnemyObjects();
 
         CheckEnemyCollisions();
 
@@ -146,7 +146,13 @@ void ofApp::UpdatePlayerObjects() {
 
 void ofApp::UpdateEnemyObjects() {
     for (int i = 0; i < enemies_.size(); i++) {
-        enemies_[i]->enemy_center_.second += kEnemyDefaultMoveSpeed;
+        pair<int, int> current_move = enemies_[i]->path_.front();
+
+		enemies_[i]->enemy_center_.first += current_move.first;
+        enemies_[i]->enemy_center_.second += current_move.second;
+
+		enemies_[i]->path_.pop();
+        enemies_[i]->path_.push(current_move);
 
         if (enemies_[i]->enemy_center_.second > kGameWindowHeight) {
             enemies_[i]->enemy_center_.second = kEnemySpawnHeight;
@@ -162,6 +168,31 @@ void ofApp::UpdateEnemyObjects() {
             enemy_bullets_.erase(enemy_bullets_.begin() + i);
         }
     }
+}
+
+queue<pair<int, int>> ofApp::GenerateDefaultPath() {
+    queue<pair<int, int>> to_return;
+
+	// default path moves as follows:
+	// L L R R R R L L
+
+    to_return.push(kLeftMove);
+    to_return.push(kZeroMove);
+    to_return.push(kLeftMove);
+    to_return.push(kZeroMove);
+	to_return.push(kRightMove);
+    to_return.push(kZeroMove);
+	to_return.push(kRightMove);
+    to_return.push(kZeroMove);
+    to_return.push(kRightMove);
+    to_return.push(kZeroMove);
+    to_return.push(kRightMove);
+    to_return.push(kZeroMove);
+    to_return.push(kLeftMove);
+    to_return.push(kZeroMove);
+    to_return.push(kLeftMove);
+
+	return to_return;
 }
 
 queue<pair<int, int>> ofApp::GeneratePath() {
@@ -294,7 +325,7 @@ void ofApp::GenerateWave() {
         }
 
         curr_bee = CreateEnemy(x, y, 0);
-		curr_bee->formation_pos_ = std::pair<int, int>(x, y);
+        curr_bee->formation_pos_ = std::pair<int, int>(x, y);
         x += curr_bee->enemy_width_ + separation;
     }
 
@@ -348,7 +379,7 @@ void ofApp::CheckEnemyCollisions() {
             if (current_enemy.intersects(current_bullet)) {
                 score_ += enemies_[j]->enemy_kill_score_;
 
-				delete enemies_[j];
+                delete enemies_[j];
                 enemies_.erase(enemies_.begin() + j);
 
                 delete player_bullets_[i];
@@ -406,9 +437,9 @@ void ofApp::CheckPlayerCollisions() {
 
 //--------------------------------------------------------------
 void ofApp::draw() {
-    //ofSetColor(200, 40, 30);
-    //ofSetColor(255);
-    //xbox.draw();
+    // ofSetColor(200, 40, 30);
+    // ofSetColor(255);
+    // xbox.draw();
 
     DrawSideboard();
     DrawNonPlayerObjects();
@@ -420,8 +451,6 @@ void ofApp::draw() {
         player.fighter_texture_.draw(player.player_center_.first,
                                      player.player_center_.second);
     }
-	
-	
 }
 
 void ofApp::DrawNonPlayerObjects() {
@@ -458,6 +487,8 @@ Enemy* ofApp::CreateEnemy(int x, int y, int type) {
     current_enemy->enemy_center_.second = y;
     current_enemy->formation_pos_.first = x;
     current_enemy->formation_pos_.second = y;
+    current_enemy->path_ = GenerateDefaultPath();
+
     enemies_.push_back(current_enemy);
     current_enemy->enemy_width_ = kEnemyWidth;
 

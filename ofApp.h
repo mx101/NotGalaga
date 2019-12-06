@@ -35,11 +35,15 @@ class ofApp : public ofBaseApp {
 
   void GenerateWave();
   void ReturnToFormation(); // currently instantly teleports enemies to starting position
+
+  queue<pair<int, int>> GenerateDefaultPath();
   queue<pair<int, int>> GeneratePath();
   pair<int, int> GenerateRandomMove();  // returns a single move in the form of
                                         // (delta x, delta y)
 
-  pair<int, int> zero_move_ = {0, 0};
+  pair<int, int> kZeroMove = {0, 0};
+  pair<int, int> kLeftMove = {-10, 0};
+  pair<int, int> kRightMove = {10, 0};
 
   void CheckEnemyCollisions();
   void CheckPlayerCollisions();
