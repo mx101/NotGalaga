@@ -68,15 +68,6 @@ void ofApp::LoadData() {
 //--------------------------------------------------------------
 void ofApp::update() {
 	timer_++;
-    /*if (test) {
-        std::vector<std::pair<int, int>> vect = CreateRandPath();
-
-        for (std::pair<int, int> cPair : vect) {
-            std::cout << cPair.first << std::endl;
-            std::cout << cPair.second << std::endl;
-        }
-                test = false;
-        }*/
 
   xbox.update();
 
@@ -153,7 +144,12 @@ void ofApp::UpdatePlayerObjects() {
       // std::cout << "out by: " << ship_left << std::endl;
       player.player_center_.first -= ship_left;
     }
-  }
+	} else {
+		if (gamepad->start) {
+			RevivePlayer();
+			ReturnToFormation();
+		}
+	}
 
   for (int i = 0; i < player_bullets_.size(); i++) {
     player_bullets_[i]->bullet_center_.second += kPlayerBulletSpeed;
@@ -171,6 +167,10 @@ void ofApp::UpdateEnemyObjects() {
 
 	for (int i = 0; i < enemies_.size(); i++) {
 	  bool should_move = (enemies_[i]->time_moved_ - timer_) % kGeneralTime == 0;
+
+		if (!enemies_[i]->path_.in_formation_) {
+			should_move = true;
+		}
 
 		if (enemies_[i]->path_.directions.empty()) {
 			enemies_[i]->GenerateNewPath();

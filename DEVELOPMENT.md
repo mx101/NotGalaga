@@ -204,3 +204,7 @@ Implement player shooting and enemy movement at the very least.
 - 1:20am - Big 5 implemented for enemy class so that C++ won't argue with the compiler, tested and game still functions properly
 
 - 1:35am - Fixed whitespacing for ofApp.cpp
+
+- 10:10am - Starting Diagonal downwards movement for enemy units
+
+- 10:30am - Diagonal movement works for enemy units. TODO: Make sure enemy units end up at their starting position, make this diag movement less weird.

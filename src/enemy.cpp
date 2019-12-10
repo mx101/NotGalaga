@@ -162,7 +162,17 @@ Enemy& Enemy::operator=(Enemy&& source) noexcept {
 void Enemy::GenerateNewPath() {
 	int selection = std::rand() % kNumPathChoices;
 	
-  this->path_.directions = GenerateDefaultPath();
+	//weight the default path so we hopefully don't have an extraordinary number of enemies flying at the player at once
+	// if have time, implement continuous enemy movement if there are only a few enemies left on screen
+  
+	if (selection < 9) {
+		this->path_.directions = GenerateDefaultPath();
+		this->path_.in_formation_ = true;
+	} else {
+		this->path_.directions = GenerateDiagPath();
+		this->path_.in_formation_ = false;
+	}
+	
 }
 vector<pair<int, int>> Enemy::GenerateDefaultPath() {
 	vector<pair<int, int>> to_path;
@@ -191,7 +201,7 @@ vector<pair<int, int>> Enemy::GenerateDefaultPath() {
 }
 
 vector<pair<int, int>> Enemy::PathPlotter(pair<int, int> begin, pair<int, int> end) {
-	int frame_count = 20;
+	int frame_count = 10;
 	pair<int, int> current = begin;
 	int x_change = (end.first - begin.first) / frame_count;
 	int y_change = (end.second - begin.second) / frame_count;
@@ -200,6 +210,34 @@ vector<pair<int, int>> Enemy::PathPlotter(pair<int, int> begin, pair<int, int> e
 
 	for (int i = 0; i < frame_count; i++) {
 		to_return.push_back({ x_change, y_change });
+	}
+
+	return to_return;
+}
+
+vector<pair<int, int>> Enemy::GenerateDiagPath() {
+	vector<pair<int, int>> to_return;
+
+	for (int i = 0; i < kMoveFrames; i++) {
+		if (i % 2 == 0) {
+			to_return.push_back(kDiagLeft);
+			to_return.push_back(kDiagLeft);
+			to_return.push_back(kDiagLeft);
+			to_return.push_back(kDiagLeft);
+			to_return.push_back(kDiagLeft);
+			to_return.push_back(kDiagLeft);
+			to_return.push_back(kDiagLeft);
+			to_return.push_back(kDiagLeft);
+		} else {
+			to_return.push_back(kDiagRight);
+			to_return.push_back(kDiagRight);
+			to_return.push_back(kDiagRight);
+			to_return.push_back(kDiagRight);
+			to_return.push_back(kDiagRight);
+			to_return.push_back(kDiagRight);
+			to_return.push_back(kDiagRight);
+			to_return.push_back(kDiagRight);
+		}
 	}
 
 	return to_return;
