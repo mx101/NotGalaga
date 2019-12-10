@@ -168,7 +168,9 @@ void Enemy::GenerateNewPath() {
   
 	if (selection < 6) {
 		this->path_.directions = GenerateLeftCurve();
-		this->path_.in_formation_ = true;
+		this->path_.in_formation_ = false;
+		// save for defaultpath
+		//this->path_.in_formation_ = true;
 	} else if (selection == 6) {
 		//these are all set for testing purposes
 		int vertical_offset = 50;
@@ -280,8 +282,8 @@ vector<pair<int, int>> Enemy::GenerateSwirlPath() {
 
 vector<pair<int, int>> Enemy::GenerateLeftCurve() {
 	int move_frames = 10;
-	int down_shift = 70;
-	int side_shift = 50;
+	int down_shift = 40;
+	int side_shift = 30;
 
 	vector<pair<int, int>> right_arm;
 	vector<pair<int, int>> middle_arm;
@@ -308,5 +310,30 @@ vector<pair<int, int>> Enemy::GenerateLeftCurve() {
 }
 
 vector<pair<int, int>> Enemy::GenerateRightCurve() {
-	return vector<pair<int, int>>();
+	int move_frames = 10;
+	int down_shift = 40;
+	int side_shift = 30;
+
+	vector<pair<int, int>> right_arm;
+	vector<pair<int, int>> middle_arm;
+	vector<pair<int, int>> left_arm;
+
+	pair<int, int> left_end = { this->enemy_center_.first - side_shift,
+		this->enemy_center_.second + down_shift };
+
+	pair<int, int> middle_end = { left_end.first,
+		left_end.second + down_shift };
+
+	pair<int, int> right_end = { middle_end.first + side_shift,
+		middle_end.second + down_shift };
+
+	right_arm = PathPlotter(this->enemy_center_, left_end, move_frames);
+	middle_arm = PathPlotter(left_end, middle_end, move_frames);
+	left_arm = PathPlotter(middle_end, right_end, move_frames);
+
+	vector<pair<int, int>> right_curve = left_arm;
+	right_curve.insert(right_curve.end(), middle_arm.begin(), middle_arm.end());
+	right_curve.insert(right_curve.end(), right_arm.begin(), right_arm.end());
+
+	return right_curve;
 }

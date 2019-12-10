@@ -214,3 +214,5 @@ Implement player shooting and enemy movement at the very least.
 - 1:30pm - Modifying when an enemy will shoot
 
 - 4:00pm - Started GenerateSwirlPath, bug fixed in PathPlotter
+
+- 4:20pm - GenerateRightCurve and GenerateLeftCurve tested and functioning
