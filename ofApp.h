@@ -111,10 +111,10 @@ class ofApp : public ofBaseApp {
 
   
 
-  const int kBeeMothWidth = 40;
-  const int kBeeMothHeight = 40;
-  const int kBossWidth = 60;
-  const int kEnemySpacing = 60;
+  const int kBeeMothWidth = 35;
+  const int kBeeMothHeight = 35;
+  const int kBossWidth = 45;
+  const int kEnemySpacing = 45;
   const int kEnemyDefaultMoveSpeed = 5;
   const int kEnemySpawnHeight = -20;
   const int kBeeStartX = 120;  // change kStartX and kStartY

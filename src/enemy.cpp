@@ -165,11 +165,13 @@ void Enemy::GenerateNewPath() {
 	//weight the default path so we hopefully don't have an extraordinary number of enemies flying at the player at once
 	// if have time, implement continuous enemy movement if there are only a few enemies left on screen
   
-	if (selection < 9) {
+	if (selection < 6) {
 		this->path_.directions = GenerateDefaultPath();
 		this->path_.in_formation_ = true;
 	} else {
-		this->path_.directions = GenerateDiagPath();
+		int vertical_offset = 50;
+		pair<int, int> new_end = { this->enemy_center_.first + 20, ofGetHeight() + vertical_offset };
+		this->path_.directions = PathPlotter(this->enemy_center_, new_end, 100);
 		this->path_.in_formation_ = false;
 	}
 	
@@ -200,16 +202,19 @@ vector<pair<int, int>> Enemy::GenerateDefaultPath() {
 	return to_path;
 }
 
-vector<pair<int, int>> Enemy::PathPlotter(pair<int, int> begin, pair<int, int> end) {
-	int frame_count = 10;
+vector<pair<int, int>> Enemy::PathPlotter(pair<int, int> begin, pair<int, int> end, int frame_count) {
 	pair<int, int> current = begin;
 	int x_change = (end.first - begin.first) / frame_count;
 	int y_change = (end.second - begin.second) / frame_count;
 
+	float ratio = float(x_change) / (float(x_change) + float(y_change));
+	int x_move = kMoveSpeedMax * ratio;
+	int y_move = kMoveSpeedMax - x_move;
+
 	vector<pair<int, int>> to_return;
 
 	for (int i = 0; i < frame_count; i++) {
-		to_return.push_back({ x_change, y_change });
+		to_return.push_back({ x_move, y_move });
 	}
 
 	return to_return;
@@ -220,23 +225,23 @@ vector<pair<int, int>> Enemy::GenerateDiagPath() {
 
 	for (int i = 0; i < kMoveFrames; i++) {
 		if (i % 2 == 0) {
-			to_return.push_back(kDiagLeft);
-			to_return.push_back(kDiagLeft);
-			to_return.push_back(kDiagLeft);
-			to_return.push_back(kDiagLeft);
-			to_return.push_back(kDiagLeft);
-			to_return.push_back(kDiagLeft);
-			to_return.push_back(kDiagLeft);
-			to_return.push_back(kDiagLeft);
+			to_return.push_back(kDiagDownLeft);
+			to_return.push_back(kDiagDownLeft);
+			to_return.push_back(kDiagDownLeft);
+			to_return.push_back(kDiagDownLeft);
+			to_return.push_back(kDiagDownLeft);
+			to_return.push_back(kDiagDownLeft);
+			to_return.push_back(kDiagDownLeft);
+			to_return.push_back(kDiagDownLeft);
 		} else {
-			to_return.push_back(kDiagRight);
-			to_return.push_back(kDiagRight);
-			to_return.push_back(kDiagRight);
-			to_return.push_back(kDiagRight);
-			to_return.push_back(kDiagRight);
-			to_return.push_back(kDiagRight);
-			to_return.push_back(kDiagRight);
-			to_return.push_back(kDiagRight);
+			to_return.push_back(kDiagDownRight);
+			to_return.push_back(kDiagDownRight);
+			to_return.push_back(kDiagDownRight);
+			to_return.push_back(kDiagDownRight);
+			to_return.push_back(kDiagDownRight);
+			to_return.push_back(kDiagDownRight);
+			to_return.push_back(kDiagDownRight);
+			to_return.push_back(kDiagDownRight);
 		}
 	}
 

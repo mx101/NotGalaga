@@ -208,3 +208,6 @@ Implement player shooting and enemy movement at the very least.
 - 10:10am - Starting Diagonal downwards movement for enemy units
 
 - 10:30am - Diagonal movement works for enemy units. TODO: Make sure enemy units end up at their starting position, make this diag movement less weird.
+
+- 11:10am - Various changes, adjusted enemy size to be more similar to the actual game. Also changed PathPlotter() to be more flexible as a path vector creator.
+
