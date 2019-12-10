@@ -202,3 +202,5 @@ Implement player shooting and enemy movement at the very least.
 - 12:40am - Moved over rest of path functions to enemy class, start fixing and refining
 
 - 1:20am - Big 5 implemented for enemy class so that C++ won't argue with the compiler, tested and game still functions properly
+
+- 1:35am - Fixed whitespacing for ofApp.cpp
