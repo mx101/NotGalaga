@@ -49,6 +49,7 @@ class Enemy {
   int enemy_kill_score_;
   int enemy_width_;
 	int time_moved_ = 0;
+	int shots_to_fire_;
 
   ofTexture enemy_texture_;
 };

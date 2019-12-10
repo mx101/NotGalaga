@@ -31,6 +31,7 @@ Enemy::Enemy() {
 	enemy_kill_score_ = 0;
 	enemy_width_ = 0;
 	time_moved_ = 0;
+	shots_to_fire_ = 0;
 }
 
 Enemy::Enemy(const Enemy& source) {
@@ -43,6 +44,7 @@ Enemy::Enemy(const Enemy& source) {
 		enemy_kill_score_ = 0;
 		enemy_width_ = 0;
 		time_moved_ = 0;
+		shots_to_fire_ = 0;
 		return;
 	}
 
@@ -54,6 +56,7 @@ Enemy::Enemy(const Enemy& source) {
 	this->enemy_width_ = source.enemy_width_;
 	this->time_moved_ = source.time_moved_;
 	this->enemy_texture_ = source.enemy_texture_;
+	this->shots_to_fire_ = source.shots_to_fire_;
 }
 
 Enemy::Enemy(Enemy&& source) noexcept {
@@ -66,6 +69,7 @@ Enemy::Enemy(Enemy&& source) noexcept {
 		enemy_kill_score_ = 0;
 		enemy_width_ = 0;
 		time_moved_ = 0;
+		shots_to_fire_ = 0;
 		return;
 	}
 
@@ -77,6 +81,7 @@ Enemy::Enemy(Enemy&& source) noexcept {
 	this->enemy_width_ = source.enemy_width_;
 	this->time_moved_ = source.time_moved_;
 	this->enemy_texture_ = source.enemy_texture_;
+	this->shots_to_fire_ = source.shots_to_fire_;
 
 	source.path_.directions.clear();
 	source.path_.in_formation_ = false;
@@ -86,6 +91,7 @@ Enemy::Enemy(Enemy&& source) noexcept {
 	source.enemy_kill_score_ = 0;
 	source.enemy_width_ = 0;
 	source.time_moved_ = 0;
+	source.shots_to_fire_ = 0;
 }
 
 Enemy::~Enemy() {
@@ -97,6 +103,7 @@ Enemy::~Enemy() {
 	this->enemy_kill_score_ = 0;
 	this->enemy_width_ = 0;
 	this->time_moved_ = 0;
+	this->shots_to_fire_ = 0;
 }
 
 Enemy& Enemy::operator=(const Enemy& source) {
@@ -109,6 +116,7 @@ Enemy& Enemy::operator=(const Enemy& source) {
 		this->enemy_kill_score_ = 0;
 		this->enemy_width_ = 0;
 		this->time_moved_ = 0;
+		this->shots_to_fire_ = 0;
 	}
 
 	this->path_ = source.path_;
@@ -119,6 +127,7 @@ Enemy& Enemy::operator=(const Enemy& source) {
 	this->enemy_width_ = source.enemy_width_;
 	this->time_moved_ = source.time_moved_;
 	this->enemy_texture_ = source.enemy_texture_;
+	this->shots_to_fire_ = source.shots_to_fire_;
 
 	return *this;
 }
@@ -133,6 +142,7 @@ Enemy& Enemy::operator=(Enemy&& source) noexcept {
 		this->enemy_kill_score_ = 0;
 		this->enemy_width_ = 0;
 		this->time_moved_ = 0;
+		this->shots_to_fire_ = 0;
 		return *this;
 	}
 
@@ -144,6 +154,7 @@ Enemy& Enemy::operator=(Enemy&& source) noexcept {
 	this->enemy_width_ = source.enemy_width_;
 	this->time_moved_ = source.time_moved_;
 	this->enemy_texture_ = source.enemy_texture_;
+	this->shots_to_fire_ = source.shots_to_fire_;
 
 	// reset source's elements
 	source.path_.directions.clear();
@@ -154,6 +165,7 @@ Enemy& Enemy::operator=(Enemy&& source) noexcept {
 	source.enemy_kill_score_ = 0;
 	source.enemy_width_ = 0;
 	source.time_moved_ = 0;
+	source.shots_to_fire_ = 0;
 
 	return *this;
 }
@@ -169,6 +181,7 @@ void Enemy::GenerateNewPath() {
 		this->path_.directions = GenerateDefaultPath();
 		this->path_.in_formation_ = true;
 	} else {
+		//these are all set for minimum testing purposes
 		int vertical_offset = 50;
 		pair<int, int> new_end = { this->enemy_center_.first + 20, ofGetHeight() + vertical_offset };
 		this->path_.directions = PathPlotter(this->enemy_center_, new_end, 100);

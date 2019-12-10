@@ -174,6 +174,15 @@ void ofApp::UpdateEnemyObjects() {
 
 		if (enemies_[i]->path_.directions.empty()) {
 			enemies_[i]->GenerateNewPath();
+
+			// use enemy's shot count and a random low probability to determine if enemy should shoot
+			bool should_shoot = (std::rand() % 8 < 1) && enemies_[i]->shots_to_fire_ != 0;
+
+			// if do enemy fly in, the shooting can be moved to as the enemies fly in
+			if (enemies_[i]->enemy_type_ != 2 && should_shoot) {
+				ShootBullet(enemies_[i]->enemy_center_, kEnemyBulletSpeed, false);
+				enemies_[i]->shots_to_fire_--;
+			}
 		}
 
 		if (should_move) {
@@ -335,6 +344,8 @@ void ofApp::GenerateWave() {
 
     curr_bee = CreateEnemy(x, y, 0);
     curr_bee->formation_pos_ = std::pair<int, int>(x, y);
+		curr_bee->shots_to_fire_ = 1;
+
     x += curr_bee->enemy_width_ + separation;
   }
 
@@ -351,6 +362,8 @@ void ofApp::GenerateWave() {
 
     curr_moth = CreateEnemy(x, y, 1);
     curr_moth->formation_pos_ = std::pair<int, int>(x, y);
+		curr_moth->shots_to_fire_ = 2;
+
     x += curr_moth->enemy_width_ + separation;
   }
 
@@ -362,6 +375,7 @@ void ofApp::GenerateWave() {
 
     curr_boss = CreateEnemy(x, y, 2);
     curr_boss->formation_pos_ = std::pair<int, int>(x, y);
+		curr_boss->shots_to_fire_ = 0;
     x += curr_boss->enemy_width_ + separation;
   }
 
@@ -461,7 +475,6 @@ void ofApp::draw() {
    ofSetColor(255);
    xbox.draw();*/
 
-  DrawSideboard();
   DrawNonPlayerObjects();
 
   if (!player.alive_) {
@@ -473,6 +486,8 @@ void ofApp::draw() {
 		player.fighter_texture_.draw(player.player_center_.first,
 			player.player_center_.second);
 	}
+
+	DrawSideboard();
 }
 
 void ofApp::DrawNonPlayerObjects() {
@@ -527,14 +542,6 @@ Enemy* ofApp::CreateEnemy(int x, int y, int type) {
 	//current_enemy->path_.directions = GenerateDefaultPath();
 	current_enemy->path_.in_formation_ = false;
 	enemies_.push_back(current_enemy);
-
-    // use wave number mod something else to determine if an enemy should shoot
-  bool difficulty = (std::rand() % waves_) > waves_ / 3;
-
-	// if do enemy fly in, the shooting can be moved to as the enemies fly in
-	if (type != 2 && difficulty) {
-    ShootBullet(current_enemy->enemy_center_, kEnemyBulletSpeed, false);
-  }
 
   return current_enemy;
 }
