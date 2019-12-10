@@ -39,11 +39,6 @@ class ofApp : public ofBaseApp {
   void GenerateWave();
   void ReturnToFormation(); // currently instantly teleports enemies to starting position
 
-  queue<pair<int, int>> ofApp::PathPlotter(pair<int, int> begin, pair<int, int> end);
-  queue<pair<int, int>> GenerateRandomPath();
-  pair<int, int> GenerateRandomMove();  // returns a single move in the form of
-                                        // (delta x, delta y)
-
   void CheckEnemyCollisions();
   void CheckPlayerCollisions();
 

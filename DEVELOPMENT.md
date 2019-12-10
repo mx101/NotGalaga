@@ -197,3 +197,6 @@ Implement player shooting and enemy movement at the very least.
 
 ### 12/9/19
 - 11:15pm - Adding fixes to PathPlotter(), making this an enemy class function instead of ofApp along with GenerateDefaultPath
+
+### 12/10/19
+- 12:40am - Moved over rest of path functions to enemy class, start fixing and refining

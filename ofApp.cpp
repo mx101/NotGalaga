@@ -205,43 +205,6 @@ void ofApp::UpdateEnemyObjects() {
     }
 }
 
-queue<pair<int, int>> ofApp::PathPlotter(pair<int, int> begin, pair<int, int> end) {
-	int frame_count = 20;
-	pair<int, int> current = begin;
-	int x_change = (end.first - begin.first) / frame_count;
-	int y_change = (end.second - begin.second) / frame_count;
-
-	queue<pair<int, int>> to_return;
-
-	for (int i = 0; i < frame_count; i++) {
-		to_return.push({x_change, y_change});
-	}
-
-	return to_return;
-}
-
-queue<pair<int, int>> ofApp::GenerateRandomPath() {
-    queue<pair<int, int>> to_return;
-	int random_steps = 20;
-
-	for (int i = 0; i < random_steps; i++) {
-		to_return.push(GenerateRandomMove());
-	}
-    
-    return to_return;
-}
-
-pair<int, int> ofApp::GenerateRandomMove() {
-    int enemy_speed_range = 20;
-
-    // generates a pair of numbers in the range of [-10, 10]
-    int x_change = (enemy_speed_range / 2) - (std::rand() % enemy_speed_range);
-
-    int y_change = (enemy_speed_range / 2) - (std::rand() % enemy_speed_range);
-
-    return pair<int, int>(x_change, y_change);
-}
-
 void ofApp::DrawScoreboard() {
     // items to display, high score of current session, score of current game
     // option to restart game

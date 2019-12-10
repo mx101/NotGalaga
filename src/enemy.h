@@ -14,6 +14,9 @@ class Enemy {
 
   void GenerateNewPath();
   vector<pair<int, int>> GenerateDefaultPath();
+	vector<pair<int, int>> PathPlotter(pair<int, int> begin, pair<int, int> end);
+	vector<pair<int, int>> GenerateRandomPath();
+	pair<int, int> GenerateRandomMove();
 
   pair<int, int> kZeroMove = { 0, 0 };
   pair<int, int> kLeftMove = { -10, 0 };
