@@ -109,7 +109,7 @@ class ofApp : public ofBaseApp {
   Enemy boss_;
   Enemy moth_;
 
-  int time_enemy_moved;
+  
 
   const int kBeeMothWidth = 40;
   const int kBeeMothHeight = 40;

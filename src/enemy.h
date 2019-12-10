@@ -8,9 +8,21 @@ class Enemy {
   // the pair will be representing a change in x, y
   // this is represented as a queue since some enemies have repeating paths
   struct EnemyPath {
+		EnemyPath() {
+			directions = vector<pair<int, int>>();
+			in_formation_ = false;
+		}
+
     vector<pair<int, int>> directions;
     bool in_formation_;
   };
+
+	Enemy();
+	Enemy(const Enemy& source);
+	Enemy(Enemy&& source) noexcept;
+	~Enemy();
+	Enemy& operator=(Enemy&& source) noexcept;
+	Enemy& operator=(const Enemy&);
 
   void GenerateNewPath();
   vector<pair<int, int>> GenerateDefaultPath();
@@ -28,6 +40,9 @@ class Enemy {
   int enemy_type_;
   int enemy_kill_score_;
   int enemy_width_;
+	int time_moved_ = 0;
 
   ofTexture enemy_texture_;
+
+	const int kNumPathChoices = 8;
 };

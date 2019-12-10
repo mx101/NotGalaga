@@ -22,7 +22,6 @@ void ofApp::RestartGame() {
 	timer_ = 0;
 	time_last_shot = 0;
 	time_last_paused = 0;
-	time_enemy_moved = 0;
 	shots_fired_ = 0;
 	shots_hit_ = 0;
 
@@ -168,30 +167,30 @@ void ofApp::UpdatePlayerObjects() {
     }
 }
 
-void ofApp::UpdateEnemyObjects() {
-	bool should_move = (time_enemy_moved - timer_) % kGeneralTime == 0;
-	if (should_move) {
-		
+void ofApp::UpdateEnemyObjects() {	
 
 		for (int i = 0; i < enemies_.size(); i++) {
+			bool should_move = (enemies_[i]->time_moved_ - timer_) % kGeneralTime == 0;
+
 			if (enemies_[i]->path_.directions.empty()) {
 				enemies_[i]->GenerateNewPath();
 			}
 
-			pair<int, int> current_move = enemies_[i]->path_.directions.front();
+			if (should_move) {
+				pair<int, int> current_move = enemies_[i]->path_.directions.front();
 
-			enemies_[i]->enemy_center_.first += current_move.first;
-			enemies_[i]->enemy_center_.second += current_move.second;
+				enemies_[i]->enemy_center_.first += current_move.first;
+				enemies_[i]->enemy_center_.second += current_move.second;
 
-			enemies_[i]->path_.directions.erase(enemies_[i]->path_.directions.begin());
+				enemies_[i]->path_.directions.erase(enemies_[i]->path_.directions.begin());
 
-			if (enemies_[i]->enemy_center_.second > kGameWindowHeight) {
-				enemies_[i]->enemy_center_.second = kEnemySpawnHeight;
+				if (enemies_[i]->enemy_center_.second > kGameWindowHeight) {
+					enemies_[i]->enemy_center_.second = kEnemySpawnHeight;
+				}
+
+				enemies_[i]->time_moved_ = timer_;
 			}
 		}
-
-		time_enemy_moved = timer_;
-	}
     
 
     for (int i = 0; i < enemy_bullets_.size(); i++) {
