@@ -171,14 +171,19 @@ void ofApp::UpdatePlayerObjects() {
 void ofApp::UpdateEnemyObjects() {
 	bool should_move = (time_enemy_moved - timer_) % kGeneralTime == 0;
 	if (should_move) {
+		
+
 		for (int i = 0; i < enemies_.size(); i++) {
+			if (enemies_[i]->path_.directions.empty()) {
+				enemies_[i]->GenerateNewPath();
+			}
+
 			pair<int, int> current_move = enemies_[i]->path_.directions.front();
 
 			enemies_[i]->enemy_center_.first += current_move.first;
 			enemies_[i]->enemy_center_.second += current_move.second;
 
-			enemies_[i]->path_.directions.pop();
-			enemies_[i]->path_.directions.push(current_move);
+			enemies_[i]->path_.directions.erase(enemies_[i]->path_.directions.begin());
 
 			if (enemies_[i]->enemy_center_.second > kGameWindowHeight) {
 				enemies_[i]->enemy_center_.second = kEnemySpawnHeight;
@@ -211,32 +216,6 @@ queue<pair<int, int>> ofApp::PathPlotter(pair<int, int> begin, pair<int, int> en
 	for (int i = 0; i < frame_count; i++) {
 		to_return.push({x_change, y_change});
 	}
-
-	return to_return;
-}
-
-queue<pair<int, int>> ofApp::GenerateDefaultPath() {
-    queue<pair<int, int>> to_return;
-
-	// default path moves as follows:
-	// L L R R R R L L
-
-    to_return.push(kLeftMove);
-    to_return.push(kZeroMove);
-    to_return.push(kLeftMove);
-    to_return.push(kZeroMove);
-	to_return.push(kRightMove);
-    to_return.push(kZeroMove);
-	to_return.push(kRightMove);
-    to_return.push(kZeroMove);
-    to_return.push(kRightMove);
-    to_return.push(kZeroMove);
-    to_return.push(kRightMove);
-    to_return.push(kZeroMove);
-    to_return.push(kLeftMove);
-    to_return.push(kZeroMove);
-    to_return.push(kLeftMove);
-    to_return.push(kZeroMove);
 
 	return to_return;
 }
@@ -570,7 +549,7 @@ Enemy* ofApp::CreateEnemy(int x, int y, int type) {
     current_enemy->enemy_center_.second = y;
     current_enemy->formation_pos_.first = x;
     current_enemy->formation_pos_.second = y;
-    current_enemy->path_.directions = GenerateDefaultPath();
+    //current_enemy->path_.directions = GenerateDefaultPath();
 	current_enemy->path_.in_formation_ = false;
 
     enemies_.push_back(current_enemy);

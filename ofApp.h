@@ -40,14 +40,9 @@ class ofApp : public ofBaseApp {
   void ReturnToFormation(); // currently instantly teleports enemies to starting position
 
   queue<pair<int, int>> ofApp::PathPlotter(pair<int, int> begin, pair<int, int> end);
-  queue<pair<int, int>> GenerateDefaultPath();
   queue<pair<int, int>> GenerateRandomPath();
   pair<int, int> GenerateRandomMove();  // returns a single move in the form of
                                         // (delta x, delta y)
-
-  pair<int, int> kZeroMove = {0, 0};
-  pair<int, int> kLeftMove = {-10, 0};
-  pair<int, int> kRightMove = {10, 0};
 
   void CheckEnemyCollisions();
   void CheckPlayerCollisions();

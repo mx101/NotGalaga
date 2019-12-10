@@ -194,3 +194,6 @@ Implement player shooting and enemy movement at the very least.
 - 6:45am - Made some adjustments to enemy spawn coordinates
 
 - 7:00am - Created PathPlotter() function that creates a queue based on a default frame_count in which we want the enemy to travel from point A to point B in.
+
+### 12/9/19
+- 11:15pm - Adding fixes to PathPlotter(), making this an enemy class function instead of ofApp along with GenerateDefaultPath

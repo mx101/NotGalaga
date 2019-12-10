@@ -8,9 +8,16 @@ class Enemy {
   // the pair will be representing a change in x, y
   // this is represented as a queue since some enemies have repeating paths
   struct EnemyPath {
-    queue<pair<int, int>> directions;
+    vector<pair<int, int>> directions;
     bool in_formation_;
   };
+
+  void GenerateNewPath();
+  vector<pair<int, int>> GenerateDefaultPath();
+
+  pair<int, int> kZeroMove = { 0, 0 };
+  pair<int, int> kLeftMove = { -10, 0 };
+  pair<int, int> kRightMove = { 10, 0 };
 	 
   EnemyPath path_;
   pair<int, int> enemy_center_;
