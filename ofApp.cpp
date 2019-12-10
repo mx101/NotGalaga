@@ -58,11 +58,13 @@ void ofApp::LoadData() {
   ofLoadImage(bee_.enemy_texture_, "bee.png");
   ofLoadImage(boss_.enemy_texture_, "bossGalaga.png");
   ofLoadImage(moth_.enemy_texture_, "moth.png");
+	ofLoadImage(boss_damaged_.enemy_texture_, "bossGalagaHit.png");
 
   // note that this number will be doubled if the enemy dies while moving
   bee_.enemy_kill_score_ = 40;
-  moth_.enemy_kill_score_ = 80;
-  boss_.enemy_kill_score_ = 150;
+	moth_.enemy_kill_score_ = 80;
+  boss_.enemy_kill_score_ = 0;
+	boss_damaged_.enemy_kill_score_ = 150;
 }
 
 //--------------------------------------------------------------
@@ -168,6 +170,7 @@ void ofApp::UpdateEnemyObjects() {
 	for (int i = 0; i < enemies_.size(); i++) {
 	  bool should_move = (enemies_[i]->time_moved_ - timer_) % kGeneralTime == 0;
 
+		// if the enemy is not in formation, then they should not move according to the timer
 		if (!enemies_[i]->path_.in_formation_) {
 			should_move = true;
 		}
@@ -409,9 +412,15 @@ void ofApp::CheckEnemyCollisions() {
 					score_ += 2 * enemies_[j]->enemy_kill_score_;
 				}
 
-        delete enemies_[j];
-        enemies_.erase(enemies_.begin() + j);
-
+				/*if (enemies_[j]->enemy_type_ == 2) {
+					std::cout << "damaged" << std::endl;
+					*(enemies_[j]) = boss_damaged_;
+					enemies_[j]->enemy_type_ = 3;
+				} else {*/
+					delete enemies_[j];
+					enemies_.erase(enemies_.begin() + j);
+				//}
+        
         delete player_bullets_[i];
         player_bullets_.erase(player_bullets_.begin() + i);
         player.player_shots_--;
@@ -497,7 +506,6 @@ void ofApp::DrawNonPlayerObjects() {
  		int second = player_bullets_[i]->bullet_center_.second;
 		player_bullets_[i]->bullet_texture_.draw(first, second);
   }
-
     
 	for (int i = 0; i < enemies_.size(); i++) {
 		int first = enemies_[i]->enemy_center_.first;
@@ -514,24 +522,26 @@ void ofApp::DrawNonPlayerObjects() {
 
 Enemy* ofApp::CreateEnemy(int x, int y, int type) {
 
-  
 	Enemy* current_enemy = new Enemy();
   
 	if (type == 0) {
 
 		*current_enemy = bee_;
 		current_enemy->enemy_width_ = kBeeMothWidth;
+		current_enemy->enemy_type_ = 0;
 	
 	} else if (type == 1) {
   
 		*current_enemy = moth_;
   	current_enemy->enemy_width_ = kBeeMothWidth;
-    
+		current_enemy->enemy_type_ = 1;
+
 	} else if (type == 2) {
   
 		*current_enemy = boss_;
   	current_enemy->enemy_width_ = kBossWidth;
-    
+		current_enemy->enemy_type_ = 2;
+
 	}
 
 	current_enemy->enemy_center_.first = x;
@@ -539,7 +549,6 @@ Enemy* ofApp::CreateEnemy(int x, int y, int type) {
 	current_enemy->formation_pos_.first = x;
 	current_enemy->formation_pos_.second = y;
   
-	//current_enemy->path_.directions = GenerateDefaultPath();
 	current_enemy->path_.in_formation_ = false;
 	enemies_.push_back(current_enemy);
 

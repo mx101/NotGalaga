@@ -108,6 +108,7 @@ class ofApp : public ofBaseApp {
   Enemy bee_;
   Enemy boss_;
   Enemy moth_;
+	Enemy boss_damaged_;
 
   
 

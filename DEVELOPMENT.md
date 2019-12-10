@@ -212,3 +212,5 @@ Implement player shooting and enemy movement at the very least.
 - 11:10am - Various changes, adjusted enemy size to be more similar to the actual game. Also changed PathPlotter() to be more flexible as a path vector creator.
 
 - 1:30pm - Modifying when an enemy will shoot
+
+- 4:00pm - Started GenerateSwirlPath, bug fixed in PathPlotter

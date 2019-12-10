@@ -33,14 +33,16 @@ class Enemy {
 	vector<pair<int, int>> GenerateDiagPath();
 	vector<pair<int, int>> PathPlotter(pair<int, int> begin, pair<int, int> end, int frame_count);
 	vector<pair<int, int>> GenerateRandomPath();
+	vector<pair<int, int>> GenerateSwirlPath();
 	pair<int, int> GenerateRandomMove();
-
+	vector<pair<int, int>> GenerateLeftCurve();
+	vector<pair<int, int>> GenerateRightCurve();
 
   pair<int, int> kZeroMove = { 0, 0 };
   pair<int, int> kLeftMove = { -10, 0 };
   pair<int, int> kRightMove = { 10, 0 };
-	pair<int, int> kDiagDownLeft = { -5, 5 };
-	pair<int, int> kDiagDownRight = { 5, 5 };
+	pair<int, int> kDiagDownLeft = { -3, 3 };
+	pair<int, int> kDiagDownRight = { 3, 3 };
 	 
   EnemyPath path_;
   pair<int, int> enemy_center_;
@@ -49,6 +51,7 @@ class Enemy {
   int enemy_kill_score_;
   int enemy_width_;
 	int time_moved_ = 0;
+	int shots_to_kill_;
 	int shots_to_fire_;
 
   ofTexture enemy_texture_;

@@ -9,6 +9,7 @@ Enemy::Enemy() {
 	enemy_width_ = 0;
 	time_moved_ = 0;
 	shots_to_fire_ = 0;
+	shots_to_kill_ = 0;
 }
 
 Enemy::Enemy(const Enemy& source) {
@@ -22,6 +23,7 @@ Enemy::Enemy(const Enemy& source) {
 		enemy_width_ = 0;
 		time_moved_ = 0;
 		shots_to_fire_ = 0;
+		shots_to_kill_ = 0;
 		return;
 	}
 
@@ -34,6 +36,7 @@ Enemy::Enemy(const Enemy& source) {
 	this->time_moved_ = source.time_moved_;
 	this->enemy_texture_ = source.enemy_texture_;
 	this->shots_to_fire_ = source.shots_to_fire_;
+	this->shots_to_kill_ = source.shots_to_kill_;
 }
 
 Enemy::Enemy(Enemy&& source) noexcept {
@@ -47,6 +50,7 @@ Enemy::Enemy(Enemy&& source) noexcept {
 		enemy_width_ = 0;
 		time_moved_ = 0;
 		shots_to_fire_ = 0;
+		shots_to_kill_ = 0;
 		return;
 	}
 
@@ -59,6 +63,7 @@ Enemy::Enemy(Enemy&& source) noexcept {
 	this->time_moved_ = source.time_moved_;
 	this->enemy_texture_ = source.enemy_texture_;
 	this->shots_to_fire_ = source.shots_to_fire_;
+	this->shots_to_kill_ = source.shots_to_kill_;
 
 	source.path_.directions.clear();
 	source.path_.in_formation_ = false;
@@ -69,6 +74,7 @@ Enemy::Enemy(Enemy&& source) noexcept {
 	source.enemy_width_ = 0;
 	source.time_moved_ = 0;
 	source.shots_to_fire_ = 0;
+	source.shots_to_kill_ = 0;
 }
 
 Enemy::~Enemy() {
@@ -81,6 +87,7 @@ Enemy::~Enemy() {
 	this->enemy_width_ = 0;
 	this->time_moved_ = 0;
 	this->shots_to_fire_ = 0;
+	this->shots_to_kill_ = 0;
 }
 
 Enemy& Enemy::operator=(const Enemy& source) {
@@ -94,6 +101,7 @@ Enemy& Enemy::operator=(const Enemy& source) {
 		this->enemy_width_ = 0;
 		this->time_moved_ = 0;
 		this->shots_to_fire_ = 0;
+		this->shots_to_kill_ = 0;
 	}
 
 	this->path_ = source.path_;
@@ -105,6 +113,7 @@ Enemy& Enemy::operator=(const Enemy& source) {
 	this->time_moved_ = source.time_moved_;
 	this->enemy_texture_ = source.enemy_texture_;
 	this->shots_to_fire_ = source.shots_to_fire_;
+	this->shots_to_kill_ = source.shots_to_kill_;
 
 	return *this;
 }
@@ -119,6 +128,7 @@ Enemy& Enemy::operator=(Enemy&& source) noexcept {
 		this->enemy_kill_score_ = 0;
 		this->enemy_width_ = 0;
 		this->time_moved_ = 0;
+		this->shots_to_kill_ = 0;
 		this->shots_to_fire_ = 0;
 		return *this;
 	}
@@ -132,6 +142,7 @@ Enemy& Enemy::operator=(Enemy&& source) noexcept {
 	this->time_moved_ = source.time_moved_;
 	this->enemy_texture_ = source.enemy_texture_;
 	this->shots_to_fire_ = source.shots_to_fire_;
+	this->shots_to_kill_ = source.shots_to_kill_;
 
 	// reset source's elements
 	source.path_.directions.clear();
@@ -143,6 +154,7 @@ Enemy& Enemy::operator=(Enemy&& source) noexcept {
 	source.enemy_width_ = 0;
 	source.time_moved_ = 0;
 	source.shots_to_fire_ = 0;
+	source.shots_to_kill_ = 0;
 
 	return *this;
 }
@@ -155,17 +167,21 @@ void Enemy::GenerateNewPath() {
 	// if have time, implement continuous enemy movement if there are only a few enemies left on screen
   
 	if (selection < 6) {
-		this->path_.directions = GenerateDefaultPath();
+		this->path_.directions = GenerateLeftCurve();
 		this->path_.in_formation_ = true;
-	} else {
-		//these are all set for minimum testing purposes
+	} else if (selection == 6) {
+		//these are all set for testing purposes
 		int vertical_offset = 50;
 		pair<int, int> new_end = { this->enemy_center_.first + 20, ofGetHeight() + vertical_offset };
 		this->path_.directions = PathPlotter(this->enemy_center_, new_end, 100);
 		this->path_.in_formation_ = false;
+	} else {
+		this->path_.directions = GenerateDiagPath();
+		this->path_.in_formation_ = false;
 	}
 	
 }
+
 vector<pair<int, int>> Enemy::GenerateDefaultPath() {
 	vector<pair<int, int>> to_path;
 
@@ -197,14 +213,10 @@ vector<pair<int, int>> Enemy::PathPlotter(pair<int, int> begin, pair<int, int> e
 	int x_change = (end.first - begin.first) / frame_count;
 	int y_change = (end.second - begin.second) / frame_count;
 
-	float ratio = float(x_change) / (float(x_change) + float(y_change));
-	int x_move = kMoveSpeedMax * ratio;
-	int y_move = kMoveSpeedMax - x_move;
-
 	vector<pair<int, int>> to_return;
 
 	for (int i = 0; i < frame_count; i++) {
-		to_return.push_back({ x_move, y_move });
+		to_return.push_back({ x_change, y_change });
 	}
 
 	return to_return;
@@ -258,4 +270,43 @@ pair<int, int> Enemy::GenerateRandomMove() {
 	int y_change = (enemy_speed_range / 2) - (std::rand() % enemy_speed_range);
 
 	return pair<int, int>(x_change, y_change);
+}
+
+vector<pair<int, int>> Enemy::GenerateSwirlPath() {
+	vector<pair<int, int>> to_return;
+
+	return to_return;
+}
+
+vector<pair<int, int>> Enemy::GenerateLeftCurve() {
+	int move_frames = 10;
+	int down_shift = 70;
+	int side_shift = 50;
+
+	vector<pair<int, int>> right_arm;
+	vector<pair<int, int>> middle_arm;
+	vector<pair<int, int>> left_arm;
+
+	pair<int, int> right_end = { this->enemy_center_.first + side_shift, 
+		this->enemy_center_.second + down_shift };
+	
+	pair<int, int> middle_end = { right_end.first,
+		right_end.second + down_shift };
+
+	pair<int, int> left_end = { middle_end.first - side_shift,
+		middle_end.second + down_shift };
+
+	right_arm = PathPlotter(this->enemy_center_, right_end, move_frames);
+	middle_arm = PathPlotter(right_end, middle_end, move_frames);
+	left_arm = PathPlotter(middle_end, left_end, move_frames);
+
+	vector<pair<int, int>> left_curve = right_arm;
+	left_curve.insert(left_curve.end(), middle_arm.begin(), middle_arm.end());
+	left_curve.insert(left_curve.end(), left_arm.begin(), left_arm.end());
+
+	return left_curve;
+}
+
+vector<pair<int, int>> Enemy::GenerateRightCurve() {
+	return vector<pair<int, int>>();
 }
