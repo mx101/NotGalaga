@@ -30,11 +30,11 @@ Some stretch goals I would want to implement if this project is finished ahead o
     - [X] Collision handling
     - [X] Player lives
 - #### Week 3
-  - [ ] Continue game engine
+  - [X] Continue game engine
     - [X] Implement controller support
 	- [X] Implement wave creation
-	- [?] Start more advanced enemy movement/paths
-    - [?] Start wave difficulty handling (should be slightly exponential)
+	- [X] Start more advanced enemy movement/paths
+    - [X] Start wave difficulty handling (should be slightly exponential)
 	  - Some ideas for this could be:
 	    - more shooting
 		- more random movement paths

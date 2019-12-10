@@ -1,27 +1,4 @@
 #include "enemy.h"
-/**
-	// Copy constructor
-	template<typename ElementType>
-	LinkedList<ElementType>::LinkedList(const LinkedList<ElementType> &source) {
-		if (source.empty()) {
-			this->clear();
-			return;
-		}
-
-		this->head_ = new LinkedListNode(source.head_->data_);
-		LinkedListNode *curr_node = source.head_->next_;
-		LinkedListNode *previous = this->head_;
-		this->length_ = source.length_;
-
-		while (curr_node != nullptr) {
-			previous->next_ = new LinkedListNode(curr_node->data_);
-			previous = previous->next_;
-			curr_node = curr_node->next_;
-		}
-	}
-
-
-*/
 
 Enemy::Enemy() {
 	path_ = EnemyPath();
