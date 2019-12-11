@@ -112,20 +112,20 @@ void ofApp::UpdatePlayerObjects() {
     // when player shoots with a, the ship will fire sequentially
     // very quickly so it looks like a single shot
     // solution: store when the last shot was shot?
-    if ((gamepad->a || gamepad->b) && player.player_shots_ < kLegalBulletsMax && abs(time_last_shot - timer_) > kReloadTime) {
+    if ((gamepad->a || gamepad->b) && 
+				player.player_shots_ < kLegalBulletsMax && abs(time_last_shot - timer_) > kReloadTime) {
       time_last_shot = timer_;
 	  	ShootBullet(player.player_center_, kPlayerBulletSpeed, true);
 			shots_fired_++;
     }
 
     if ((gamepad->dPadLeft || left_pressed) &&
-      player.player_center_.first > 0) {
+				player.player_center_.first > 0) {
       player.player_center_.first -= kFighterMoveSpeed;
     }
 
     if ((gamepad->dPadRight || right_pressed) &&
-        (player.player_center_.first + kFighterWidth - 1) <
-      kGameWindowWidth) {
+        (player.player_center_.first + kFighterWidth - 1) < kGameWindowWidth) {
       player.player_center_.first += kFighterMoveSpeed;
     }
 
