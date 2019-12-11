@@ -147,13 +147,11 @@ void ofApp::UpdatePlayerObjects() {
 	} else if (player.player_lives_ > 0) {
 		if (gamepad->start) {
 			RevivePlayer();
-			ReturnToFormation();
 		}
 	} else {
 		if (gamepad->back) {
 			RevivePlayer();
 			RestartGame();
-			ReturnToFormation();
 		}
 	}
 
@@ -180,7 +178,15 @@ void ofApp::UpdateEnemyObjects() {
 		}
 
 		if (enemies_[i]->path_.directions.empty()) {
-			enemies_[i]->GenerateNewPath();
+			if (!player.alive_) {
+				enemies_[i]->path_.directions = enemies_[i]->GenerateDefaultPath();
+				enemies_[i]->path_.in_formation_ = true;
+			} else if (enemies_[i]->path_.in_formation_) {
+				enemies_[i]->GenerateNewPath();
+			} else {
+				enemies_[i]->ReturnToFormation();
+				enemies_[i]->path_.in_formation_ = true;
+			}
 
 			// use enemy's shot count and a random low probability to determine if enemy should shoot
 			bool should_shoot = (std::rand() % 8 < 1) && enemies_[i]->shots_to_fire_ != 0;
@@ -222,8 +228,8 @@ void ofApp::UpdateEnemyObjects() {
 
 void ofApp::DrawScoreboard() {
 	int scoreboard_spacing = 40;
-
-	string shots_hit_message = "Accuracy: " + to_string((float(shots_hit_) / float(shots_fired_)) * 100);
+	float accuracy = (float(shots_hit_) / float(shots_fired_)) * 100;
+	string shots_hit_message = "Accuracy: " + to_string(accuracy) + "%";
 
 	int side_hit_width = (kGameWindowWidth / 2) -
 		(message_font_.stringWidth(shots_hit_message) / 2);
@@ -601,7 +607,6 @@ void ofApp::keyPressed(int key) {
 
   if (upper_key == 'R' && !player.alive_) {
     RevivePlayer();
-    ReturnToFormation();
   }
 
   if (upper_key == 'E') {
@@ -615,12 +620,6 @@ void ofApp::RevivePlayer() {
 
   ofSetColor(255, 255, 255);
   ofSetBackgroundColor(0, 0, 0);
-}
-
-void ofApp::ReturnToFormation() {
-  for (Enemy* curr_enemy : enemies_) {
-    curr_enemy->enemy_center_ = curr_enemy->formation_pos_;
-  }
 }
 
 //--------------------------------------------------------------

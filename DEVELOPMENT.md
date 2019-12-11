@@ -220,3 +220,5 @@ Implement player shooting and enemy movement at the very least.
 - 7:45pm - Added additional controller inputs and final scoreboard display
 
 - 8:15pm - Added shots fired and shots hit to scoreboard
+
+- 9:20pm - Implemented ReturnToFormation so enemies return to their original position after running out of moves

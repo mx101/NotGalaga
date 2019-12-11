@@ -37,6 +37,7 @@ class Enemy {
 	pair<int, int> GenerateRandomMove();
 	vector<pair<int, int>> GenerateLeftCurve();
 	vector<pair<int, int>> GenerateRightCurve();
+	void ReturnToFormation();
 
   pair<int, int> kZeroMove = { 0, 0 };
   pair<int, int> kLeftMove = { -10, 0 };
