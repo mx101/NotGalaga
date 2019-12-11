@@ -221,7 +221,9 @@ void ofApp::UpdateEnemyObjects() {
 }
 
 void ofApp::DrawScoreboard() {
-	string shots_hit_message = "Accuracy: " + to_string(shots_hit_);
+	int scoreboard_spacing = 40;
+
+	string shots_hit_message = "Accuracy: " + to_string((float(shots_hit_) / float(shots_fired_)) * 100);
 
 	int side_hit_width = (kGameWindowWidth / 2) -
 		(message_font_.stringWidth(shots_hit_message) / 2);
@@ -230,6 +232,16 @@ void ofApp::DrawScoreboard() {
 
 	//ofSetColor(255, 255, 255);
 	side_font_.drawString(shots_hit_message, side_hit_width, side_hit_height);
+
+	string shots_fired_message = "Shots Fired: " + to_string(shots_fired_);
+
+	int side_fired_width = (kGameWindowWidth / 2) -
+		(message_font_.stringWidth(shots_fired_message) / 2);
+
+	int side_fired_height = (kGameWindowHeight / 2) + scoreboard_spacing;
+
+	side_font_.drawString(shots_fired_message, side_fired_width, side_fired_height);
+
   // items to display, high score of current session, score of current game
   // option to restart game
   // remember to delete the remaining enemies from memory

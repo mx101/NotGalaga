@@ -218,3 +218,5 @@ Implement player shooting and enemy movement at the very least.
 - 4:20pm - GenerateRightCurve and GenerateLeftCurve tested and functioning
 
 - 7:45pm - Added additional controller inputs and final scoreboard display
+
+- 8:15pm - Added shots fired and shots hit to scoreboard
