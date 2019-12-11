@@ -229,3 +229,5 @@ Implement player shooting and enemy movement at the very least.
 - 12:00am - DrawSideboard now prints onto an ofRectangle to hide the incoming enemies on the right side
 
 - 12:15am - FlyIn works now but it's messing with the Enemy formation positions.
+
+- 12:30am - Enemy fly in no longer messes with the enemies' formation positions. This was fixed by adjusting ReturnToFormation()'s tolerance for instant teleportation from == 0 to <= 1

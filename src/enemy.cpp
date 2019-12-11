@@ -195,7 +195,7 @@ void Enemy::ReturnToFormation() {
 	int frames_needed_y = abs(this->enemy_center_.second - this->formation_pos_.second) / kMoveSpeedMax;
 	int frames_needed = max(frames_needed_x, frames_needed_y);
 
-	if (frames_needed == 0) {
+	if (frames_needed <= 1) {
 		this->enemy_center_ = formation_pos_;
 	} else {
 		this->path_.directions = PathPlotter(this->enemy_center_, this->formation_pos_, frames_needed);

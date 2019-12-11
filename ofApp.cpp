@@ -177,8 +177,12 @@ void ofApp::UpdateEnemyObjects() {
 
 		if (enemies_[i]->path_.directions.empty()) {
 			if (!player.alive_) {
-				enemies_[i]->path_.directions = enemies_[i]->GenerateDefaultPath();
-				enemies_[i]->path_.in_formation_ = true;
+				if (enemies_[i]->path_.in_formation_) {
+					enemies_[i]->path_.directions = enemies_[i]->GenerateDefaultPath();
+				} else {
+					enemies_[i]->ReturnToFormation();
+					enemies_[i]->path_.in_formation_ = true;
+				}
 			} else if (enemies_[i]->path_.in_formation_) {
 				enemies_[i]->GenerateNewPath();
 			} else {
