@@ -223,4 +223,7 @@ Implement player shooting and enemy movement at the very least.
 
 - 9:20pm - Implemented ReturnToFormation so enemies return to their original position after running out of moves
 
-- 11:00pm - 
+- 11:00pm - Started implementing enemy fly in, if have time, set the enemies' default path movement to a private member var of ofApp whenever the enemies are in formation so that all the enemies will move together.
+
+### 12/11/19
+- 12:00am - DrawSideboard now prints onto an ofRectangle to hide the incoming enemies on the right side

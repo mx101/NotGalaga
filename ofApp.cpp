@@ -134,14 +134,12 @@ void ofApp::UpdatePlayerObjects() {
     int out_of_bounds_right = ship_right - kGameWindowWidth;
 
     if (out_of_bounds_right > 0) {
-      // std::cout << "out by: " << out_of_bounds << std::endl;
       player.player_center_.first -= out_of_bounds_right;
     }
 
     int ship_left = player.player_center_.first;
 
     if (ship_left < 0) {
-      // std::cout << "out by: " << ship_left << std::endl;
       player.player_center_.first -= ship_left;
     }
 	} else if (player.player_lives_ > 0) {
@@ -236,7 +234,6 @@ void ofApp::DrawScoreboard() {
 
 	int side_hit_height = kGameWindowHeight / 2;
 
-	//ofSetColor(255, 255, 255);
 	side_font_.drawString(shots_hit_message, side_hit_width, side_hit_height);
 
 	string shots_fired_message = "Shots Fired: " + to_string(shots_fired_);
@@ -258,6 +255,10 @@ void ofApp::DrawSideboard() {
   glm::vec2 top_border(kGameWindowWidth, 0);
   glm::vec2 bottom_border(kGameWindowWidth, kGameWindowHeight);
   ofDrawLine(top_border, bottom_border);
+
+	ofSetColor(0, 0, 0);
+	ofDrawRectangle(top_border, kSideboardWidth, kGameWindowHeight);
+	ofSetColor(255, 255, 255);
 
   string lives_message = "Lives: " + to_string(player.player_lives_);
 

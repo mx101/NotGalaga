@@ -184,6 +184,11 @@ void Enemy::GenerateNewPath() {
 	}
 }
 
+vector<pair<int, int>> Enemy::GenerateFlyIn() {
+	pair<int, int> start_point = this->enemy_center_;
+	return vector<pair<int, int>>();
+}
+
 void Enemy::ReturnToFormation() {
 	int frames_needed_x = abs(this->enemy_center_.first - this->formation_pos_.first) / kMoveSpeedMax;
 	int frames_needed_y = abs(this->enemy_center_.second - this->formation_pos_.second) / kMoveSpeedMax;

@@ -110,7 +110,8 @@ class ofApp : public ofBaseApp {
   Enemy moth_;
 	Enemy boss_damaged_;
 
-  
+	const pair<int, int> kLeftSpawn = { -50, (3 * kGameWindowHeight) / 4 };
+	const pair<int, int> kRightSpawn = { kGameWindowWidth + 50, (3 * kGameWindowHeight) / 4 };
 
   const int kBeeMothWidth = 35;
   const int kBeeMothHeight = 35;

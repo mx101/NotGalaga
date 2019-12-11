@@ -29,6 +29,7 @@ class Enemy {
 	Enemy& operator=(const Enemy&);
 
   void GenerateNewPath();
+	vector<pair<int, int>> GenerateFlyIn();
   vector<pair<int, int>> GenerateDefaultPath();
 	vector<pair<int, int>> GenerateDiagPath();
 	vector<pair<int, int>> PathPlotter(pair<int, int> begin, pair<int, int> end, int frame_count);
