@@ -7,7 +7,7 @@ class Enemy {
  public:  
   // the pair will be representing a change in x, y
   // this is represented as a queue since some enemies have repeating paths
-	const int kNumPathChoices = 10;
+	const int kNumPathChoices = 16;
 	const int kMoveFrames = 20;
 	const int kMoveSpeedMax = 8;
 

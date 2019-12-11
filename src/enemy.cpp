@@ -166,17 +166,14 @@ void Enemy::GenerateNewPath() {
 	//weight the default path so we hopefully don't have an extraordinary number of enemies flying at the player at once
 	// if have time, implement continuous enemy movement if there are only a few enemies left on screen
   
-	if (selection < kNumPathChoices) {
+	if (selection < kNumPathChoices - 2) {
 		// std::cout << "swirl" << std::endl;
-		this->path_.directions = GenerateSwirlPath();
-		this->path_.in_formation_ = false;
+		this->path_.directions = GenerateDefaultPath();
+		this->path_.in_formation_ = true;
 		// save for defaultpath
 		//this->path_.in_formation_ = true;
 	} else if (selection == 6) {
-		//these are all set for testing purposes
-		int vertical_offset = 50;
-		pair<int, int> new_end = { this->enemy_center_.first + 20, ofGetHeight() + vertical_offset };
-		this->path_.directions = PathPlotter(this->enemy_center_, new_end, 100);
+		this->path_.directions = GenerateSwirlPath();
 		this->path_.in_formation_ = false;
 	} else {
 		this->path_.directions = GenerateDiagPath();
@@ -317,7 +314,7 @@ vector<pair<int, int>> Enemy::GenerateSwirlPath() {
 vector<pair<int, int>> Enemy::GenerateLeftCurve() {
 	int move_frames = 10;
 	int down_shift = 40;
-	int side_shift = 30;
+	int side_shift = 60;
 
 	vector<pair<int, int>> right_arm;
 	vector<pair<int, int>> middle_arm;

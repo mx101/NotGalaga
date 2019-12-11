@@ -231,3 +231,7 @@ Implement player shooting and enemy movement at the very least.
 - 12:15am - FlyIn works now but it's messing with the Enemy formation positions.
 
 - 12:30am - Enemy fly in no longer messes with the enemies' formation positions. This was fixed by adjusting ReturnToFormation()'s tolerance for instant teleportation from == 0 to <= 1
+
+- 10:45am - Trying new function CheckAllReady(), O(# of enemies) runtime, to bind all enemies to a single default path movement
+
+- 11:10am - Player given ability to press start to start the next wave, the other implementation for wave start would be setting a timer but this feels like a better design choice to me. Also, CheckAllReady() does not seem to have a noticeable effect on runtime

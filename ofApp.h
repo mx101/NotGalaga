@@ -37,7 +37,7 @@ class ofApp : public ofBaseApp {
   void ShootBullet(std::pair<int, int> center, int velocity, bool player_shot);
 
   void GenerateWave();
-  void ReturnToFormation(); // currently instantly teleports enemies to starting position
+	void CheckAllReady();
 
   void CheckEnemyCollisions();
   void CheckPlayerCollisions();
@@ -105,6 +105,7 @@ class ofApp : public ofBaseApp {
   const int kEnemyBulletSpeed = 10;
 
   vector<Enemy*> enemies_;
+	bool all_in_form_;
   Enemy bee_;
   Enemy boss_;
   Enemy moth_;

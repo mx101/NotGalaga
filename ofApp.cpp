@@ -24,6 +24,7 @@ void ofApp::RestartGame() {
 	time_last_paused = 0;
 	shots_fired_ = 0;
 	shots_hit_ = 0;
+	all_in_form_ = false;
 
 	left_pressed = false;
 	right_pressed = false;
@@ -74,9 +75,11 @@ void ofApp::update() {
   xbox.update();
 
   if (game_running_) {
-    if (enemies_.empty()) {
+    if (enemies_.empty() && gamepad->start) {
       GenerateWave();
     }
+
+		CheckAllReady();
 
     UpdatePlayerObjects();
 
@@ -94,6 +97,11 @@ void ofApp::update() {
   } else {
     DeathVibration();
   }
+
+	if (gamepad->dPadDown) {
+		gamepad->rightVibration = 0;
+		gamepad->leftVibration = 0;
+	}
 }
 
 void ofApp::DeathVibration() {
@@ -105,6 +113,17 @@ void ofApp::DeathVibration() {
     gamepad->rightVibration = 0;
     gamepad->leftVibration = 0;
   }
+}
+
+void ofApp::CheckAllReady() {
+	for (size_t i = 0; i < enemies_.size(); i++) {
+		if (!enemies_[i]->path_.in_formation_) {
+			all_in_form_ = false;
+			return;
+		}
+	}
+
+	all_in_form_ = true;
 }
 
 void ofApp::UpdatePlayerObjects() {
@@ -166,7 +185,6 @@ void ofApp::UpdatePlayerObjects() {
 }
 
 void ofApp::UpdateEnemyObjects() {	
-
 	for (int i = 0; i < enemies_.size(); i++) {
 	  bool should_move = (enemies_[i]->time_moved_ - timer_) % kGeneralTime == 0;
 
