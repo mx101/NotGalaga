@@ -86,14 +86,12 @@ void ofApp::update() {
 
     if (player.alive_) {
       CheckPlayerCollisions();
-    }
-
-	  if (!player.alive_) {
-      DeathVibration();
+		}
+		else {
+			DeathVibration();
 		}
 
   } else {
-    DrawScoreboard();
     DeathVibration();
   }
 }
@@ -146,9 +144,15 @@ void ofApp::UpdatePlayerObjects() {
       // std::cout << "out by: " << ship_left << std::endl;
       player.player_center_.first -= ship_left;
     }
-	} else {
+	} else if (player.player_lives_ > 0) {
 		if (gamepad->start) {
 			RevivePlayer();
+			ReturnToFormation();
+		}
+	} else {
+		if (gamepad->back) {
+			RevivePlayer();
+			RestartGame();
 			ReturnToFormation();
 		}
 	}
@@ -217,6 +221,15 @@ void ofApp::UpdateEnemyObjects() {
 }
 
 void ofApp::DrawScoreboard() {
+	string shots_hit_message = "Accuracy: " + to_string(shots_hit_);
+
+	int side_hit_width = (kGameWindowWidth / 2) -
+		(message_font_.stringWidth(shots_hit_message) / 2);
+
+	int side_hit_height = kGameWindowHeight / 2;
+
+	//ofSetColor(255, 255, 255);
+	side_font_.drawString(shots_hit_message, side_hit_width, side_hit_height);
   // items to display, high score of current session, score of current game
   // option to restart game
   // remember to delete the remaining enemies from memory
@@ -487,11 +500,12 @@ void ofApp::draw() {
   DrawNonPlayerObjects();
 
   if (!player.alive_) {
-    DrawGameDead();
-		
-	}
-	else {
-
+		if (player.player_lives_ > 0) {
+			DrawGameDead();
+		} else {
+			DrawScoreboard();
+		}
+	} else {
 		player.fighter_texture_.draw(player.player_center_.first,
 			player.player_center_.second);
 	}

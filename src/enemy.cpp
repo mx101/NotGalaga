@@ -166,7 +166,7 @@ void Enemy::GenerateNewPath() {
 	//weight the default path so we hopefully don't have an extraordinary number of enemies flying at the player at once
 	// if have time, implement continuous enemy movement if there are only a few enemies left on screen
   
-	if (selection < 6) {
+	if (selection < kNumPathChoices) {
 		this->path_.directions = GenerateLeftCurve();
 		this->path_.in_formation_ = false;
 		// save for defaultpath
@@ -293,7 +293,7 @@ vector<pair<int, int>> Enemy::GenerateLeftCurve() {
 		this->enemy_center_.second + down_shift };
 	
 	pair<int, int> middle_end = { right_end.first,
-		right_end.second + down_shift };
+		right_end.second + (down_shift / 2) };
 
 	pair<int, int> left_end = { middle_end.first - side_shift,
 		middle_end.second + down_shift };
@@ -322,7 +322,7 @@ vector<pair<int, int>> Enemy::GenerateRightCurve() {
 		this->enemy_center_.second + down_shift };
 
 	pair<int, int> middle_end = { left_end.first,
-		left_end.second + down_shift };
+		left_end.second + (down_shift / 2) };
 
 	pair<int, int> right_end = { middle_end.first + side_shift,
 		middle_end.second + down_shift };
