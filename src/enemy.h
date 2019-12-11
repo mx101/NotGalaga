@@ -9,7 +9,7 @@ class Enemy {
   // this is represented as a queue since some enemies have repeating paths
 	const int kNumPathChoices = 10;
 	const int kMoveFrames = 20;
-	const int kMoveSpeedMax = 6;
+	const int kMoveSpeedMax = 8;
 
   struct EnemyPath {
 		EnemyPath() {
