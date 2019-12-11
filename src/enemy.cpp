@@ -167,7 +167,7 @@ void Enemy::GenerateNewPath() {
 	// if have time, implement continuous enemy movement if there are only a few enemies left on screen
   
 	if (selection < kNumPathChoices) {
-		std::cout << "swirl" << std::endl;
+		// std::cout << "swirl" << std::endl;
 		this->path_.directions = GenerateSwirlPath();
 		this->path_.in_formation_ = false;
 		// save for defaultpath
@@ -295,11 +295,11 @@ vector<pair<int, int>> Enemy::GenerateSwirlPath() {
 
 	for (int i = 0; i < iter_count; i++) {
 		if (std::rand() % 2 == 0) {
-			std::cout << "left" << std::endl;
+			// std::cout << "left" << std::endl;
 			vector<pair<int, int>> left_curve = GenerateLeftCurve();
 			to_return.insert(to_return.end(), left_curve.begin(), left_curve.end());
 		} else {
-			std::cout << "right" << std::endl;
+			// std::cout << "right" << std::endl;
 			vector<pair<int, int>> right_curve = GenerateRightCurve();
 			to_return.insert(to_return.end(), right_curve.begin(), right_curve.end());
 		}

@@ -4,7 +4,7 @@ For my final project, I intend on recreating a classic arcade game in the style 
 
 The old plan was to use an external math libraries like this [Poisson point generator](https://github.com/corporateshark/poisson-disk-generator) and [matplotlib](https://github.com/lava/matplotlib-cpp) to plot out possible creative enemy paths for __*Galaga*__.
 
-I realized that using a poisson random point generator to create a set of directional movements was overly complicated and so instead opted to implement controller support using this library. [ofxXboxController](https://github.com/charlesveasey/ofxXboxController) by GitHub user charlesveasey
+I realized that using a poisson random point generator to create a set of directional movements was overly complicated and so instead opted to implement controller support using the Microsoft XInput library and this implementation: [ofxXboxController](https://github.com/charlesveasey/ofxXboxController) by GitHub user charlesveasey
 
 The current timeline for this project (detailed more specifically by week below) covers the key gameplay functionalities of __*Galaga*__. This includes player movement/shooting, enemy movement (paths)/shooting, enemy types, player [kidnapping/rescuing](https://youtu.be/bnGl9P2TVUc?t=43), a scoreboard, incrementing wave difficulty, etc.
 

@@ -172,7 +172,7 @@ void ofApp::UpdateEnemyObjects() {
 	for (int i = 0; i < enemies_.size(); i++) {
 	  bool should_move = (enemies_[i]->time_moved_ - timer_) % kGeneralTime == 0;
 
-		// if the enemy is not in formation, then they should not move according to the timer
+		// if the enemy is not in formation, the timer should not affect their movement
 		if (!enemies_[i]->path_.in_formation_) {
 			should_move = true;
 		}
