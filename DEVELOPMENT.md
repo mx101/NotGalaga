@@ -235,3 +235,5 @@ Implement player shooting and enemy movement at the very least.
 - 10:45am - Trying new function CheckAllReady(), O(# of enemies) runtime, to bind all enemies to a single default path movement
 
 - 11:10am - Player given ability to press start to start the next wave, the other implementation for wave start would be setting a timer but this feels like a better design choice to me. Also, CheckAllReady() does not seem to have a noticeable effect on runtime
+
+- 7:10pm - Enemies now all move together when in formation. Bug that now exists is formation entirely stops moving when waiting for enemies to return to formation

@@ -98,6 +98,7 @@ void ofApp::update() {
     DeathVibration();
   }
 
+	// weird bugs with vibration continuing, press Down to turn off vibration
 	if (gamepad->dPadDown) {
 		gamepad->rightVibration = 0;
 		gamepad->leftVibration = 0;
@@ -117,7 +118,7 @@ void ofApp::DeathVibration() {
 
 void ofApp::CheckAllReady() {
 	for (size_t i = 0; i < enemies_.size(); i++) {
-		if (!enemies_[i]->path_.in_formation_) {
+		if (enemies_[i]->enemy_center_ != enemies_[i]->formation_pos_) {
 			all_in_form_ = false;
 			return;
 		}
@@ -195,13 +196,14 @@ void ofApp::UpdateEnemyObjects() {
 
 		if (enemies_[i]->path_.directions.empty()) {
 			if (!player.alive_) {
-				if (enemies_[i]->path_.in_formation_) {
+				if (all_in_form_) {
 					enemies_[i]->path_.directions = enemies_[i]->GenerateDefaultPath();
+					enemies_[i]->path_.in_formation_ = true;
 				} else {
 					enemies_[i]->ReturnToFormation();
 					enemies_[i]->path_.in_formation_ = true;
 				}
-			} else if (enemies_[i]->path_.in_formation_) {
+			} else if (all_in_form_) { // enemies_[i]->path_.in_formation_) {
 				enemies_[i]->GenerateNewPath();
 			} else {
 				enemies_[i]->ReturnToFormation();

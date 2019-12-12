@@ -182,7 +182,7 @@ void Enemy::GenerateNewPath() {
 }
 
 vector<pair<int, int>> Enemy::GenerateFlyIn() {
-	int frames_to_move = 80;
+	int frames_to_move = 100;
 	vector<pair<int, int>> fly_in_path = PathPlotter(this->enemy_center_, this->formation_pos_, frames_to_move);
 	return fly_in_path;
 }
