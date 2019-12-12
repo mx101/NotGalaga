@@ -239,3 +239,5 @@ Implement player shooting and enemy movement at the very least.
 - 7:10pm - Enemies now all move together when in formation. Bug that now exists is formation entirely stops moving when waiting for enemies to return to formation
 
 - 7:20pm - Enemies now move onto the screen in waves instead of all at once!
+
+- 8:20pm - Some enemy movement smoothing, now toying around with enemy shots to fire

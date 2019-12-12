@@ -1,7 +1,7 @@
 #include "ofApp.h"
 
 void ofApp::setup() {
-  ofSetWindowTitle("NotGalaga");
+  ofSetWindowTitle("Legally?DistinctGalaga");
 
   // set background color to black, because it's space
   ofSetBackgroundColor(0, 0, 0);
@@ -194,27 +194,31 @@ void ofApp::UpdateEnemyObjects() {
 			should_move = true;
 		}
 
-		if (enemies_[i]->path_.directions.empty()) {
+		int move_tolerance = 3;
+
+		if (enemies_[i]->path_.directions.size() < move_tolerance) {
 			if (!player.alive_) {
 				if (all_in_form_) {
 					enemies_[i]->path_.directions = enemies_[i]->GenerateDefaultPath();
 					enemies_[i]->path_.in_formation_ = true;
 				} else {
 					enemies_[i]->ReturnToFormation();
-					enemies_[i]->path_.in_formation_ = true;
+					enemies_[i]->path_.in_formation_ = false;
 				}
 			} else if (all_in_form_) { // enemies_[i]->path_.in_formation_) {
 				enemies_[i]->GenerateNewPath();
 			} else {
 				enemies_[i]->ReturnToFormation();
-				enemies_[i]->path_.in_formation_ = true;
+				enemies_[i]->path_.in_formation_ = false;
 			}
 
 			// use enemy's shot count and a random low probability to determine if enemy should shoot
-			bool should_shoot = (std::rand() % 8 < 1) && enemies_[i]->shots_to_fire_ != 0;
+			bool should_shoot = (std::rand() % waves_ > (sqrt(waves_) + 1)) &&
+				enemies_[i]->shots_to_fire_ > 0 &&
+				!enemies_[i]->path_.in_formation_ &&
+				enemies_[i]->enemy_type_ != 2;
 
-			// if do enemy fly in, the shooting can be moved to as the enemies fly in
-			if (enemies_[i]->enemy_type_ != 2 && should_shoot) {
+			if (should_shoot) {
 				ShootBullet(enemies_[i]->enemy_center_, kEnemyBulletSpeed, false);
 				enemies_[i]->shots_to_fire_--;
 			}
@@ -405,7 +409,7 @@ void ofApp::GenerateWave() {
     curr_bee->formation_pos_ = std::pair<int, int>(x, y);
 		curr_bee->enemy_center_ = kLeftSpawn;
 		curr_bee->path_.directions = curr_bee->GenerateFlyIn(std::rand() % kWaveCount);
-		curr_bee->shots_to_fire_ = 1;
+		curr_bee->shots_to_fire_ = sqrt(waves_);
 
     x += curr_bee->enemy_width_ + separation;
   }
@@ -425,7 +429,7 @@ void ofApp::GenerateWave() {
     curr_moth->formation_pos_ = std::pair<int, int>(x, y);
 		curr_moth->enemy_center_ = kRightSpawn;
 		curr_moth->path_.directions = curr_moth->GenerateFlyIn(std::rand() % kWaveCount);
-		curr_moth->shots_to_fire_ = 2;
+		curr_moth->shots_to_fire_ = 2 * sqrt(waves_);
 
     x += curr_moth->enemy_width_ + separation;
   }

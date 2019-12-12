@@ -8,8 +8,8 @@ class Enemy {
   // the pair will be representing a change in x, y
   // this is represented as a queue since some enemies have repeating paths
 	const int kNumPathChoices = 16;
-	const int kMoveFrames = 20;
-	const int kMoveSpeedMax = 8;
+	const int kMoveFrames = 40;
+	const int kMoveSpeedMax = 4;
 
   struct EnemyPath {
 		EnemyPath() {

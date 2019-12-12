@@ -166,13 +166,13 @@ void Enemy::GenerateNewPath() {
 	//weight the default path so we hopefully don't have an extraordinary number of enemies flying at the player at once
 	// if have time, implement continuous enemy movement if there are only a few enemies left on screen
   
-	if (selection < kNumPathChoices - 2) {
+	if (selection < kNumPathChoices - 6) {
 		// std::cout << "swirl" << std::endl;
 		this->path_.directions = GenerateDefaultPath();
 		this->path_.in_formation_ = true;
 		// save for defaultpath
 		//this->path_.in_formation_ = true;
-	} else if (selection == 6) {
+	} else if (selection < kNumPathChoices - 3) {
 		this->path_.directions = GenerateSwirlPath();
 		this->path_.in_formation_ = false;
 	} else {
@@ -183,7 +183,7 @@ void Enemy::GenerateNewPath() {
 
 vector<pair<int, int>> Enemy::GenerateFlyIn(int wave_number) {
 	int frames_to_move = 100;
-	int delay_frames = 120;
+	int delay_frames = 140;
 
 	vector<pair<int, int>> fly_in_path = PathPlotter(this->enemy_center_, this->formation_pos_, frames_to_move);
 	vector<pair<int, int>> wave_delay(delay_frames, kZeroMove);
@@ -215,6 +215,22 @@ vector<pair<int, int>> Enemy::GenerateDefaultPath() {
 	// default path moves as follows:
 	// L L R R R R L L
 
+	to_path.push_back(kLeftMove);
+	to_path.push_back(kZeroMove);
+	to_path.push_back(kLeftMove);
+	to_path.push_back(kZeroMove);
+	to_path.push_back(kRightMove);
+	to_path.push_back(kZeroMove);
+	to_path.push_back(kRightMove);
+	to_path.push_back(kZeroMove);
+	to_path.push_back(kRightMove);
+	to_path.push_back(kZeroMove);
+	to_path.push_back(kRightMove);
+	to_path.push_back(kZeroMove);
+	to_path.push_back(kLeftMove);
+	to_path.push_back(kZeroMove);
+	to_path.push_back(kLeftMove);
+	to_path.push_back(kZeroMove);
 	to_path.push_back(kLeftMove);
 	to_path.push_back(kZeroMove);
 	to_path.push_back(kLeftMove);
