@@ -7,9 +7,10 @@ class Enemy {
  public:  
   // the pair will be representing a change in x, y
   // this is represented as a queue since some enemies have repeating paths
-	const int kNumPathChoices = 16;
+	const int kNumPathChoices = 18;
 	const int kPathChoiceDefault = 12;
 	const int kPathChoice1 = 14;
+	const int kPathChoice2 = 16;
 	const int kMoveFrames = 20;
 	const int kMoveSpeedMax = 4;
 
@@ -36,6 +37,8 @@ class Enemy {
 	vector<pair<int, int>> GenerateDiagPath();
 	vector<pair<int, int>> PathPlotter(pair<int, int> begin, pair<int, int> end, int frame_count);
 	vector<pair<int, int>> GenerateRandomPath();
+	vector<pair<int, int>> GenerateZPath();
+	vector<pair<int, int>> GenerateZHelper();
 	vector<pair<int, int>> GenerateArcPath();
 	pair<int, int> GenerateRandomMove();
 	vector<pair<int, int>> GenerateLeftCurve();
@@ -44,6 +47,7 @@ class Enemy {
 
 	vector<pair<int, int>> arc_path_;
 	vector<pair<int, int>> diag_path_;
+	vector<pair<int, int>> z_path_;
 	vector<pair<int, int>> default_path_;
 
   pair<int, int> kZeroMove = { 0, 0 };

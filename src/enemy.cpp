@@ -179,6 +179,9 @@ void Enemy::GenerateNewPath(bool all_move) {
 	} else if (selection < kPathChoice1) {
 		this->path_.directions = this->arc_path_;
 		this->path_.in_formation_ = false;
+	} else if (selection < kPathChoice2) {
+		this->path_.directions = this->z_path_;
+		this->path_.in_formation_ = false;
 	} else {
 		this->path_.directions = this->diag_path_;
 		this->path_.in_formation_ = false;
@@ -333,6 +336,50 @@ pair<int, int> Enemy::GenerateRandomMove() {
 	int y_change = (enemy_speed_range / 2) - (std::rand() % enemy_speed_range);
 
 	return pair<int, int>(x_change, y_change);
+}
+
+vector<pair<int, int>> Enemy::GenerateZPath() {
+	vector<pair<int, int>> to_return;
+
+	int iter_count = 11;
+
+	for (int i = 0; i < iter_count; i++) {
+		vector<pair<int, int>> z_it = GenerateZHelper();
+		to_return.insert(to_return.end(), z_it.begin(), z_it.end());
+	}
+
+	return to_return;
+}
+
+vector<pair<int, int>> Enemy::GenerateZHelper() {
+	vector<pair<int, int>> to_return;
+
+	int move_frames = 10;
+	int down_shift = 60;
+	int side_shift = 60;
+
+	vector<pair<int, int>> right_arm;
+	vector<pair<int, int>> middle_arm;
+	vector<pair<int, int>> left_arm;
+
+	pair<int, int> right_end = { this->enemy_center_.first + side_shift,
+		this->enemy_center_.second + down_shift };
+
+	pair<int, int> middle_end = { right_end.first - side_shift,
+		right_end.second };
+
+	pair<int, int> left_end = { middle_end.first + side_shift,
+		middle_end.second + down_shift };
+
+	right_arm = PathPlotter(this->enemy_center_, right_end, move_frames);
+	middle_arm = PathPlotter(right_end, middle_end, move_frames);
+	left_arm = PathPlotter(middle_end, left_end, move_frames);
+
+	vector<pair<int, int>> left_curve = right_arm;
+	left_curve.insert(left_curve.end(), middle_arm.begin(), middle_arm.end());
+	left_curve.insert(left_curve.end(), left_arm.begin(), left_arm.end());
+
+	return left_curve;
 }
 
 vector<pair<int, int>> Enemy::GenerateArcPath() {

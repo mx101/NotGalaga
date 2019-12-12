@@ -263,3 +263,5 @@ Implement player shooting and enemy movement at the very least.
 - 10:15pm - No longer allowing resizeable window
 
 - 11:20pm - Create enemy paths before when generating enemies to hopefully have better run time
+
+- 11:45pm - Added new path for enemies to move in: ZPath()

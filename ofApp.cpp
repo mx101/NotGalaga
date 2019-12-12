@@ -252,6 +252,10 @@ void ofApp::UpdateEnemyObjects() {
 				enemies_[i]->enemy_center_.second = kEnemySpawnHeight;
 			}
 
+			if (enemies_[i]->enemy_center_.first > kRightSpawn.first) {
+				enemies_[i]->enemy_center_.first = kLeftSpawn.first;
+			}
+
 			enemies_[i]->time_moved_ = timer_;
 		}
 	}
@@ -666,6 +670,7 @@ Enemy* ofApp::CreateEnemy(int x, int y, int type) {
 
 	current_enemy->arc_path_ = current_enemy->GenerateArcPath();
 	current_enemy->diag_path_ = current_enemy->GenerateDiagPath();
+	current_enemy->z_path_ = current_enemy->GenerateZPath();
 	current_enemy->default_path_ = current_enemy->GenerateDefaultPath();
   
 	current_enemy->path_.in_formation_ = false;
