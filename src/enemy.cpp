@@ -187,7 +187,7 @@ void Enemy::GenerateNewPath(bool all_move) {
 
 vector<pair<int, int>> Enemy::GenerateFlyIn(int wave_number) {
 	int frames_to_move = 100;
-	int delay_frames = 140;
+	int delay_frames = 130;
 
 	vector<pair<int, int>> fly_in_path = PathPlotter(this->enemy_center_, this->formation_pos_, frames_to_move);
 	vector<pair<int, int>> wave_delay(delay_frames, kZeroMove);

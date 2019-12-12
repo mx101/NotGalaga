@@ -36,6 +36,8 @@ void ofApp::RestartGame() {
 	player.player_center_.first = kGameWindowWidth / 2;
 	player.player_center_.second = kGameWindowHeight - (kGameWindowHeight / 8);
 
+	enemies_.clear();
+
 	score_ = 0;
 }
 
@@ -186,6 +188,7 @@ void ofApp::UpdatePlayerObjects() {
 }
 
 void ofApp::UpdateEnemyObjects() {	
+	// Update Enemies themselves
 	for (int i = 0; i < enemies_.size(); i++) {
 	  bool should_move = (enemies_[i]->time_moved_ - timer_) % kGeneralTime == 0;
 
@@ -248,6 +251,7 @@ void ofApp::UpdateEnemyObjects() {
 	}
     
 
+	// Update Enemy Bullets
   for (int i = 0; i < enemy_bullets_.size(); i++) {
     enemy_bullets_[i]->bullet_center_.second += kEnemyBulletSpeed;
     int second = enemy_bullets_[i]->bullet_center_.second;
@@ -262,6 +266,11 @@ void ofApp::UpdateEnemyObjects() {
 void ofApp::DrawScoreboard() {
 	int scoreboard_spacing = 40;
 	float accuracy = (float(shots_hit_) / float(shots_fired_)) * 100;
+
+	if (shots_hit_ == 0) {
+		accuracy = 0.0;
+	}
+
 	string shots_hit_message = "Accuracy: " + to_string(accuracy) + "%";
 
 	int side_hit_width = (kGameWindowWidth / 2) -
@@ -518,7 +527,7 @@ void ofApp::CheckPlayerCollisions() {
     ofRectangle current_enemy(enemy_center, enemies_[j]->enemy_width_,
                               enemies_[j]->enemy_width_);
 
-    if (current_enemy.intersects(player_rect)) {
+    if (current_enemy.intersects(player_rect) && player.alive_) {
       score_ += 2 * enemies_[j]->enemy_kill_score_;
 
       delete enemies_[j];
@@ -527,6 +536,7 @@ void ofApp::CheckPlayerCollisions() {
       player.player_lives_--;
       player.alive_ = false;
       time_last_paused = timer_;
+			break;
     }
   }
 
@@ -540,13 +550,14 @@ void ofApp::CheckPlayerCollisions() {
       ofRectangle current_enemy(enemy_center, kBulletWidth,
                                 kBulletHeight);
 
-      if (current_enemy.intersects(player_rect)) {
+      if (current_enemy.intersects(player_rect) && player.alive_) {
         delete enemy_bullets_[i];
         enemy_bullets_.erase(enemy_bullets_.begin() + i);
 
         player.player_lives_--;
         player.alive_ = false;
         time_last_paused = timer_;
+				break;
       }
     }
   }

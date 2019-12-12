@@ -243,3 +243,5 @@ Implement player shooting and enemy movement at the very least.
 - 8:20pm - Some enemy movement smoothing, now toying around with enemy shots to fire
 
 - 8:45pm - Enemies will now not stay in formation if there are too few of them remaining.
+
+- 9:00pnm - Fixes so player doesn't lose multiple lives when dead player hitbox intersects with enemy objects
