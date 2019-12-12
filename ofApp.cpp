@@ -225,7 +225,7 @@ void ofApp::UpdateEnemyObjects() {
 			}
 
 			// use enemy's shot count and a random low probability to determine if enemy should shoot
-			bool should_shoot = (std::rand() % int(sqrt(waves_)) + 1 < ((waves_ / 2) + 1)) &&
+			bool should_shoot = (std::rand() % int(sqrt(waves_)) + 1 < (waves_ / 2)) &&
 				enemies_[i]->shots_to_fire_ > 0 &&
 				enemies_[i]->enemy_center_ != enemies_[i]->formation_pos_ &&
 				enemies_[i]->enemy_type_ != 2;
