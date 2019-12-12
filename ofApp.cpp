@@ -1,7 +1,7 @@
 #include "ofApp.h"
 
 void ofApp::setup() {
-  ofSetWindowTitle("Legally?DistinctGalaga");
+  ofSetWindowTitle("Legally?DistinctDefinitelyNotGalaga");
 
   // set background color to black, because it's space
   ofSetBackgroundColor(0, 0, 0);
