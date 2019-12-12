@@ -663,6 +663,10 @@ Enemy* ofApp::CreateEnemy(int x, int y, int type) {
 	current_enemy->enemy_center_.second = y;
 	current_enemy->formation_pos_.first = x;
 	current_enemy->formation_pos_.second = y;
+
+	current_enemy->arc_path_ = current_enemy->GenerateArcPath();
+	current_enemy->diag_path_ = current_enemy->GenerateDiagPath();
+	current_enemy->default_path_ = current_enemy->GenerateDefaultPath();
   
 	current_enemy->path_.in_formation_ = false;
 	enemies_.push_back(current_enemy);

@@ -36,11 +36,15 @@ class Enemy {
 	vector<pair<int, int>> GenerateDiagPath();
 	vector<pair<int, int>> PathPlotter(pair<int, int> begin, pair<int, int> end, int frame_count);
 	vector<pair<int, int>> GenerateRandomPath();
-	vector<pair<int, int>> GenerateSwirlPath();
+	vector<pair<int, int>> GenerateArcPath();
 	pair<int, int> GenerateRandomMove();
 	vector<pair<int, int>> GenerateLeftCurve();
 	vector<pair<int, int>> GenerateRightCurve();
 	void ReturnToFormation();
+
+	vector<pair<int, int>> arc_path_;
+	vector<pair<int, int>> diag_path_;
+	vector<pair<int, int>> default_path_;
 
   pair<int, int> kZeroMove = { 0, 0 };
   pair<int, int> kLeftMove = { -10, 0 };

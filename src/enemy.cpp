@@ -174,13 +174,13 @@ void Enemy::GenerateNewPath(bool all_move) {
 	// if have time, implement continuous enemy movement if there are only a few enemies left on screen
   
 	if (selection < kPathChoiceDefault) {
-		this->path_.directions = GenerateDefaultPath();
+		this->path_.directions = this->default_path_;
 		this->path_.in_formation_ = true;
 	} else if (selection < kPathChoice1) {
-		this->path_.directions = GenerateSwirlPath();
+		this->path_.directions = this->arc_path_;
 		this->path_.in_formation_ = false;
 	} else {
-		this->path_.directions = GenerateDiagPath();
+		this->path_.directions = this->diag_path_;
 		this->path_.in_formation_ = false;
 	}
 }
@@ -335,7 +335,7 @@ pair<int, int> Enemy::GenerateRandomMove() {
 	return pair<int, int>(x_change, y_change);
 }
 
-vector<pair<int, int>> Enemy::GenerateSwirlPath() {
+vector<pair<int, int>> Enemy::GenerateArcPath() {
 	vector<pair<int, int>> to_return;
 
 	//this number seems weird, but making it 11 brings it closer to the 320 frame count standard for paths
@@ -388,7 +388,7 @@ vector<pair<int, int>> Enemy::GenerateLeftCurve() {
 vector<pair<int, int>> Enemy::GenerateRightCurve() {
 	int move_frames = 10;
 	int down_shift = 40;
-	int side_shift = 30;
+	int side_shift = 60;
 
 	vector<pair<int, int>> right_arm;
 	vector<pair<int, int>> middle_arm;

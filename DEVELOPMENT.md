@@ -261,3 +261,5 @@ Implement player shooting and enemy movement at the very least.
 - 10:00pm - Adjusted diagonal path and some timing constants so the diagonal path movement was not so quick and stuttery
 
 - 10:15pm - No longer allowing resizeable window
+
+- 11:20pm - Create enemy paths before when generating enemies to hopefully have better run time
