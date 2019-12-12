@@ -16,6 +16,7 @@ class ofApp : public ofBaseApp {
   void setup();
   void update();
   void draw();
+	void windowResized(int, int);
 
   void RestartGame();
   void LoadData();

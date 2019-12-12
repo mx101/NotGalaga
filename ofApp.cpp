@@ -17,6 +17,10 @@ void ofApp::setup() {
 	RestartGame();
 }
 
+void ofApp::windowResized(int, int) {
+	ofSetWindowShape(kGameWindowWidth + kSideboardWidth, kGameWindowHeight);
+}
+
 void ofApp::RestartGame() {
 	game_running_ = true;
 	waves_ = 1;

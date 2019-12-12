@@ -159,7 +159,7 @@ Enemy& Enemy::operator=(Enemy&& source) noexcept {
 	return *this;
 }
 
-
+// Doing the math, each path should take around 320 frames to execute so everything lines up
 void Enemy::GenerateNewPath(bool all_move) {
 	int selection = std::rand() % kNumPathChoices;
 
@@ -338,7 +338,8 @@ pair<int, int> Enemy::GenerateRandomMove() {
 vector<pair<int, int>> Enemy::GenerateSwirlPath() {
 	vector<pair<int, int>> to_return;
 
-	int iter_count = 10;
+	//this number seems weird, but making it 11 brings it closer to the 320 frame count standard for paths
+	int iter_count = 11;
 
 	for (int i = 0; i < iter_count; i++) {
 		if (std::rand() % 2 == 0) {
