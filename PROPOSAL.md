@@ -38,8 +38,8 @@ Some stretch goals I would want to implement if this project is finished ahead o
 	  - Some ideas for this could be:
 	    - more shooting
 		- more random movement paths
-  - [?] Scoreboard display at end of game
-  - [ ] Add any other application text output needed i.e. *"Fighter Captured"*, *"Game Over"*, *"Game Start"*, etc.
+  - [X] Scoreboard display at end of game
+  - [X] Add any other application text output needed i.e. *"Fighter Captured"*, *"Game Over"*, *"Game Start"*, etc.
 - #### Week 4
   - [X] Enemy Fly In
 - #### Stretch Goals
