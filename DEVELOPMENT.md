@@ -249,3 +249,7 @@ Implement player shooting and enemy movement at the very least.
 - 9:10pm - Added an additional "New High Score!" string print out when a new high is reached
 
 - 9:20pm - Implemented boss galaga two-hit life
+
+- 9:30pm - Added a DrawString function in an attempt to streamline more string printing
+
+- 9:35pm - Added a string for what wave number the player is about to start

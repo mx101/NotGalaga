@@ -275,8 +275,7 @@ void ofApp::DrawFinalScreen(bool new_high) {
 		int new_high_str_width = (kGameWindowWidth / 2) -
 			(side_font_.stringWidth(new_high_str) / 2);
 		int new_high_str_height = kGameWindowHeight / 2 - scoreboard_spacing;
-
-		side_font_.drawString(new_high_str, new_high_str_width, new_high_str_height);
+		DrawString(new_high_str, new_high_str_width, new_high_str_height, 0);
 
 		side_font_.load("galaga.ttf", kSideSize);
 	}
@@ -288,26 +287,30 @@ void ofApp::DrawFinalScreen(bool new_high) {
 	}
 
 	string shots_hit_message = "Accuracy: " + to_string(accuracy) + "%";
-
 	int side_hit_width = (kGameWindowWidth / 2) -
-		(message_font_.stringWidth(shots_hit_message) / 2);
-
+													(message_font_.stringWidth(shots_hit_message) / 2);
 	int side_hit_height = kGameWindowHeight / 2;
-
-	side_font_.drawString(shots_hit_message, side_hit_width, side_hit_height);
+	DrawString(shots_hit_message, side_hit_width, side_hit_height, 0);
 
 	string shots_fired_message = "Shots Fired: " + to_string(shots_fired_);
-
 	int side_fired_width = (kGameWindowWidth / 2) -
-		(message_font_.stringWidth(shots_fired_message) / 2);
-
+													(message_font_.stringWidth(shots_fired_message) / 2);
 	int side_fired_height = (kGameWindowHeight / 2) + scoreboard_spacing;
-
-	side_font_.drawString(shots_fired_message, side_fired_width, side_fired_height);
+	DrawString(shots_fired_message, side_fired_width, side_fired_height, 0);
 
   // items to display, high score of current session, score of current game
   // option to restart game
   // remember to delete the remaining enemies from memory
+}
+
+void ofApp::DrawString(string message, int width, int height, int type) {
+	ofTrueTypeFont font = side_font_;
+
+	if (type == 1) {
+		font = message_font_;
+	}
+
+	font.drawString(message, width, height);
 }
 
 void ofApp::DrawSideboard() {
@@ -321,49 +324,34 @@ void ofApp::DrawSideboard() {
 	ofSetColor(255, 255, 255);
 
   string lives_message = "Lives: " + to_string(player.player_lives_);
-
   int side_life_width = kGameWindowWidth + (kSideboardWidth / 2) -
-                    side_font_.stringWidth(lives_message) / 2;
-
+														side_font_.stringWidth(lives_message) / 2;
   int side_life_height = (kGameWindowHeight / 2) + kSideboardSpacing;
-
-  side_font_.drawString(lives_message, side_life_width, side_life_height);
+	DrawString(lives_message, side_life_width, side_life_height, 0);
 
   string score_message = "Score: " + to_string(score_);
-
   int side_score_width = kGameWindowWidth + (kSideboardWidth / 2) -
-                    side_font_.stringWidth(score_message) / 2;
-
+														side_font_.stringWidth(score_message) / 2;
   int side_score_height = (kGameWindowHeight / 2) - kSideboardSpacing;
-
-  side_font_.drawString(score_message, side_score_width, side_score_height);
+	DrawString(score_message, side_score_width, side_score_height, 0);
 
   string wave_message = "Wave: " + to_string(waves_ - 1);
-
   int side_wave_width = kGameWindowWidth + (kSideboardWidth / 2) -
-                    side_font_.stringWidth(wave_message) / 2;
-
+														side_font_.stringWidth(wave_message) / 2;
   int side_wave_height = (kGameWindowHeight / 2) + (3 * kSideboardSpacing);
-
-  side_font_.drawString(wave_message, side_wave_width, side_wave_height);
+	DrawString(wave_message, side_wave_width, side_wave_height, 0);
 
 	string high_message = "High Score:";
-
 	int side_high_width = kGameWindowWidth + (kSideboardWidth / 2) -
-		                side_font_.stringWidth(high_message) / 2;
-
+														side_font_.stringWidth(high_message) / 2;
 	int side_high_height = (kGameWindowHeight / 2) - (5 * kSideboardSpacing);
-
-	side_font_.drawString(high_message, side_high_width, side_high_height);
+	DrawString(high_message, side_high_width, side_high_height, 0);
 
 	string highS_message = to_string(high_score_);
-
 	int side_highS_width = kGameWindowWidth + (kSideboardWidth / 2) -
-	                 	side_font_.stringWidth(highS_message) / 2;
-
+	                 					side_font_.stringWidth(highS_message) / 2;
 	int side_highS_height = (kGameWindowHeight / 2) - (4 * kSideboardSpacing);
-
-	side_font_.drawString(highS_message, side_highS_width, side_highS_height);
+	DrawString(highS_message, side_highS_width, side_highS_height, 0);
 }
 
 void ofApp::DrawGameDead() {
@@ -387,7 +375,7 @@ void ofApp::DrawGameDead() {
 
   int center_height = kGameWindowHeight / 2;
 
-  message_font_.drawString(death_message, center_width, center_height);
+	DrawString(death_message, center_width, center_height, 1);
 }
 
 void ofApp::ShootBullet(std::pair<int, int> center, int velocity,
@@ -603,9 +591,20 @@ void ofApp::draw() {
 	} else {
 		player.fighter_texture_.draw(player.player_center_.first,
 			player.player_center_.second);
+
+		if (enemies_.empty()) {
+			DrawStartPrompt();
+		}
 	}
 
 	DrawSideboard();
+}
+
+void ofApp::DrawStartPrompt() {
+	string start_prompt = "Press Start to Begin Wave #" + to_string(waves_);
+	int start_width = kGameWindowWidth / 2 - side_font_.stringWidth(start_prompt) / 2;
+	int start_height = (kGameWindowHeight / 2);
+	DrawString(start_prompt, start_width, start_height, 0);
 }
 
 void ofApp::DrawNonPlayerObjects() {

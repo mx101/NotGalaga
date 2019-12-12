@@ -27,6 +27,8 @@ class ofApp : public ofBaseApp {
   void UpdatePlayerObjects();
   void UpdateEnemyObjects();
 
+	void DrawStartPrompt();
+	void DrawString(string message, int width, int height, int type);
   void DrawSideboard();
   void DrawFinalScreen(bool new_high);
   void DrawNonPlayerObjects();
@@ -70,7 +72,7 @@ class ofApp : public ofBaseApp {
 
   ofTrueTypeFont message_font_;
   ofTrueTypeFont side_font_;
-  const int kMessageSize = 16;
+  const int kMessageSize = 12;
   const int kSideSize = 20;
   const int kSideboardSpacing = 30;
 
