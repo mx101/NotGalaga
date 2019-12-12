@@ -257,3 +257,5 @@ Implement player shooting and enemy movement at the very least.
 - 9:45pm - Adjusted should_shoot boolean to be a more realistic difficulty increase
 
 - 9:50pm - Renamed window to "Legally?DistinctDefinitelyNotGalaga"
+
+- 10:00pm - Adjusted diagonal path and some timing constants so the diagonal path movement was not so quick and stuttery

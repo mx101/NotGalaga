@@ -282,7 +282,23 @@ vector<pair<int, int>> Enemy::GenerateDiagPath() {
 			to_return.push_back(kDiagDownLeft);
 			to_return.push_back(kDiagDownLeft);
 			to_return.push_back(kDiagDownLeft);
+			to_return.push_back(kDiagDownLeft);
+			to_return.push_back(kDiagDownLeft);
+			to_return.push_back(kDiagDownLeft);
+			to_return.push_back(kDiagDownLeft);
+			to_return.push_back(kDiagDownLeft);
+			to_return.push_back(kDiagDownLeft);
+			to_return.push_back(kDiagDownLeft);
+			to_return.push_back(kDiagDownLeft);
 		} else {
+			to_return.push_back(kDiagDownRight);
+			to_return.push_back(kDiagDownRight);
+			to_return.push_back(kDiagDownRight);
+			to_return.push_back(kDiagDownRight);
+			to_return.push_back(kDiagDownRight);
+			to_return.push_back(kDiagDownRight);
+			to_return.push_back(kDiagDownRight);
+			to_return.push_back(kDiagDownRight);
 			to_return.push_back(kDiagDownRight);
 			to_return.push_back(kDiagDownRight);
 			to_return.push_back(kDiagDownRight);
