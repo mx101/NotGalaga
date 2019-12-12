@@ -160,19 +160,23 @@ Enemy& Enemy::operator=(Enemy&& source) noexcept {
 }
 
 
-void Enemy::GenerateNewPath() {
+void Enemy::GenerateNewPath(bool all_move) {
 	int selection = std::rand() % kNumPathChoices;
+
+	if (all_move) {
+		int difference = kPathChoiceDefault - selection;
+		int move_choice_range = kNumPathChoices - kPathChoiceDefault;
+
+		selection = selection + difference + (std::rand() % move_choice_range);
+	}
 	
 	//weight the default path so we hopefully don't have an extraordinary number of enemies flying at the player at once
 	// if have time, implement continuous enemy movement if there are only a few enemies left on screen
   
-	if (selection < kNumPathChoices - 6) {
-		// std::cout << "swirl" << std::endl;
+	if (selection < kPathChoiceDefault) {
 		this->path_.directions = GenerateDefaultPath();
 		this->path_.in_formation_ = true;
-		// save for defaultpath
-		//this->path_.in_formation_ = true;
-	} else if (selection < kNumPathChoices - 3) {
+	} else if (selection < kPathChoice1) {
 		this->path_.directions = GenerateSwirlPath();
 		this->path_.in_formation_ = false;
 	} else {

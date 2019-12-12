@@ -195,6 +195,7 @@ void ofApp::UpdateEnemyObjects() {
 		}
 
 		int move_tolerance = 3;
+		int enemy_count_tolerance = 6;
 
 		if (enemies_[i]->path_.directions.size() < move_tolerance) {
 			if (!player.alive_) {
@@ -205,17 +206,23 @@ void ofApp::UpdateEnemyObjects() {
 					enemies_[i]->ReturnToFormation();
 					enemies_[i]->path_.in_formation_ = false;
 				}
-			} else if (all_in_form_) { // enemies_[i]->path_.in_formation_) {
-				enemies_[i]->GenerateNewPath();
+			} else if (all_in_form_) {
+				bool all_move = false;
+
+				if (enemies_.size() < enemy_count_tolerance) {
+					all_move = true;
+				}
+
+				enemies_[i]->GenerateNewPath(all_move);
 			} else {
 				enemies_[i]->ReturnToFormation();
 				enemies_[i]->path_.in_formation_ = false;
 			}
 
 			// use enemy's shot count and a random low probability to determine if enemy should shoot
-			bool should_shoot = (std::rand() % waves_ > (sqrt(waves_) + 1)) &&
+			bool should_shoot = (std::rand() % int(sqrt(waves_)) + 1 < ((waves_ / 2) + 1)) &&
 				enemies_[i]->shots_to_fire_ > 0 &&
-				!enemies_[i]->path_.in_formation_ &&
+				enemies_[i]->enemy_center_ != enemies_[i]->formation_pos_ &&
 				enemies_[i]->enemy_type_ != 2;
 
 			if (should_shoot) {
