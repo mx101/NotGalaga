@@ -65,6 +65,7 @@ class ofApp : public ofBaseApp {
   const int kSideboardWidth = 300;
   const int kOffset = 50;
   const int kDefaultHighScore = 10000;
+	const int kWaveCount = 4;
 
 
   ofTrueTypeFont message_font_;

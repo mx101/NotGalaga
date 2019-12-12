@@ -404,7 +404,7 @@ void ofApp::GenerateWave() {
     curr_bee = CreateEnemy(x, y, 0);
     curr_bee->formation_pos_ = std::pair<int, int>(x, y);
 		curr_bee->enemy_center_ = kLeftSpawn;
-		curr_bee->path_.directions = curr_bee->GenerateFlyIn();
+		curr_bee->path_.directions = curr_bee->GenerateFlyIn(std::rand() % kWaveCount);
 		curr_bee->shots_to_fire_ = 1;
 
     x += curr_bee->enemy_width_ + separation;
@@ -424,7 +424,7 @@ void ofApp::GenerateWave() {
     curr_moth = CreateEnemy(x, y, 1);
     curr_moth->formation_pos_ = std::pair<int, int>(x, y);
 		curr_moth->enemy_center_ = kRightSpawn;
-		curr_moth->path_.directions = curr_moth->GenerateFlyIn();
+		curr_moth->path_.directions = curr_moth->GenerateFlyIn(std::rand() % kWaveCount);
 		curr_moth->shots_to_fire_ = 2;
 
     x += curr_moth->enemy_width_ + separation;
@@ -439,7 +439,7 @@ void ofApp::GenerateWave() {
     curr_boss = CreateEnemy(x, y, 2);
     curr_boss->formation_pos_ = std::pair<int, int>(x, y);
 		curr_boss->enemy_center_ = kRightSpawn;
-		curr_boss->path_.directions = curr_boss->GenerateFlyIn();
+		curr_boss->path_.directions = curr_boss->GenerateFlyIn(std::rand() % kWaveCount);
 		curr_boss->shots_to_fire_ = 0;
 
     x += curr_boss->enemy_width_ + separation;
