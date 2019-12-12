@@ -28,7 +28,7 @@ class ofApp : public ofBaseApp {
   void UpdateEnemyObjects();
 
   void DrawSideboard();
-  void DrawScoreboard();
+  void DrawFinalScreen(bool new_high);
   void DrawNonPlayerObjects();
 
   void DrawGameDead();
@@ -110,7 +110,6 @@ class ofApp : public ofBaseApp {
   Enemy bee_;
   Enemy boss_;
   Enemy moth_;
-	Enemy boss_damaged_;
 
 	const pair<int, int> kLeftSpawn = { -50, (3 * kGameWindowHeight) / 4 };
 	const pair<int, int> kRightSpawn = { kGameWindowWidth + 50, (3 * kGameWindowHeight) / 4 };

@@ -244,4 +244,8 @@ Implement player shooting and enemy movement at the very least.
 
 - 8:45pm - Enemies will now not stay in formation if there are too few of them remaining.
 
-- 9:00pnm - Fixes so player doesn't lose multiple lives when dead player hitbox intersects with enemy objects
+- 9:00pm - Fixes so player doesn't lose multiple lives when dead player hitbox intersects with enemy objects
+
+- 9:10pm - Added an additional "New High Score!" string print out when a new high is reached
+
+- 9:20pm - Implemented boss galaga two-hit life

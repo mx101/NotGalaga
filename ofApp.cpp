@@ -11,13 +11,14 @@ void ofApp::setup() {
   gamepad = xbox.getGamepadPtr(0);
   deadZone = true;
 
+	high_score_ = kDefaultHighScore;
+
   LoadData();
 	RestartGame();
 }
 
 void ofApp::RestartGame() {
 	game_running_ = true;
-	high_score_ = kDefaultHighScore;
 	waves_ = 1;
 	timer_ = 0;
 	time_last_shot = 0;
@@ -37,6 +38,9 @@ void ofApp::RestartGame() {
 	player.player_center_.second = kGameWindowHeight - (kGameWindowHeight / 8);
 
 	enemies_.clear();
+	if (score_ > high_score_) {
+		high_score_ = score_;
+	}
 
 	score_ = 0;
 }
@@ -61,13 +65,11 @@ void ofApp::LoadData() {
   ofLoadImage(bee_.enemy_texture_, "bee.png");
   ofLoadImage(boss_.enemy_texture_, "bossGalaga.png");
   ofLoadImage(moth_.enemy_texture_, "moth.png");
-	ofLoadImage(boss_damaged_.enemy_texture_, "bossGalagaHit.png");
 
   // note that this number will be doubled if the enemy dies while moving
   bee_.enemy_kill_score_ = 40;
 	moth_.enemy_kill_score_ = 80;
   boss_.enemy_kill_score_ = 0;
-	boss_damaged_.enemy_kill_score_ = 150;
 }
 
 //--------------------------------------------------------------
@@ -263,8 +265,22 @@ void ofApp::UpdateEnemyObjects() {
   }
 }
 
-void ofApp::DrawScoreboard() {
+void ofApp::DrawFinalScreen(bool new_high) {
 	int scoreboard_spacing = 40;
+
+	if (new_high) {
+		side_font_.load("galaga.ttf", kSideSize + 10);
+
+		string new_high_str = "New High Score!"; //\n" + to_string(score_) + "!";
+		int new_high_str_width = (kGameWindowWidth / 2) -
+			(side_font_.stringWidth(new_high_str) / 2);
+		int new_high_str_height = kGameWindowHeight / 2 - scoreboard_spacing;
+
+		side_font_.drawString(new_high_str, new_high_str_width, new_high_str_height);
+
+		side_font_.load("galaga.ttf", kSideSize);
+	}
+
 	float accuracy = (float(shots_hit_) / float(shots_fired_)) * 100;
 
 	if (shots_hit_ == 0) {
@@ -495,14 +511,15 @@ void ofApp::CheckEnemyCollisions() {
 					score_ += 2 * enemies_[j]->enemy_kill_score_;
 				}
 
-				/*if (enemies_[j]->enemy_type_ == 2) {
-					std::cout << "damaged" << std::endl;
-					*(enemies_[j]) = boss_damaged_;
-					enemies_[j]->enemy_type_ = 3;
-				} else {*/
+				enemies_[j]->shots_to_kill_--;
+
+				if (enemies_[j]->shots_to_kill_ <= 0) {
 					delete enemies_[j];
 					enemies_.erase(enemies_.begin() + j);
-				//}
+				} else {
+					ofLoadImage(enemies_[j]->enemy_texture_, "bossGalagaHit.png");
+					enemies_[j]->enemy_kill_score_ = 150;
+				}
         
         delete player_bullets_[i];
         player_bullets_.erase(player_bullets_.begin() + i);
@@ -575,7 +592,13 @@ void ofApp::draw() {
 		if (player.player_lives_ > 0) {
 			DrawGameDead();
 		} else {
-			DrawScoreboard();
+			bool new_high = false;
+
+			if (score_ > high_score_) {
+				new_high = true;
+			}
+
+			DrawFinalScreen(new_high);
 		}
 	} else {
 		player.fighter_texture_.draw(player.player_center_.first,
@@ -615,18 +638,21 @@ Enemy* ofApp::CreateEnemy(int x, int y, int type) {
 		*current_enemy = bee_;
 		current_enemy->enemy_width_ = kBeeMothWidth;
 		current_enemy->enemy_type_ = 0;
+		current_enemy->shots_to_kill_ = 1;
 	
 	} else if (type == 1) {
   
 		*current_enemy = moth_;
   	current_enemy->enemy_width_ = kBeeMothWidth;
 		current_enemy->enemy_type_ = 1;
+		current_enemy->shots_to_kill_ = 1;
 
 	} else if (type == 2) {
   
 		*current_enemy = boss_;
   	current_enemy->enemy_width_ = kBossWidth;
 		current_enemy->enemy_type_ = 2;
+		current_enemy->shots_to_kill_ = 2;
 
 	}
 
