@@ -1,4 +1,7 @@
 # Galaga
+![](https://imgur.com/a/tf29piP)
+
+
 ## Dependencies
 #### Note that this project was built on Windows using Visual Studio 2019 with OpenFrameworks, other operating systems may not run the program as expected
 
