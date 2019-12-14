@@ -5,7 +5,7 @@
 - [Visual Studio 2019](https://visualstudio.microsoft.com/vs/)
 - [OpenFrameworks](https://openframeworks.cc/)
 
-#### The only additional things that should need to be added in order for this program to run properly are the images and true type font files which can be found at the Google drive link below
+#### The only additional things that should need to be added in order for this program to run properly are the images and true type font files which can be found at the Google drive link below. These items will need to be downloaded in placed within the project's bin/data directory.
 
 - [Drive with Images and Text](https://drive.google.com/drive/folders/1KP0UuPWWYmDlTjWZ2g_p5fIMfFZX7Uwx?usp=sharing)
 
