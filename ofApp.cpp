@@ -681,29 +681,6 @@ Enemy* ofApp::CreateEnemy(int x, int y, int type) {
 
 //--------------------------------------------------------------
 void ofApp::keyPressed(int key) {
-  if (player.alive_) {
-    if (key == OF_KEY_LEFT) {
-      left_pressed = true;
-    }
-
-    if (key == OF_KEY_RIGHT) {
-      right_pressed = true;
-    }
-		
-		if (key == OF_KEY_UP) {
-			shoot_pressed = true;    
-		}
-  }
-
-  int upper_key = toupper(key);
-
-  if (upper_key == 'R' && !player.alive_) {
-    RevivePlayer();
-  }
-
-  if (upper_key == 'E') {
-    GenerateWave();
-  }
 }
 
 void ofApp::RevivePlayer() {
