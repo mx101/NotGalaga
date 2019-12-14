@@ -21,3 +21,5 @@
 |-------------------------------|------------------------|
 | `Directional-Pad Left/Right`  | Movement of the Player |
 | `A or B`                      | Fire                   |
+| `Start`                       | Start Wave/Respawn     |
+| `Back`                        | Restart/Revive         |
