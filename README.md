@@ -1,5 +1,5 @@
 # Galaga
-![](https://imgur.com/a/tf29piP)
+![GalagaWaveStart](https://github.com/mx101/imagesDump/blob/master/GalagaWaveStart.png)
 
 
 ## Dependencies
